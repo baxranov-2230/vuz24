@@ -1,0 +1,36 @@
+<div class="row newsRow" *ngIf="newsItem">
+  <div class="col-3 pr-0">
+    <img src="{{ imgSrc }}" *ngIf="imgSrc">
+  </div>
+  <div class="col-9">
+    <a data-toggle="modal" id="{{'target' + newsItem.id}}">
+      <h5>{{newsItem.title}}</h5>
+      <p>{{newsItem.subContent}}</p>
+    </a>
+    <hr class="m-1">
+    <p class="mainColor m-1">
+      <i class="fa fa-bookmark-o"></i><span> {{newsItem.newsType.key}}</span>
+      <i class="fa fa-clock-o ml-3"></i><span> {{newsItem.submitDate.split(" ")[1]}}</span>
+      <i class="fa fa-calendar ml-3"></i><span> {{newsItem.submitDate.split(" ")[0]}}</span>
+      <i class="fa fa-user ml-3"></i><span> {{newsItem.profile.firstName}}</span>
+    </p>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="{{'newsInModal'+newsItem.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">{{newsItem.title}}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="{{'closeBtn'+newsItem.id}}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" [innerHTML]="content">
+      </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="publishNews()">Chop etish</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="modal fade" id="modalSignIn" role="dialog">
+  <div class="modal-dialog" id="modal-itself">
+    <div class="modal-content">
+      <div>
+				<main>
+				  <button class="icon-close" id="login-close-btn" data-dismiss="modal">X</button>
+				  <input id="tab1" type="radio" name="tabs" checked>
+				  <label for="tab1" id="logintab">Kirish</label>
+
+				  <input id="tab2" type="radio" name="tabs">
+				  <label for="tab2" id="registertab">Ro'yhatdan o'tish</label>
+
+				  <section id="content1">
+				  	<form>
+				      <input type="text" placeholder="Username" name="login"  [(ngModel)] = "profile.login" required>
+				      <input type="password" placeholder="Password" name="password" [(ngModel)]="profile.password" required>
+				      <button type="button" class="cancelbtn" data-dismiss="modal">Cancel</button>
+				      <button type="submit" class="loginbtn" (click)="authorization()">Login</button>
+			      </form>
+				  </section>
+
+				  <section id="content2">
+				  	<form>
+		          <input type="text" placeholder="First Name" name="name" [(ngModel)]="profile.name" required>
+		          <input type="text" placeholder="Last Name" name="surname" [(ngModel)]="profile.surname" required>
+		          <input type="text" placeholder="Email" name="email" [(ngModel)]="profile.email" required>
+							<input type="text" placeholder="Username" name="login" [(ngModel)]="profile.login" required>
+		          <input type="password" placeholder="Password" name="password" [(ngModel)]="profile.password" required>
+							<input type="password" placeholder="Confirm Password" name="ndPassword" [(ngModel)]="ndPassword" required>
+		          <!--<label for="check">
+		          <input type="checkbox" name="checkbox" id="check" value="1"> I agree to the <u>Terms</u>.</label> -->
+		          <button type="button" class="cancelbtn" data-dismiss="modal">Cancel</button>
+							<button type="submit" class="loginbtn" (click)="registration()">Registration</button>
+		        </form>
+				  </section>
+				</main>
+      </div>
+    </div>
+  </div>
+</div>

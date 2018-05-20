@@ -1,0 +1,45 @@
+<div class="row">
+  <h2 class="mainHeader">Yangi moderator</h2>
+</div>
+<form class="row pt-4">
+  <div class="col-6">
+    <div class="data-form">
+      <label for="fName">Name</label>
+      <input type="text" class="form-control" id="fName" placeholder="Enter name"
+             name="fName" (blur)="checkMdrtData()">
+    </div>
+    <div class="data-form">
+      <label for="login">Username</label>
+      <input type="text" class="form-control" id="login" placeholder="Enter username"
+             name="login" (blur)="checkMdrtData()">
+    </div>
+    <div class="data-form">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+    <div class="data-form">
+      <label for="bDate">Birthday</label>
+      <input type="date" class="form-control" id="bDate" name="bDate">
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="data-form">
+      <label for="lName">Surname</label>
+      <input type="text" class="form-control" id="lName" placeholder="Enter surname"
+             name="lName" (blur)="checkMdrtData()">
+    </div>
+    <div class="data-form">
+      <label for="pwd">Password</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+             name="pswd" (blur)="checkMdrtData()">
+    </div>
+    <div class="data-form">
+      <label for="phNumber">Phone number</label>
+      <input type="number" class="form-control" min="0" id="phNumber" placeholder="Enter phone number" name="phNumber">
+    </div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary mdrtCreate" (click)="createMdrt()"
+            [attr.disabled]="isMdrtReady ? null : true">Submit</button>
+  </div>
+</form>

@@ -1,0 +1,56 @@
+<header id="layout">
+    <nav class="littleNav">
+        <div class="container">
+            <ul class="list-inline">
+                <li class="navbar navbar-expand-lg p-0">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fa fa-bars" style="color: #fff"></span>
+                    </button>
+                </li>
+                <li *ngFor="let lang of langs">
+                    <a id="{{lang.name}}" routerLink="/{{lang.name}}" routerLinkActive="active" (click)="saveLang(lang.name)">{{lang.key}}</a>
+                </li>
+                <li class="miniLogo">
+                    <a href="#"><img src="assets/images/logo.png" height="31"></a>
+                </li>
+                <li class="moveRight pr-0">
+                    <a id="logInModal" data-toggle="modal" data-target="#modalSignIn" *ngIf="!isLoggedIn">
+                        <span class="fa fa-sign-in"></span><span class="enter"> Kirish</span>
+                    </a>
+                    <a (click)="showDropdown()" *ngIf="isLoggedIn">
+                        <span class="fa fa-user"></span>&nbsp;
+                        <span class="firstName">{{user.firstName}}&nbsp;</span>
+                        <span class="surname">{{user.lastName}}&nbsp;</span>
+                        <span class="fa fa-caret-down"></span>
+                    </a>
+                    <div class="dropdown-menu" id="profileddMenu" *ngIf="isLoggedIn">
+                        <h6 class="dropdown-header">{{user.firstName}} {{user.lastName}}</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" routerLink="./my-profile">Mening profilim</a>
+                        <a class="dropdown-item" (click)="logOut()">Chiqish</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <img src="assets/images/logo.png" width="170" height="70" class="mainLogo">
+                <div class="menu">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item" *ngFor="let newsType of newsTypes">
+                            <a class="nav-link grow" routerLink="topic/{{newsType.key}}" routerLinkActive="active-menu" (click)="goToTop(newsType.key)"><span>{{newsType.name}}</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<app-sign-in-modal (isEntered)="checkWeatherEntered($event)"></app-sign-in-modal>
+<div id="spaceTop"></div>
+<router-outlet></router-outlet>
+<div class="content" id="wrap">
+    <div style="height: 700px;"></div>
+</div>

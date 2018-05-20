@@ -1,0 +1,8 @@
+<div class="row" id="npNewsList">
+    <div class="col-12 pb-3">
+        <h2>Chop etilmagan yangiliklar</h2>
+    </div>
+    <div class="col-6" *ngFor="let news of NPnews">
+        <app-not-published-news-item [newsItem]="news"></app-not-published-news-item>
+    </div>
+</div>

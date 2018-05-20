@@ -1,0 +1,14 @@
+<div class="row mdrtItem" *ngIf="moderator">
+  <div class="col-8">
+    <h4 data-toggle="tooltip" title="{{moderator.firstName}} {{moderator.lastName}}"
+        >{{moderator.firstName}} {{moderator.lastName}}</h4>
+    <p data-toggle="tooltip" title="{{moderator.email}}"><span class="fa fa-envelope-o"></span> {{moderator.email}}</p>
+    <p><span class="fa fa-phone"></span> +{{moderator.phoneNumber}}</p>
+  </div>
+  <div class="col-4">
+    <img src="assets/images/user.png">
+  </div>
+  <div class="col-12">
+    <a type="button" class="btn btn-primary btn-sm moreInfo" routerLink="./detail" [queryParams]="{id: moderator.id}" fragment="{{moderator.firstName}}_{{moderator.lastName}}">To'liqroq</a>
+  </div>
+</div>

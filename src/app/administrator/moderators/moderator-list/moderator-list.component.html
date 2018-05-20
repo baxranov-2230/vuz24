@@ -1,0 +1,10 @@
+<div class="row">
+    <h2 class="mainHeader">Moderatorlar</h2>
+    <a class="addMdrtBtn" data-toggle="tooltip" title="Moderator qo'shish"
+        routerLink="../create-moderator"><span class="fa fa-user-plus"></span></a>
+</div>
+<div class="row pt-4" *ngIf="moderators">
+    <div class="col-12 col-sm-6 col-lg-4" *ngFor="let mdrt of moderators">
+        <app-moderator-item [moderator]="mdrt"></app-moderator-item>
+    </div>
+</div>
