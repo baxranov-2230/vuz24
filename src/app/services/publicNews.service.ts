@@ -32,7 +32,19 @@ export class PublicNewsService {
     return this.http.get(GeneralURL.newsPublic.concat("get_token/" + id), options);
   }
 
-  public getAllNewsList(count: CountDto) {
+  public getRecentNewsList(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+    };
+
+    return this.http.post(GeneralURL.newsPublic.concat("resent_no/" + count.lang), json, options);
+  }
+
+  public getRecentNewsListWithToken(count: CountDto) {
     let json = JSON.stringify(count);
 
     let options = {
@@ -42,6 +54,81 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("most_type_with/" + count.lang.key), json, options);
+    return this.http.post(GeneralURL.newsPublic.concat("resent_with/" + count.lang), json, options);
+  }
+
+  public getMostReadNewsList(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+    };
+
+    return this.http.post(GeneralURL.newsPublic.concat("most_no/" + count.lang), json, options);
+  }
+
+  public getMostReadNewsListWithToken(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+        })
+    };
+
+    return this.http.post(GeneralURL.newsPublic.concat("most_with/" + count.lang), json, options);
+  }
+
+  public getNewsListByType(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+    };
+
+    return this.http.post(GeneralURL.newsPublic.concat("type_no/" + count.lang), json, options);
+  }
+
+  public getNewsListByTypeWithToken(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+        })
+    };
+
+    return this.http.post(GeneralURL.newsPublic.concat("type_with/" + count.lang), json, options);
+  }
+
+  public getMostReadNewsListByType(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+    };
+
+    return this.http.post(GeneralURL.newsPublic.concat("most_type_no/" + count.lang), json, options);
+  }
+
+  public getMostReadNewsListByTypeWithToken(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+        })
+    };
+
+    return this.http.post(GeneralURL.newsPublic.concat("most_type_with/" + count.lang), json, options);
   }
 }

@@ -20,8 +20,8 @@ export class NewsComponent implements OnInit {
   constructor(private publicNewsService: PublicNewsService, private location: Location) {}
 
   ngOnInit() {
-    this.getAllNews();
 
+    this.getAllNews();
     if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
       this.getMostReadNewsWithToken();
     } else {
@@ -43,11 +43,12 @@ export class NewsComponent implements OnInit {
     var count = new CountDto();
     count.from = this.from;
     count.to = this.amount;
-    count.lang = new LangDto();
-    count.lang.key = this.location.path().split('/')[1];
+    count.lang = this.location.path().split('/')[1];
+    count.type = "technologies";
+    // count.lang.key = this.location.path().split('/')[1];
     this.from += this.amount;
 
-    this.publicNewsService.getAllNewsList(count).subscribe(
+    this.publicNewsService.getNewsListByTypeWithToken(count).subscribe(
       (data) => {
         console.log(data);
       },

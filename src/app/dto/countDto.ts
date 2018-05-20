@@ -4,7 +4,7 @@ export class CountDto {
     public state: number;
     public from: number;
     public to: number;
-    public lang: LangDto;
+    public lang: string;
     public type: string;
     public key: number;
 
