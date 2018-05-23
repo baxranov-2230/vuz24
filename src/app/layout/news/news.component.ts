@@ -5,6 +5,7 @@ import { CountDto } from '../../dto/countDto';
 import { LocalStorageSecurity } from '../../util/localStorageSecurity';
 import { CommonKey } from '../../util/commonKey';
 import { LangDto } from '../../dto/langDto';
+import { NewsDto } from '../../dto/newsDto';
 
 @Component({
   selector: 'app-news',
@@ -16,43 +17,68 @@ export class NewsComponent implements OnInit {
 
   private from: number = 0;
   private amount: number = 9;
+  public news: Array<NewsDto>;
+  public mostReadNews: Array<NewsDto>;
 
-  constructor(private publicNewsService: PublicNewsService, private location: Location) {}
+  constructor(private publicNewsService: PublicNewsService, private location: Location) {
+    this.news = [];
+    this.mostReadNews = [];
+  }
 
   ngOnInit() {
-
-    this.getAllNews();
-    if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
-      this.getMostReadNewsWithToken();
-    } else {
-      this.getMostReadNewsWithOUTToken();
-    }
+      this.getRecentNews();
+      this.getMostReadNews();
   }
 
-  private getMostReadNewsWithOUTToken() {
-    console.log('yoq');
-    
-  }
-
-  private getMostReadNewsWithToken() {
-    console.log('bor');
-    
-  }
-
-  private getAllNews() {
+  private getRecentNews() {
     var count = new CountDto();
     count.from = this.from;
     count.to = this.amount;
     count.lang = this.location.path().split('/')[1];
-    count.type = "technologies";
-    // count.lang.key = this.location.path().split('/')[1];
     this.from += this.amount;
 
-    this.publicNewsService.getNewsListByTypeWithToken(count).subscribe(
-      (data) => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
+      this.publicNewsService.getRecentNewsListWithToken(count).subscribe(
+        (data) => {
+          this.news = this.news.concat(data);
+          console.log(this.news);
+        },
+        error => console.log(error)
+      );
+    } else {
+      this.publicNewsService.getRecentNewsList(count).subscribe(
+        (data) => {
+          this.news = this.news.concat(data);
+          console.log(this.news);
+        },
+        error => console.log(error)
+      );
+    }
+  }
+
+  private getMostReadNews() {
+    var count = new CountDto();
+    count.from = this.from;
+    count.to = this.amount;
+    count.lang = this.location.path().split('/')[1];
+    this.from += this.amount;
+
+    if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
+      this.publicNewsService.getMostReadNewsListWithToken(count).subscribe(
+        (data) => {
+          this.mostReadNews = this.mostReadNews.concat(data);
+          console.log(this.mostReadNews);
+        },
+        error => console.log(error)
+      );
+    } else {
+      this.publicNewsService.getMostReadNewsList(count).subscribe(
+        (data) => {
+          this.mostReadNews = this.mostReadNews.concat(data);
+          console.log(this.mostReadNews);
+        },
+        error => console.log(error)
+      );
+    }
   }
 }

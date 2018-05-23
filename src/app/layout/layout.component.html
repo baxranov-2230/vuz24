@@ -8,7 +8,7 @@
                     </button>
                 </li>
                 <li *ngFor="let lang of langs">
-                    <a id="{{lang.name}}" routerLink="/{{lang.name}}" routerLinkActive="active" (click)="saveLang(lang.name)">{{lang.key}}</a>
+                    <a id="{{lang.name}}" (click)="saveLang(lang.name)">{{lang.key}}</a>
                 </li>
                 <li class="miniLogo">
                     <a href="#"><img src="assets/images/logo.png" height="31"></a>
@@ -50,7 +50,16 @@
 </header>
 <app-sign-in-modal (isEntered)="checkWeatherEntered($event)"></app-sign-in-modal>
 <div id="spaceTop"></div>
-<router-outlet></router-outlet>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-9">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-md-3 side">
+            side
+        </div>
+    </div>
+</div>
 <div class="content" id="wrap">
-    <div style="height: 700px;"></div>
+    <div style="height: 1700px;"></div>
 </div>

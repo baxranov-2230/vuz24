@@ -336,6 +336,7 @@ textarea {
     left: 0;
     right: 0;
     top: 0;
+    z-index: 1;
     nav.littleNav {
       background: #000;
       ul:not(.dropdown-menu) {
@@ -662,3 +663,121 @@ textarea {
     }
 }
 // animated modal
+// news
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  margin: 5px 0;
+  &:before {
+    content: '';
+    background: #000;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1.5px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    padding: 0 .5em;
+    line-height: 1.5em;
+    font-weight: 500;
+    color: #222;
+    background-color: #F1F1F1;
+  }
+}
+@media screen and (max-width: 767px) {
+  .side {
+    display: none;
+  }
+}
+.grow {
+  transition: all .2s ease-in-out;
+}
+.grow:hover {
+  transform: scale(1.15);
+}
+.colorlocal {
+  color: #449cee;
+}
+.colorworld {
+  color: #6bf59c;
+}
+.colorsport {
+  color: #ee4444;
+}
+.colortechnologies {
+  color: #ee9044;
+}
+.colorculture {
+  color: #f56bf3;
+}
+.coloreconomy {
+  color: #534ff6;
+}
+.colorshowbusiness {
+  color: #964e4e;
+}
+
+.newsItem {
+  background-color: #fff;
+  margin: unset;
+  margin-bottom: 0.5rem;
+  .col-3 {
+    overflow: hidden;
+    padding: unset;
+    img {
+      display: none;
+    }
+  }
+  .col-9 {
+    padding: 15px 15px 0 15px;
+    a, a:hover, a:active {
+      color: inherit;
+      text-decoration: none;
+    }
+    .downLine {
+      margin-top: 5px;
+      .downElement {
+        display: inline-block;
+        min-width: 60px;
+        pre {
+          margin: unset;
+          line-height: 14px;
+          span:first-child {
+            font-size: 15px;
+          }
+          span:last-child {
+            font-size: 11px;
+          }
+        }
+      }
+      .downElement:last-child {
+        min-width: unset;
+        margin-left: 21px;
+      }
+      .downElements {
+        float: right;
+        .downElement {
+          vertical-align: middle;
+          span {
+            display: block;
+            text-align: center;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 991px) {
+      p.subContent {
+        display: none;
+      }
+    }
+  }
+}

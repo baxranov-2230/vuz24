@@ -5,6 +5,7 @@ import { GeneralURL } from '../util/generalUrl';
 import { LocalStorageSecurity } from '../util/localStorageSecurity';
 import { CommonKey } from '../util/commonKey';
 import { CountDto } from '../dto/countDto';
+import { NewsDto } from '../dto/newsDto';
 
 @Injectable()
 export class PublicNewsService {
@@ -41,7 +42,7 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("resent_no/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("resent_no/" + count.lang), json, options);
   }
 
   public getRecentNewsListWithToken(count: CountDto) {
@@ -54,7 +55,7 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("resent_with/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("resent_with/" + count.lang), json, options);
   }
 
   public getMostReadNewsList(count: CountDto) {
@@ -66,7 +67,7 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("most_no/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("most_no/" + count.lang), json, options);
   }
 
   public getMostReadNewsListWithToken(count: CountDto) {
@@ -79,7 +80,7 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("most_with/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("most_with/" + count.lang), json, options);
   }
 
   public getNewsListByType(count: CountDto) {
@@ -91,7 +92,7 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("type_no/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("type_no/" + count.lang), json, options);
   }
 
   public getNewsListByTypeWithToken(count: CountDto) {
@@ -104,7 +105,7 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("type_with/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("type_with/" + count.lang), json, options);
   }
 
   public getMostReadNewsListByType(count: CountDto) {
@@ -116,7 +117,7 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("most_type_no/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("most_type_no/" + count.lang), json, options);
   }
 
   public getMostReadNewsListByTypeWithToken(count: CountDto) {
@@ -129,6 +130,6 @@ export class PublicNewsService {
         })
     };
 
-    return this.http.post(GeneralURL.newsPublic.concat("most_type_with/" + count.lang), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("most_type_with/" + count.lang), json, options);
   }
 }

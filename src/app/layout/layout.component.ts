@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 import { LocalStorageSecurity } from '../util/localStorageSecurity';
 import { CommonKey } from '../util/commonKey';
 import { ProfileDto } from '../dto/profileDto';
+import { NewsType } from '../util/newsType';
 
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  providers: [NewsService]
+  providers: [NewsService, NewsType]
 })
 export class LayoutComponent implements OnInit {
 
@@ -22,7 +23,7 @@ export class LayoutComponent implements OnInit {
   public isLoggedIn: Boolean = false;
   public user: ProfileDto;
 
-  constructor(private newsService: NewsService, private location: Location, private router: Router) {
+  constructor(private newsTypeService: NewsType, private newsService: NewsService, private location: Location, private router: Router) {
     this.langs = [];
   }
 
@@ -60,6 +61,7 @@ export class LayoutComponent implements OnInit {
     this.newsService.getNewsTypeList(this.location.path().split('/')[1]).subscribe(
       (data) => {
         this.newsTypes = data;
+        this.newsTypeService.setNewsTypes(data);
       },
       error => console.log(error)
     );
@@ -77,14 +79,23 @@ export class LayoutComponent implements OnInit {
 
   public saveLang(str: string) {
     LocalStorageSecurity.setItem(CommonKey.LANGUAGE, str);
+    if (document.querySelector(".active") !== null) {
+      document.querySelector(".active").classList.remove("active");
+    }
+    document.getElementById(str).classList.add("active");
+    this.router.navigate(["/" + str + this.router.url.substring(4)]);
   }
 
   private getLang() {
     setTimeout(() => {
-      if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE) && !document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)).classList.contains("active")) {
-        document.querySelector(".active").classList.remove("active");
+      if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE) && document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)) !== null && !document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)).classList.contains("active")) {
+        if (document.querySelector(".active") !== null) {
+          document.querySelector(".active").classList.remove("active");
+        }
         document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)).classList.add("active");
         this.router.navigate(["/" + LocalStorageSecurity.getItem(CommonKey.LANGUAGE) + this.router.url.substring(4)]);
+      } else {
+        this.getLang();
       }
       setTimeout(() => {
         if(document.querySelector(".nav-link.active-menu") === null) {

@@ -1,3 +1,36 @@
-<p>
-  news-item works!
-</p>
+<div class="row newsItem" *ngIf="newsItem">
+    <div class="col-3" *ngIf="imageHeight" id="{{'newsImgBlock' + newsItem.nlId}}">
+      <img src="{{imgSrc}}" *ngIf="imgSrc" class="grow">
+    </div>
+    <div class="col-9" id="{{'newsContent' + newsItem.nlId}}">
+      <a routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.nlId}}">
+        <h5>{{newsItem.title}}</h5>
+        <p class="subContent">{{newsItem.subContent}}</p>
+      </a>
+      <hr class="mt-2 mb-1">
+      <div class="downLine">
+        <div class="downElement">
+            <pre>
+<span class="{{'color' + newsItem.newsType.key}}">{{newsItem.newsType.name}}</span>
+<span>{{newsItem.publishDate}}</span></pre>
+        </div>
+        <div class="downElements">
+          <div class="downElement">
+              <span><i class="fa fa-eye"></i> 15</span>
+          </div>
+          <div class="downElement">
+              <span><i class="fa fa-comments-o"></i> 16</span>
+          </div>
+          <div class="downElement">
+            <span>
+              <input id="{{'toggle-heart-' + index}}" type="checkbox"/>
+              <label for="{{'toggle-heart-' + index}}" aria-label="like"><i class="fa fa-heart"></i> 15</label>
+            </span>
+          </div>
+          <div class="downElement">
+            <span><i class="fa fa-bookmark-o"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

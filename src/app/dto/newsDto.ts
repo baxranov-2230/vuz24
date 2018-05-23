@@ -8,6 +8,7 @@ export class NewsDto {
     public subContent: String;
     public submitDate: string;
     public newsType: NewsTypeDto;
+    public nlId: number;
 
     constructor() {}
 }
