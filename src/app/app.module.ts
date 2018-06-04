@@ -28,6 +28,7 @@ import { NewsDetailComponent } from './layout/news/news-detail/news-detail.compo
 import { NewsItemComponent } from './layout/news/news-item/news-item.component';
 import { EditNewsComponent } from './administrator/news/edit-news/edit-news.component';
 import { MyProfileComponent } from './layout/my-profile/my-profile.component';
+import { MrnewsItemComponent } from './layout/news/mrnews-item/mrnews-item.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MyProfileComponent } from './layout/my-profile/my-profile.component';
     NewsDetailComponent,
     NewsItemComponent,
     EditNewsComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    MrnewsItemComponent
   ],
   imports: [
     BrowserModule,

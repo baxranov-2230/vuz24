@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
 import { GeneralURL } from '../util/generalUrl';
 import { LocalStorageSecurity } from '../util/localStorageSecurity';
 import { CommonKey } from '../util/commonKey';
@@ -8,6 +7,7 @@ import { CryptoSecurity } from '../util/cryptoSecurity';
 import { ProfileDto } from '../dto/profileDto';
 import { CountDto } from '../dto/countDto';
 import { ImageDto } from '../dto/imageDto';
+import { NewsDto } from '../dto/newsDto';
 
 @Injectable()
 export class ProfileService {
@@ -90,10 +90,58 @@ export class ProfileService {
     return this.http.post(GeneralURL.profileURL.concat('pagination'), json, options);
   }
 
+  public saveNews(news: NewsDto) {
+    let json = JSON.stringify(news);
+    
+    let options = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+        })
+    };
+
+    return this.http.post(GeneralURL.profileURL.concat('save_nl'), json, options);
+  }
+
+  public deleteSavedNews(news: NewsDto) {
+    let options = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+        })
+    };
+
+    return this.http.delete(GeneralURL.profileURL.concat('delete_nl'), options);
+  }
+
+  public getSavedNews(count: CountDto) {
+    let json = JSON.stringify(count);
+    
+    let options = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+        })
+    };
+
+    return this.http.post(GeneralURL.profileURL.concat('saved_nll'), json, options);
+  }
+
   public createImage(file: File) {
       let formData = new FormData();
       formData.append('file', file);
 
       return this.http.post<ImageDto>(GeneralURL.imageURL.concat('create'), formData);
+  }
+
+  public LikeNews(id: number) {
+    let options = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+        })
+    };
+
+    return this.http.get<CountDto>(GeneralURL.likeNewsURL.concat('create/' + id), options);
   }
 }

@@ -1,4 +1,14 @@
 <hr class="hr-text" data-content="Ommabop">
+<div class="row MainNewsBlock">
+    <div class="col-6" *ngFor="let newsOne of mostReadNews; index as i"
+         [style.margin-right]="i%2 === 0 ? '2%' : 'unset'">
+        <app-mrnews-item [newsItem]="newsOne" [index]="i"></app-mrnews-item>
+    </div>
+    <!-- <div class="col-4" *ngFor="let newsItem of mostReadNews; index as i" style="height: 26rem; padding:unset; max-width: 32%; margin-bottom: 1rem"
+         [style.margin-right]="i%3 !== 2 ? '2%' : 'unset'">
+        <app-mrnews-item [newsItem]="newsItem" [index]="i"></app-mrnews-item>
+    </div> -->
+</div>
 <div *ngFor="let newsItem of news; index as i">
     <app-news-item [newsItem]="newsItem" [index]="i"></app-news-item>
 </div>

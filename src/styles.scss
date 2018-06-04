@@ -1,5 +1,6 @@
+@import "node_modules/mathsass/dist/math";
 body {
-    background-color: #f1f1f1;
+    background-color: #f5f5f5;
 }
 .mainColor {
     color: #0F0;
@@ -336,7 +337,7 @@ textarea {
     left: 0;
     right: 0;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     nav.littleNav {
       background: #000;
       ul:not(.dropdown-menu) {
@@ -394,11 +395,6 @@ textarea {
           }
           @media screen and (max-width: 575px) {
             .firstName {
-              display: none
-            }
-          }
-          @media screen and (max-width: 991px) {
-            .surname {
               display: none
             }
           }
@@ -725,11 +721,158 @@ textarea {
 .colorshowbusiness {
   color: #964e4e;
 }
-
+$bubble-d: 1.5rem; // bubble diameter
+$bubble-r: .5*$bubble-d; // bubble-radius
+$sparkle-d: .375rem;
+$sparkle-r: .5*$sparkle-d;
+@mixin sparkles($k) {
+    $shadow-list: ();
+    $n-groups: 7;
+    $group-base-angle: 360deg/$n-groups;
+    $group-distr-r: (1 + $k*.25)*$bubble-r;
+    $n-sparkles: 2;
+    $sparkle-base-angle: 360deg/$n-sparkles;
+    $sparkle-off-angle: 60deg;
+    $spread-r: -$k*$sparkle-r;
+    @for $i from 0 to $n-groups {
+        $group-curr-angle: $i*$group-base-angle - 90deg;
+        $xg: $group-distr-r*cos($group-curr-angle);
+        $yg: $group-distr-r*sin($group-curr-angle);
+        
+        @for $j from 0 to $n-sparkles {
+            $sparkle-curr-angle: $group-curr-angle + 
+                $sparkle-off-angle + $j*$sparkle-base-angle;
+            $xs: $xg + $sparkle-d*cos($sparkle-curr-angle);
+            $ys: $yg + $sparkle-d*sin($sparkle-curr-angle);
+            
+            $shadow-list: $shadow-list, $xs $ys 0 $spread-r 
+                hsl(($i + $j)*$group-base-angle, 100%, 75%);
+        }
+    }
+    box-shadow: $shadow-list;
+}
+@mixin bubble($ext) {
+    transform: scale(1);
+    border-color: #cc8ef5;
+    border-width: $ext;
+}
+.downElement > span > input[type=checkbox] {
+    position: absolute;
+    left: -100vw;
+}
+.downElement > span > label[aria-label=like] {
+    z-index: 1;
+    margin-bottom: 0;
+    align-self: center;
+    position: relative;
+    color: #000;
+    font-size: 16px;
+    // filter: grayscale(1);
+    user-select: none;
+    cursor: pointer;
+    &:hover {
+      color: red
+    }
+    &:before, &:after {
+        position: absolute;
+        z-index: -1;
+        top: 50%; left: 50%;
+        border-radius: 50%;
+        content: '';
+    }
+    &:before {
+        box-sizing: border-box;
+        margin: -$bubble-r;
+        border: solid $bubble-r #e2264d;
+        width: $bubble-d; height: $bubble-d;
+        transform: scale(0);
+    }
+    &:after {
+        margin: -$sparkle-r;
+        width: $sparkle-d; height: $sparkle-d;
+        @include sparkles(1);
+    }
+}
+@keyframes heart {
+    0%, 17.5% {
+        font-size: 0;
+    }
+}
+@keyframes bubble {
+    15% { @include bubble($bubble-r); }
+    30%, 100% { @include bubble(0); }
+}
+@keyframes sparkles {
+    0%, 20% { opacity: 0; }
+    25% {
+        opacity: 1;
+        @include sparkles(0);
+    }
+}
+@for $i from 0 through 500 {
+  #toggle-heart-#{$i} {
+      &:checked + label {
+          color: #f00;
+          filter: none;
+          will-change: font-size;
+          animation: heart 0.5s cubic-bezier(.17, .89, .32, 1.49);
+          
+          &:before, &:after {
+              animation: inherit;
+              animation-timing-function: ease-out;
+          }
+          
+          &:before {
+              will-change: transform, border-width, border-color;
+              animation-name: bubble;
+          }
+          
+          &:after {
+              will-change: opacity, box-shadow;
+              animation-name: sparkles;
+          }
+      }
+      &:focus + label {
+          text-shadow: 0 0 3px white, 
+              0 1px 1px white, 0 -1px 1px white, 
+              1px 0 1px white, -1px 0 1px white;
+      }
+  }
+}
+@for $i from 0 through 3 {
+  #mr-toggle-heart-#{$i} {
+      &:checked + label {
+          color: #f00;
+          filter: none;
+          will-change: font-size;
+          animation: heart 0.5s cubic-bezier(.17, .89, .32, 1.49);
+          
+          &:before, &:after {
+              animation: inherit;
+              animation-timing-function: linear;
+          }
+          
+          &:before {
+              will-change: transform, border-width, border-color;
+              animation-name: bubble;
+          }
+          
+          &:after {
+              will-change: opacity, box-shadow;
+              animation-name: sparkles;
+          }
+      }
+      &:focus + label {
+          text-shadow: 0 0 3px white, 
+              0 1px 1px white, 0 -1px 1px white, 
+              1px 0 1px white, -1px 0 1px white;
+      }
+  }
+}
 .newsItem {
   background-color: #fff;
   margin: unset;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   .col-3 {
     overflow: hidden;
     padding: unset;
@@ -742,6 +885,10 @@ textarea {
     a, a:hover, a:active {
       color: inherit;
       text-decoration: none;
+      h5 {
+        font-weight: 600;
+        font-size: 1.35rem;
+      }
     }
     .downLine {
       margin-top: 5px;
@@ -762,6 +909,7 @@ textarea {
       .downElement:last-child {
         min-width: unset;
         margin-left: 21px;
+        font-size: 17px;
       }
       .downElements {
         float: right;
@@ -779,5 +927,107 @@ textarea {
         display: none;
       }
     }
+  }
+}
+
+.MainNewsBlock {
+  margin: unset;
+  & > div {
+    height: 25.2rem;
+    padding:unset;
+    max-width: 49%;
+    margin-bottom: 1rem;
+  }
+}
+
+.mrNewsItem {
+  height: 100%;
+  background-color: #fff;
+  .linkBlock {
+    display: block;
+    height: 22.7rem;
+    overflow: hidden;
+    &, &:hover, &:active {
+      text-decoration: none;
+      color: inherit;
+    }
+    .picture {
+      width: 100%;
+      height: 12rem;
+      position: relative;
+      top: 0;
+      left: 0;
+      transition: all .3s ease-in-out;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 110%;
+      border: 0 solid #fff;
+      overflow: hidden;
+      &:hover {
+        background-size: 100%;
+      }
+    }
+    h5 {
+      margin: 15px;
+      font-weight: 600;
+      font-size: 1.35rem;
+    }
+    p {
+      margin: 15px;
+      font-size: 14px;
+    }
+  }
+  .downLine {
+    margin-top: 5px;
+    margin: 5px 15px 0 15px;
+    .downElement {
+      display: inline-block;
+      min-width: 60px;
+      pre {
+        margin: unset;
+        line-height: 14px;
+        span:first-child {
+          font-size: 15px;
+        }
+        span:last-child {
+          font-size: 11px;
+        }
+      }
+    }
+    .downElement:last-child {
+      min-width: unset;
+      margin-left: 10px;
+      font-size: 17px;
+    }
+    .downElements {
+      float: right;
+      .downElement {
+        vertical-align: middle;
+        span {
+          display: block;
+          text-align: center;
+          // label:hover {
+          //   color: red;
+          // }
+        }
+      }
+      & > span {
+        border-left: 1px solid #000;
+        padding-bottom: 3px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 991px) {
+  .mrNewsItem > .linkBlock > p {
+    display: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .downElement > span > label[aria-label=like] {
+    font-size: 14px;
+  }
+  .mrNewsItem > .downLine > .downElements > .downElement {
+    min-width: 57px;
   }
 }

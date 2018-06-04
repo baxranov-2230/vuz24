@@ -30,7 +30,7 @@ const appRoutes: Routes = [
     { path: '', children: [
         { path: '', redirectTo: '/uzl', pathMatch: 'full' },
         { path: 'uzl', component: LayoutComponent , children: [
-            { path: '', component: NewsComponent },
+            { path: '', component: NewsComponent, runGuardsAndResolvers: 'always' },
             { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard] },
             { path: 'topic/:type', component: NewsByTypeComponent },
             { path: 'news/:id', component: NewsDetailComponent }
@@ -47,9 +47,9 @@ const appRoutes: Routes = [
             children: [
                 { path: 'moderators', children: [
                     { path: '', component: ModeratorListComponent },
+                    { path: 'create-moderator', component: CreateModeratorComponent },
                     { path: 'detail', component: ModeratorDetailComponent }
                 ]},
-                { path: 'create-moderator', component: CreateModeratorComponent },
                 { path: 'create-news', component: CreateNewsComponent },
                 { path: 'my-news', component: MyNewsComponent },
                 { path: 'not-published-news', component: NotPublishedNewsComponent },
@@ -61,6 +61,7 @@ const appRoutes: Routes = [
         { path: '', component: ModeratorComponent, canActivate: [ModeratorGuard],
             children: [
                 { path: 'create-news', component: CreateNewsComponent },
+                { path: 'not-published-news', component: NotPublishedNewsComponent },
                 { path: 'my-news', component: MyNewsComponent }
             ]
         }
@@ -72,7 +73,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
     ],
     exports: [RouterModule],
     providers: [

@@ -42,8 +42,6 @@ export class NotPublishedNewsItemComponent implements OnInit {
     setTimeout(() => {
       this.newsService.publishNews(this.newsItem.id).subscribe(
         (data) => {
-          console.log(data);
-          
           if (data.state === 1) {
             this.router.navigate(["administrator/published-news"]);
           }

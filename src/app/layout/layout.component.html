@@ -20,7 +20,6 @@
                     <a (click)="showDropdown()" *ngIf="isLoggedIn">
                         <span class="fa fa-user"></span>&nbsp;
                         <span class="firstName">{{user.firstName}}&nbsp;</span>
-                        <span class="surname">{{user.lastName}}&nbsp;</span>
                         <span class="fa fa-caret-down"></span>
                     </a>
                     <div class="dropdown-menu" id="profileddMenu" *ngIf="isLoggedIn">
@@ -55,11 +54,29 @@
         <div class="col-12 col-md-9">
             <router-outlet></router-outlet>
         </div>
-        <div class="col-md-3 side">
-            side
+        <div class="col-md-3 pl-0">
+            <div style="position: fixed;">
+                <hr class="hr-text" data-content="Dolzarb">
+
+                <!-- Facebook -->
+                <a type="button" class="btn-floating btn-fb"><i class="fa fa-facebook"></i></a>
+
+                <!--Twitter-->
+                <a type="button" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
+
+                <!--Google +-->
+                <a type="button" class="btn-floating btn-gplus"><i class="fa fa-google-plus"></i></a>
+
+                <!--Instagram-->
+                <a type="button" class="btn-floating btn-ins"><i class="fa fa-instagram"></i></a>
+
+                <!--Youtube-->
+                <a type="button" class="btn-floating btn-yt"><i class="fa fa-youtube-play"></i></a>
+
+                <div>
+                    <a href="">abishjon</a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="content" id="wrap">
-    <div style="height: 1700px;"></div>
 </div>

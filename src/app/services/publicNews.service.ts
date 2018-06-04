@@ -19,7 +19,7 @@ export class PublicNewsService {
       })
     };
 
-    return this.http.get(GeneralURL.newsPublic.concat("get_no/" + id), options);
+    return this.http.get<NewsDto>(GeneralURL.newsPublic.concat("get_no/" + id), options);
   }
 
   public getNewsWithToken(id: number) {
@@ -30,7 +30,7 @@ export class PublicNewsService {
       })
     };
 
-    return this.http.get(GeneralURL.newsPublic.concat("get_token/" + id), options);
+    return this.http.get<NewsDto>(GeneralURL.newsPublic.concat("get_token/" + id), options);
   }
 
   public getRecentNewsList(count: CountDto) {

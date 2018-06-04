@@ -96,6 +96,7 @@ export class CreateNewsComponent implements OnInit {
     var news = new NewsDto();
     news.newsType = new NewsTypeDto();
 
+    news.important = (<HTMLInputElement>document.getElementById('sel3')).checked;
     news.lang = (<HTMLInputElement>document.getElementById('sel1')).value;
     news.newsType.id = parseInt((<HTMLInputElement>document.getElementById('sel2')).value);
     news.title = (<HTMLInputElement>document.getElementById('title')).value;

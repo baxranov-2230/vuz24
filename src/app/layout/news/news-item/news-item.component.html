@@ -14,23 +14,27 @@
 <span class="{{'color' + newsItem.newsType.key}}">{{newsItem.newsType.name}}</span>
 <span>{{newsItem.publishDate}}</span></pre>
         </div>
-        <div class="downElements">
-          <div class="downElement">
-              <span><i class="fa fa-eye"></i> 15</span>
-          </div>
-          <div class="downElement">
-              <span><i class="fa fa-comments-o"></i> 16</span>
-          </div>
-          <div class="downElement">
-            <span>
-              <input id="{{'toggle-heart-' + index}}" type="checkbox"/>
-              <label for="{{'toggle-heart-' + index}}" aria-label="like"><i class="fa fa-heart"></i> 15</label>
-            </span>
-          </div>
-          <div class="downElement">
-            <span><i class="fa fa-bookmark-o"></i></span>
-          </div>
+      <div class="downElements">
+        <div class="downElement">
+          <span><i class="fa fa-eye"></i> {{newsItem.viewedCount}}</span>
+        </div>
+        <div class="downElement">
+          <span><i class="fa fa-comments-o"></i> 16</span>
+        </div>
+        <div class="downElement">
+          <span>
+            <input id="{{'toggle-heart-' + index}}" type="checkbox" [attr.checked]="newsItem.profile && newsItem.profile.isLiked ? true : null"/>
+            <label for="{{'toggle-heart-' + index}}" aria-label="like"
+                   (click)="likeNews()"><i class="fa"
+                   [class.fa-heart]="newsItem.profile && newsItem.profile.isLiked"
+                   [class.fa-heart-o]="!newsItem.profile || !newsItem.profile.isLiked"></i><i
+                   *ngIf="newsItem.likedCount"> {{newsItem.likedCount}}</i></label>
+          </span>
+        </div>
+        <div class="downElement">
+          <span><i class="fa fa-bookmark-o" (click)="saveNews()"></i></span>
         </div>
       </div>
     </div>
+  </div>
 </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NewsDto } from '../../../dto/newsDto';
-import { Router } from '@angular/router';
 import { NewsType } from '../../../util/newsType';
 import { LocalStorageSecurity } from '../../../util/localStorageSecurity';
 import { CommonKey } from '../../../util/commonKey';
@@ -8,42 +7,35 @@ import { ProfileService } from '../../../services/profile.service';
 declare var $;
 
 @Component({
-  selector: 'app-news-item',
-  templateUrl: './news-item.component.html',
-  styleUrls: ['./news-item.component.scss'],
-  providers: [ NewsType, ProfileService ]
+  selector: 'app-mrnews-item',
+  templateUrl: './mrnews-item.component.html',
+  styleUrls: ['./mrnews-item.component.scss'],
+  providers: [NewsType, ProfileService]
 })
-export class NewsItemComponent implements OnInit {
+export class MrnewsItemComponent implements OnInit {
 
   @Input() newsItem: NewsDto;
   @Input() index: number;
   public imgSrc: string;
-  public imageHeight: number;
+  public isLiked: boolean;
 
-  constructor(private router: Router, private newsTypeService: NewsType, private profileService: ProfileService) { }
+  constructor(private newsTypeService: NewsType, private profileService: ProfileService) { }
 
   ngOnInit() {
-    setTimeout(() => {
+    if (this.newsItem) {
       this.newsItem.newsType.name = this.newsTypeService.getNewsTypeName(this.newsItem.newsType.key);
-      this.imageHeight = $("#newsContent" + this.newsItem.nlId).height() + 15;
-      setTimeout(() => {
-        $("#newsImgBlock" + this.newsItem.nlId).css("height", this.imageHeight + "px");
-        if ($("#newsImgBlock" + this.newsItem.nlId + " img").width() < $("#newsImgBlock" + this.newsItem.nlId + " img").height()) {
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("width", "100%");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("margin-top", -($("#newsImgBlock" + this.newsItem.nlId + " img").height() - this.imageHeight)/2 + "px");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("display", "inline");
-        } else {
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("height", "100%");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("margin-left", ($("#newsImgBlock" + this.newsItem.nlId).width() - $("#newsImgBlock" + this.newsItem.nlId + " img").width())/2 + "px");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("display", "inline");
-        }
-      }, 50);
-    }, 100);
+    }
+  }
 
+  public getMyStyle() {
     try {
       this.imgSrc = $(this.newsItem.content).find('img')[0].src;
+      let myStyles = {
+        'background-image': 'url(' + this.imgSrc + ')'
+      };
+      return myStyles;
     } catch (e) {
-        console.log('Could not find <img>!');
+        this.getMyStyle();
     }
   }
 
@@ -65,7 +57,7 @@ export class NewsItemComponent implements OnInit {
         error => console.log(error)
       );
     } else {
-      $('#toggle-heart-' + this.index).on('click', function(e) {
+      $('#mr-toggle-heart-' + this.index).on('click', function(e) {
         return false;
       });
       document.getElementById("logInModal").click();

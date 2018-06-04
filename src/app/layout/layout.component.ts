@@ -38,13 +38,6 @@ export class LayoutComponent implements OnInit {
       this.user.firstName = LocalStorageSecurity.getItem(CommonKey.NAME);
       this.user.lastName = LocalStorageSecurity.getItem(CommonKey.SURNAME);
     }
-
-    var flag = this;
-    window.onscroll = (function() {
-      if(document.getElementById('wrap').offsetHeight <= window.pageYOffset
-                                                       + window.innerHeight) {
-      }
-    });
   }
 
   private getLanguages() {
@@ -110,6 +103,7 @@ export class LayoutComponent implements OnInit {
     this.user.firstName = LocalStorageSecurity.getItem(CommonKey.NAME);
     this.user.lastName = LocalStorageSecurity.getItem(CommonKey.SURNAME);
     this.isLoggedIn = isEntered;
+    this.refreshPage();
   }
 
   public showDropdown() {
@@ -121,5 +115,10 @@ export class LayoutComponent implements OnInit {
     localStorage.clear();
     LocalStorageSecurity.setItem(CommonKey.LANGUAGE, lang);
     this.isLoggedIn = false;
+    this.refreshPage();
+  }
+
+  private refreshPage() {
+    this.router.navigate([this.router.url]);
   }
 }

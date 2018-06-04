@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { PublicNewsService } from '../../services/publicNews.service';
 import { Location } from '@angular/common';
 import { CountDto } from '../../dto/countDto';
@@ -6,6 +6,7 @@ import { LocalStorageSecurity } from '../../util/localStorageSecurity';
 import { CommonKey } from '../../util/commonKey';
 import { LangDto } from '../../dto/langDto';
 import { NewsDto } from '../../dto/newsDto';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-news',
@@ -15,19 +16,48 @@ import { NewsDto } from '../../dto/newsDto';
 })
 export class NewsComponent implements OnInit {
 
-  private from: number = 0;
-  private amount: number = 9;
+  @HostListener("window:scroll", ["$event"])
+    onWindowScroll() {
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight;
+    let max = document.documentElement.scrollHeight;
+    if(pos >= max - 100)   {
+      if (this.flag) {
+        this.getRecentNews();
+        this.flag = false; 
+      }
+    } else if (!this.flag){
+      this.flag = true;
+    }
+}
+  private flag;
+  private from: number;
+  private amount: number;
   public news: Array<NewsDto>;
   public mostReadNews: Array<NewsDto>;
+  public navigationSubscription;
+  private previousEventId: number;
 
-  constructor(private publicNewsService: PublicNewsService, private location: Location) {
-    this.news = [];
-    this.mostReadNews = [];
+  constructor(private publicNewsService: PublicNewsService, private location: Location, private router: Router) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        if (!this.previousEventId && e.id !== 1) {
+          this.initialiseInvites();
+        }
+        this.previousEventId = e.id-1;
+      }
+    });
   }
 
   ngOnInit() {
-      this.getRecentNews();
-      this.getMostReadNews();
+  }
+
+  private initialiseInvites() {
+    this.news = [];
+    this.mostReadNews = [];
+    this.from = 0;
+    this.amount = 9;
+    this.getRecentNews();
+    this.getMostReadNews();
   }
 
   private getRecentNews() {
@@ -58,16 +88,15 @@ export class NewsComponent implements OnInit {
 
   private getMostReadNews() {
     var count = new CountDto();
-    count.from = this.from;
-    count.to = this.amount;
+    count.from = 0;
+    count.to = 4;
     count.lang = this.location.path().split('/')[1];
-    this.from += this.amount;
 
     if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
       this.publicNewsService.getMostReadNewsListWithToken(count).subscribe(
         (data) => {
           this.mostReadNews = this.mostReadNews.concat(data);
-          console.log(this.mostReadNews);
+          console.log(data);
         },
         error => console.log(error)
       );
@@ -75,7 +104,7 @@ export class NewsComponent implements OnInit {
       this.publicNewsService.getMostReadNewsList(count).subscribe(
         (data) => {
           this.mostReadNews = this.mostReadNews.concat(data);
-          console.log(this.mostReadNews);
+          console.log(data);
         },
         error => console.log(error)
       );

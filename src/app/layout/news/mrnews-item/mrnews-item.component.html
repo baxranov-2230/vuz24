@@ -1,0 +1,37 @@
+<div class="mrNewsItem" *ngIf="newsItem">
+  <a class="linkBlock" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.nlId}}">
+    <div class="picture" [ngStyle]="getMyStyle()"></div>
+    <h5>{{newsItem.title}}</h5>
+    <p>{{newsItem.subContent}}</p>
+  </a>
+  <div class="downLine">
+    <div class="downElement">
+      <pre>
+<span class="{{'color' + newsItem.newsType.key}}">{{newsItem.newsType.name}}</span>
+<span>{{newsItem.publishDate}}</span></pre>
+    </div>
+    <div class="downElements">
+      <div class="downElement">
+        <span><i class="fa fa-eye"></i> {{newsItem.viewedCount}}</span>
+      </div>
+      <div class="downElement">
+        <span><i class="fa fa-comments-o"></i> 19</span>
+      </div>
+      <div class="downElement">
+        <span>
+          <input id="{{'mr-toggle-heart-' + index}}" type="checkbox" [attr.checked]="newsItem.profile && newsItem.profile.isLiked ? true : null"/>
+          <label for="{{'mr-toggle-heart-' + index}}" aria-label="like" 
+                 (click)="likeNews()"><i class="fa"
+                 [class.fa-heart]="newsItem.profile && newsItem.profile.isLiked"
+                 [class.fa-heart-o]="!newsItem.profile || !newsItem.profile.isLiked"></i><i
+                 *ngIf="newsItem.likedCount"> {{newsItem.likedCount}}</i></label>
+        </span>
+      </div>
+      <span>
+      <div class="downElement">
+        <span><i class="fa fa-bookmark-o"></i></span>
+      </div>
+      </span>
+    </div>
+  </div>
+</div>

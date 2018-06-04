@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PublicNewsService } from '../../../services/publicNews.service';
 import { LocalStorageSecurity } from '../../../util/localStorageSecurity';
 import { CommonKey } from '../../../util/commonKey';
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+import { NewsDto } from '../../../dto/newsDto';
 
 @Component({
   selector: 'app-news-detail',
@@ -13,8 +15,10 @@ import { CommonKey } from '../../../util/commonKey';
 export class NewsDetailComponent implements OnInit {
 
   private newsId: number;
+  public content: SafeHtml;
+  public newsItem: NewsDto;
 
-  constructor(private activeRoute: ActivatedRoute, private newsService: PublicNewsService) { }
+  constructor(private sanitizer: DomSanitizer, private activeRoute: ActivatedRoute, private newsService: PublicNewsService) { }
 
   ngOnInit() {
     this.activeRoute.params.forEach(params =>{
@@ -30,6 +34,8 @@ export class NewsDetailComponent implements OnInit {
       this.newsService.getNewsWithToken(this.newsId).subscribe(
         (data) => {
           console.log(data);
+          this.newsItem = data;
+          this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
         },
         (error) => console.log(error)
       );
@@ -37,6 +43,8 @@ export class NewsDetailComponent implements OnInit {
       this.newsService.getNews(this.newsId).subscribe(
         (data) => {
           console.log(data);
+          this.newsItem = data;
+          this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
         },
         (error) => console.log(error)
       );

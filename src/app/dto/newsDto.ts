@@ -9,6 +9,12 @@ export class NewsDto {
     public submitDate: string;
     public newsType: NewsTypeDto;
     public nlId: number;
+    public likedCount: number;
+    public important: boolean;
+    public profile: {
+        isLiked: boolean;
+        isCommented: boolean;
+    }
 
     constructor() {}
 }

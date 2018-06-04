@@ -1,3 +1,5 @@
-<p>
-  news-detail works!
-</p>
+<div *ngIf="newsItem" class="newsDetail" style="background-color: #fff; padding: 15px">
+  <h2 style="max-width: 80%; text-align: center; margin: 0 auto">{{newsItem.title}}</h2>
+  <br>
+  <div [innerHTML]="content" *ngIf="content">
+</div>
