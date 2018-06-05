@@ -1,0 +1,99 @@
+$fb-color: #3b5998 !default;
+$tw-color: #55ADED !default;
+$gplus-color: #DB4A37 !default;
+$yt-color: #ED302F !default;
+.btn-floating {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    vertical-align: middle;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    overflow: hidden;
+    margin: 10px unset;
+    margin-left: unset;
+    cursor: pointer;
+    transition: color .3s;
+    clip-path: inset(0 0 0 0 round 100%);
+    user-select: none;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #fff;
+        border-radius: 100%;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        transition: all, 0.5s, ease-out;
+    }
+    &:hover:before, &:focus:before, &:active:before {
+        transform: scale(2);
+    }
+    i {
+        font-size: 1.625rem;
+        line-height: 44px;
+        display: inline-block;
+        text-align: center;
+        width: inherit;
+        color: #fff;
+        text-rendering: auto;
+    }
+}
+.btn-floating:not(:last-of-type) {
+    margin-right: 10px;
+}
+.btn-fb {
+    background-color: $fb-color;
+    &:hover i {
+        color: $fb-color;
+    }
+}
+.btn-tw {
+    background-color: $tw-color;
+    &:hover i {
+        color: $tw-color;
+    }
+}
+.btn-gplus {
+    background-color: $gplus-color;
+    &:hover i {
+        color: $gplus-color;
+    }
+}
+.btn-ins {
+    background-image: url("../../../assets/images/ins.png");
+    background-size: cover;
+    &:hover i {
+        color: #d6249f;
+    }
+}
+.btn-yt {
+    background-color: $yt-color;
+    &:hover i {
+        color: $yt-color;
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .btn-floating:not(:last-of-type) {
+        margin-right: 5px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .btn-floating {
+        width: 34px;
+        height: 34px;
+        i {
+            font-size: 1.25rem;
+            line-height: 34px;
+        }
+    }
+    .btn-floating:not(:last-of-type) {
+        margin-right: 5px;
+    }
+}

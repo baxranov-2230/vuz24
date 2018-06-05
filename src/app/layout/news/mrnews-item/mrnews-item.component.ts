@@ -66,14 +66,27 @@ export class MrnewsItemComponent implements OnInit {
 
   saveNews() {
     if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
-      var news = new NewsDto();
-      news.nlId = this.newsItem.nlId;
-      this.profileService.saveNews(news).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        error => console.log(error)
-      );
+      if (this.newsItem.profile.isSaved) {
+        this.profileService.deleteSavedNews(this.newsItem.nlId).subscribe(
+          (data) => {
+            if (data.state === 1) {
+              this.newsItem.profile.isSaved = false;
+            }
+          },
+          error => console.log(error)
+        );
+      } else {
+        var news = new NewsDto();
+        news.nlId = this.newsItem.nlId;
+        this.profileService.saveNews(news).subscribe(
+          (data) => {
+            if (data.state === 1) {
+              this.newsItem.profile.isSaved = true;
+            }
+          },
+          error => console.log(error)
+        );
+      }
     } else {
       document.getElementById("logInModal").click();
     }

@@ -14,6 +14,7 @@ export class NewsDto {
     public profile: {
         isLiked: boolean;
         isCommented: boolean;
+        isSaved: boolean;
     }
 
     constructor() {}

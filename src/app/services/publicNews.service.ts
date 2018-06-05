@@ -132,4 +132,14 @@ export class PublicNewsService {
 
     return this.http.post<Array<NewsDto>>(GeneralURL.newsPublic.concat("most_type_with/" + count.lang), json, options);
   }
+
+  public getImportantNewsList(lang: string) {
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.get<Array<NewsDto>>(GeneralURL.newsPublic.concat("important/" + lang), options);
+  }
 }

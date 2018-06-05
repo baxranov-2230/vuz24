@@ -32,7 +32,10 @@
           </span>
         </div>
         <div class="downElement">
-          <span><i class="fa fa-bookmark-o" (click)="saveNews()"></i></span>
+          <span><i class="fa" (click)="saveNews()"
+                    [class.fa-bookmark]="newsItem.profile && newsItem.profile.isSaved"
+                    [class.fa-bookmark-o]="!newsItem.profile || !newsItem.profile.isSaved"></i>
+          </span>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./news.component.scss'],
   providers: [ PublicNewsService ]
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
 
   @HostListener("window:scroll", ["$event"])
     onWindowScroll() {
@@ -35,20 +35,22 @@ export class NewsComponent implements OnInit {
   public news: Array<NewsDto>;
   public mostReadNews: Array<NewsDto>;
   public navigationSubscription;
-  private previousEventId: number;
 
   constructor(private publicNewsService: PublicNewsService, private location: Location, private router: Router) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
-        if (!this.previousEventId && e.id !== 1) {
+        if (e.id !== 1) {
           this.initialiseInvites();
         }
-        this.previousEventId = e.id-1;
       }
     });
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.navigationSubscription.unsubscribe();
   }
 
   private initialiseInvites() {

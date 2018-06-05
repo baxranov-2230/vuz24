@@ -100,10 +100,10 @@ export class ProfileService {
         })
     };
 
-    return this.http.post(GeneralURL.profileURL.concat('save_nl'), json, options);
+    return this.http.post<CountDto>(GeneralURL.profileURL.concat('save_nl'), json, options);
   }
 
-  public deleteSavedNews(news: NewsDto) {
+  public deleteSavedNews(id: number) {
     let options = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export class ProfileService {
         })
     };
 
-    return this.http.delete(GeneralURL.profileURL.concat('delete_nl'), options);
+    return this.http.delete<CountDto>(GeneralURL.profileURL.concat('delete_nl/' + id), options);
   }
 
   public getSavedNews(count: CountDto) {

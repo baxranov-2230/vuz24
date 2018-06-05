@@ -94,8 +94,8 @@ export class LayoutComponent implements OnInit {
         if(document.querySelector(".nav-link.active-menu") === null) {
           document.querySelector(".nav-link:first-child").classList.add("active-menu");
         }
-      }, 200);
-    }, 300);
+      }, 100);
+    }, 200);
   }
 
   public checkWeatherEntered(isEntered: Boolean) {
