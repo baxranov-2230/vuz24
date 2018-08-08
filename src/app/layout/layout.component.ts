@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { LangDto } from '../dto/langDto';
 import { Location } from '@angular/common';
 import { NewsTypeDto } from '../dto/newsTypeDto';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { LocalStorageSecurity } from '../util/localStorageSecurity';
 import { CommonKey } from '../util/commonKey';
 import { ProfileDto } from '../dto/profileDto';
 import { NewsType } from '../util/newsType';
-
 
 @Component({
   selector: 'app-layout',
@@ -16,15 +15,27 @@ import { NewsType } from '../util/newsType';
   styleUrls: ['./layout.component.scss'],
   providers: [NewsService, NewsType]
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
 
   public langs: Array<LangDto>;
   public newsTypes: Array<NewsTypeDto>;
   public isLoggedIn: Boolean = false;
   public user: ProfileDto;
+  public defLang: string;
+  public typeName: string;
+  public navigationSubscription;
 
   constructor(private newsTypeService: NewsType, private newsService: NewsService, private location: Location, private router: Router) {
     this.langs = [];
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        if (e.url.split("#").length > 1) {
+          this.typeName = e.url.split("#")[1];
+        } else if (e.url.split("/")[2] !== "topic") {
+          this.typeName = null;
+        }
+      }
+    });
   }
 
   ngOnInit() {
@@ -38,6 +49,13 @@ export class LayoutComponent implements OnInit {
       this.user.firstName = LocalStorageSecurity.getItem(CommonKey.NAME);
       this.user.lastName = LocalStorageSecurity.getItem(CommonKey.SURNAME);
     }
+    if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE)) {
+      this.defLang = LocalStorageSecurity.getItem(CommonKey.LANGUAGE);
+    }
+  }
+
+  ngOnDestroy() {
+    this.navigationSubscription.unsubscribe();
   }
 
   private getLanguages() {
@@ -60,14 +78,17 @@ export class LayoutComponent implements OnInit {
     );
   }
 
-  public goToTop(str: String) {
-    if (str === "basic") {
-      document.querySelector(".nav-link:first-child").classList.add("active-menu");
-      this.router.navigate([LocalStorageSecurity.getItem(CommonKey.LANGUAGE)]);
-    } else {
-      document.querySelector(".nav-link:first-child").classList.remove("active-menu");
-    }
-    window.scrollTo(0, 0);
+  public goToTop(str: string) {
+    setTimeout(() => {
+      if (str === "basic" && location.pathname.split("/")[2] !== "topic") {
+        this.typeName = null;
+        document.querySelector(".nav-link:first-child").classList.add("active-menu");
+      } else if (location.pathname.split("/")[2] === "topic") {
+        this.typeName = str;
+        document.querySelector(".nav-link:first-child").classList.remove("active-menu");
+      }
+      window.scrollTo(0, 0);
+    }, 50);
   }
 
   public saveLang(str: string) {
@@ -76,7 +97,7 @@ export class LayoutComponent implements OnInit {
       document.querySelector(".active").classList.remove("active");
     }
     document.getElementById(str).classList.add("active");
-    this.router.navigate(["/" + str + this.router.url.substring(4)]);
+    this.router.navigate(["/" + str + this.router.url.split('#')[0].substring(4)],  { preserveFragment: true });
   }
 
   private getLang() {
@@ -86,16 +107,14 @@ export class LayoutComponent implements OnInit {
           document.querySelector(".active").classList.remove("active");
         }
         document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)).classList.add("active");
-        this.router.navigate(["/" + LocalStorageSecurity.getItem(CommonKey.LANGUAGE) + this.router.url.substring(4)]);
+        // this.router.navigate(["/" + LocalStorageSecurity.getItem(CommonKey.LANGUAGE) + this.router.url.substring(4)]);
       } else {
         this.getLang();
       }
-      setTimeout(() => {
-        if(document.querySelector(".nav-link.active-menu") === null) {
-          document.querySelector(".nav-link:first-child").classList.add("active-menu");
-        }
-      }, 100);
-    }, 200);
+      if (this.router.url.split('/')[3]) {
+        this.goToTop(this.router.url.split('/')[3]);
+      }
+    }, 100);
   }
 
   public checkWeatherEntered(isEntered: Boolean) {
@@ -115,10 +134,14 @@ export class LayoutComponent implements OnInit {
     localStorage.clear();
     LocalStorageSecurity.setItem(CommonKey.LANGUAGE, lang);
     this.isLoggedIn = false;
-    this.refreshPage();
+    if (location.pathname.split('/')[2] === 'my-profile') {
+      this.router.navigate([location.pathname.split('/')[1]]);
+    } else {
+      this.refreshPage();
+    }
   }
 
   private refreshPage() {
-    this.router.navigate([this.router.url]);
+    this.router.navigate([this.router.url.split('#')[0]], { preserveFragment: true });
   }
 }

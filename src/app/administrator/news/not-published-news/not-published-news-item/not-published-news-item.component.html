@@ -27,10 +27,10 @@
       </div>
       <div class="modal-body" [innerHTML]="content"></div>
       <div class="modal-footer">
-        <label style="margin-right: auto;">
-          <input type="checkbox" disabled>
+        <!-- <label style="margin-right: auto;">
+          <input type="checkbox" disabled [attr.checked]="newsItem.important ? true : null">
           Dolzarb
-        </label>
+        </label> -->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="publishNews()">Chop etish</button>
       </div>

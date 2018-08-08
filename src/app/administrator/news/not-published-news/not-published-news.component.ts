@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NewsService } from '../../../services/news.service';
 import { CountDto } from '../../../dto/countDto';
 import { NewsDto } from '../../../dto/newsDto';
@@ -11,10 +11,25 @@ import { NewsDto } from '../../../dto/newsDto';
 })
 export class NotPublishedNewsComponent implements OnInit {
 
+  @HostListener("window:scroll", ["$event"])
+    onWindowScroll() {
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight;
+    let max = document.documentElement.scrollHeight;
+    if(pos >= max - 200)   {
+      if (this.flag) {
+        this.getNotPublishedNewsList();
+        this.flag = false; 
+      }
+    } else if (!this.flag){
+      this.flag = true;
+    }
+  }
+
+  private flag;
   public NPnews: Array<NewsDto>;
   private from: number = 0;
   private amount: number = 9;
-  private isEndOfMdrts: Boolean = false;
+  private isEndOfNews: Boolean = false;
 
   constructor(private newsService: NewsService) {
     this.NPnews = [];
@@ -22,14 +37,6 @@ export class NotPublishedNewsComponent implements OnInit {
 
   ngOnInit() {
     this.getNotPublishedNewsList();
-
-    var flag = this;
-    window.onscroll = (function() {
-      if(!flag.isEndOfMdrts && document.getElementById('mainBody').offsetHeight <=
-                                          window.pageYOffset + window.innerHeight) {
-        flag.getNotPublishedNewsList();
-      }
-    });
   }
 
   private getNotPublishedNewsList() {
@@ -41,11 +48,19 @@ export class NotPublishedNewsComponent implements OnInit {
     this.newsService.getNotPublishedNewsList(count).subscribe(
       (data) => {
         this.NPnews = this.NPnews.concat(data);
+        console.log(data);
+        
         if (data.length < this.amount) {
-          this.isEndOfMdrts = true;
+          this.isEndOfNews = true;
         }
       },
       error => console.log(error)
     );
+  }
+
+  public onPublish(e) {
+    this.from = 0;
+    this.NPnews = [];
+    this.getNotPublishedNewsList();
   }
 }

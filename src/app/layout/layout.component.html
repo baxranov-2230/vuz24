@@ -39,7 +39,7 @@
                 <div class="menu">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item" *ngFor="let newsType of newsTypes">
-                            <a class="nav-link grow" routerLink="topic/{{newsType.key}}" routerLinkActive="active-menu" (click)="goToTop(newsType.key)"><span>{{newsType.name}}</span></a>
+                            <a class="nav-link grow" [routerLink] = "newsType.key!=='basic' ? ['topic/' + newsType.key] : ['../' + defLang]" routerLinkActive="active-menu" (click)="goToTop(newsType.key)"><span>{{newsType.name}}</span></a>
                         </li>
                     </ul>
                 </div>
@@ -49,13 +49,14 @@
 </header>
 <app-sign-in-modal (isEntered)="checkWeatherEntered($event)"></app-sign-in-modal>
 <div id="spaceTop"></div>
+<img src="{{'assets/images/Banners/' + typeName + '.jpg'}}" style="width: 100%;" *ngIf="typeName">
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-9" [style.margin-top]="typeName ? '17px' : 'unset'">
             <router-outlet></router-outlet>
         </div>
         <div class="col-md-3 pl-0">
-            <app-main-sidebar style="position: fixed;"></app-main-sidebar>
+            <app-main-sidebar id="mainSide"></app-main-sidebar>
         </div>
     </div>
 </div>

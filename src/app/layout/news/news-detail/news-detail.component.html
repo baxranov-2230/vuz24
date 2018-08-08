@@ -1,5 +1,86 @@
-<div *ngIf="newsItem" class="newsDetail" style="background-color: #fff; padding: 15px">
-  <h2 style="max-width: 80%; text-align: center; margin: 0 auto">{{newsItem.title}}</h2>
-  <br>
-  <div [innerHTML]="content" *ngIf="content">
+<div *ngIf="newsItem" class="newsDetail">
+  <h3>{{newsItem.title}}</h3>
+  <div class="ndInfoLine">
+    <p>
+      <i class="fa fa-calendar"></i> {{newsItem.publishDate.split(' ')[0]}}
+      <i class="fa fa-clock-o"></i> {{newsItem.publishDate.split(' ')[1]}}
+    </p>
+    <p>
+      <i class="fa fa-eye"></i> {{newsItem.viewedCount}}
+      <i class="fa fa-comments-o"></i><span *ngIf="!newsItem.commentCount"> 0</span> {{newsItem.commentCount}}
+    </p>
+  </div>
+  <div [innerHTML]="content" *ngIf="content" class="content"></div>
+  <div class="row">
+    <div class="col-6 downElement">
+      <span>
+        <input id="{{'toggle-heart'}}" type="checkbox" [attr.checked]="newsItem.profile && newsItem.profile.isLiked ? true : null"/>
+        <label for="{{'toggle-heart'}}" aria-label="like"
+               (click)="likeNews()"><i class="fa"
+               [class.fa-heart]="newsItem.profile && newsItem.profile.isLiked"
+               [class.fa-heart-o]="!newsItem.profile || !newsItem.profile.isLiked"></i><i
+               *ngIf="newsItem.likedCount"> {{newsItem.likedCount}}</i></label>
+      </span>
+    </div>
+    <div class="col-6 downElement">
+      <span><i class="fa" (click)="saveNews()"
+               [class.fa-bookmark]="newsItem.profile && newsItem.profile.isSaved"
+               [class.fa-bookmark-o]="!newsItem.profile || !newsItem.profile.isSaved"></i>
+      </span>
+    </div>
+  </div>
+  <hr>
+  <div class="shareLinksRow" *ngIf="src">
+    <a class="btn-floating btn-fb"><i class="fa fa-facebook"></i></a>
+    <a class="btn-floating btn-tg" target="_blank" href="{{'https://telegram.me/share/url?url=' + src}}"><i class="fa fa-telegram"></i></a>
+    <a class="btn-floating btn-ins"><i class="fa fa-instagram"></i></a>
+    <a class="btn-floating btn-tw" target="_blank" href="{{'http://twitter.com/share?text=' + newsItem.title + '&url=' + src}}"><i class="fa fa-twitter"></i></a>
+    <a class="btn-floating btn-yt"><i class="fa fa-youtube-play"></i></a>
+  </div>
+  <p class="divider">
+    <a>
+      <span *ngIf="newsItem.lang === 'uzl'">O'xshash maqolalar</span>
+      <span *ngIf="newsItem.lang === 'uzk'">Ўхшаш мақолалар</span>
+    </a>
+  </p>
+  <div class="row relativeNewsList">
+    <div class="col-12 col-sm-4" *ngFor="let newsOne of relatedNews">
+      <a class="row" routerLink="{{'/' + newsOne.lang + '/news/' + newsOne.nlId}}" fragment="{{newsOne.newsType.key}}" (click)="goToTop()">
+        <div class="col-3 col-sm-12">
+          <img src="{{newsOne.imgSrc}}" class="grow" *ngIf="newsOne.imgSrc">
+        </div>
+        <div class="col-9 col-sm-12">
+          <p class="d-none d-sm-block">{{newsOne.publishDate}}</p>
+          <p>{{newsOne.title}}</p>
+          <hr class="d-sm-none">
+          <p class="d-sm-none">{{newsOne.publishDate}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <p class="divider">
+    <a>
+      <span *ngIf="newsItem.lang === 'uzl'">Izohlar</span>
+      <span *ngIf="newsItem.lang === 'uzk'">Изоҳлар</span>
+    </a>
+  </p>
+  <div style="">
+    <img *ngIf="!imgSrc" src="assets/images/user.png" style="width: 50px; height: 50px; margin-right: 15px; vertical-align: top; border-radius: 50%;">
+    <img *ngIf="imgSrc" src="{{imgSrc}}" style="width: 50px; height: 50px; margin-right: 15px; vertical-align: top; border-radius: 50%;">
+    <textarea rows="2" style="width: calc(100% - 135px); height: 3.65em; font-size: 14px;" [(ngModel)]="comment"></textarea>
+    <button class="btn btn-info" style="float: right; margin-top: 0.5rem;" (click)="createComment()" [attr.disabled]="comment.trim().length === 0 ? true : none">Post</button>
+  </div>
+  <div class="commentList" *ngIf="commentsList.length > 0">
+    <div class="commentItem" *ngFor="let commentItem of commentsList">
+      <hr>
+      <div class="row" style="margin: 5px 0">
+        <img src="assets/images/unisex-user.png" style="width: 36px; height: 36px; margin-right: 10px; vertical-align: top; border-radius: 50%;">
+        <pre style="line-height: 19px; margin-bottom: unset">
+<span style="color: #4E70CC; font-size: 16px">{{commentItem.profile.firstName}} {{commentItem.profile.lastName}}</span>
+<span style="font-size: 12px; color: rgba(0, 0, 0, 0.65);">{{commentItem.time}}</span></pre>
+      </div>
+      <p style="margin-bottom: unset; color: #000">{{commentItem.content}}</p>
+    </div>
+  </div>
 </div>
+<!-- <div style="height: 200px;"></div> -->

@@ -22,7 +22,7 @@ export class CommentService {
         })
     };
 
-    return this.http.post(GeneralURL.newsComment.concat('create'), json, options);
+    return this.http.post<CommentDto>(GeneralURL.newsComment.concat('create'), json, options);
   }
 
   public updateComment(comment: CommentDto) {
@@ -71,17 +71,21 @@ export class CommentService {
     return this.http.get(GeneralURL.newsComment.concat('find/' + id), options);
   }
 
-  public getNewsCommentList(id: number) {
+  public getNewsCommentList(count: CountDto) {
+    let json = JSON.stringify(count);
+
     let options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
     };
 
-    return this.http.post(GeneralURL.newsComment.concat('list_no/' + id), options);
+    return this.http.post<Array<CommentDto>>(GeneralURL.newsComment.concat('list_no/' + count.newsId), json, options);
   }
 
-  public getNewsCommentListWithToken(id: number) {
+  public getNewsCommentListWithToken(count: CountDto) {
+    let json = JSON.stringify(count);
+    
     let options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -89,6 +93,6 @@ export class CommentService {
         })
     };
 
-    return this.http.post(GeneralURL.newsComment.concat('list_token/' + id), options);
+    return this.http.post<Array<CommentDto>>(GeneralURL.newsComment.concat('list_token/' + count.newsId), json, options);
   }
 }

@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './services/authGuard';
 import { AdminGuard } from './services/adminGuard';
 import { ModeratorGuard } from './services/moderatorGuard';
+import { LocalStorageSecurity } from './util/localStorageSecurity';
+import { CommonKey } from './util/commonKey';
 
 import { AppComponent } from './app.component';
 import { LogInComponent } from './layout/log-in/log-in.component';
@@ -26,16 +28,25 @@ import { ModeratorComponent } from './moderator/moderator.component';
 import { ModeratorDetailComponent } from './administrator/moderators/moderator-detail/moderator-detail.component';
 import { MyProfileComponent } from './layout/my-profile/my-profile.component';
 
+// var isUzk: boolean = false;
+// try {
+//     if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE) && LocalStorageSecurity.getItem(CommonKey.LANGUAGE) !== 'uzl') {
+//         isUzk = true;
+//     }
+// } catch (error) {
+//     console.log(error);
+// }
+
 const appRoutes: Routes = [
     { path: '', children: [
-        { path: '', redirectTo: '/uzl', pathMatch: 'full' },
-        { path: 'uzl', component: LayoutComponent , children: [
+        { path: '', redirectTo: LocalStorageSecurity.hasItem(CommonKey.LANGUAGE) && LocalStorageSecurity.getItem(CommonKey.LANGUAGE) !== 'uzl' ? 'uzk': 'uzl', pathMatch: 'full' },
+        { path: 'uzl', component: LayoutComponent, children: [
             { path: '', component: NewsComponent, runGuardsAndResolvers: 'always' },
             { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard] },
             { path: 'topic/:type', component: NewsByTypeComponent },
             { path: 'news/:id', component: NewsDetailComponent }
         ]},
-        { path: 'uzk', component: LayoutComponent , children: [
+        { path: 'uzk', component: LayoutComponent, children: [
             { path: '', component: NewsComponent },
             { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard] },
             { path: 'topic/:type', component: NewsByTypeComponent },
@@ -79,10 +90,11 @@ const appRoutes: Routes = [
     providers: [
         AuthGuard,
         AdminGuard,
-        ModeratorGuard
+        ModeratorGuard,
     ],
     declarations: []
 })
 
 export class AppRoutingModule {
+    constructor() { }
 }

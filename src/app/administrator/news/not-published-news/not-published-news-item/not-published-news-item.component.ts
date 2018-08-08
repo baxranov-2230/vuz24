@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NewsDto } from '../../../../dto/newsDto';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NewsService } from '../../../../services/news.service';
@@ -14,17 +14,16 @@ declare var $;
 export class NotPublishedNewsItemComponent implements OnInit {
 
   @Input() newsItem: NewsDto;
+  @Output() isPublished: EventEmitter<any> = new EventEmitter();;
   public imgSrc: string;
   public content: SafeHtml;
   public target: string;
   public time: string;
   public date: string;
 
-  constructor(private sanitizer: DomSanitizer, private newsService: NewsService, private router: Router) { }
+  constructor(private sanitizer: DomSanitizer, private newsService: NewsService) { }
 
   ngOnInit() {
-    console.log(this.newsItem);
-    
     setTimeout(() => {
       document.getElementById("target" + this.newsItem.id).setAttribute('data-target', "#newsInModal" + this.newsItem.id);
     }, 500);
@@ -43,7 +42,7 @@ export class NotPublishedNewsItemComponent implements OnInit {
       this.newsService.publishNews(this.newsItem.id).subscribe(
         (data) => {
           if (data.state === 1) {
-            this.router.navigate(["administrator/published-news"]);
+            this.isPublished.emit(true);
           }
         },
         error => console.log(error)

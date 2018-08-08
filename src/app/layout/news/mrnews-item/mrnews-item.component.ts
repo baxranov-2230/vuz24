@@ -22,9 +22,9 @@ export class MrnewsItemComponent implements OnInit {
   constructor(private newsTypeService: NewsType, private profileService: ProfileService) { }
 
   ngOnInit() {
-    if (this.newsItem) {
+    setTimeout(() => {
       this.newsItem.newsType.name = this.newsTypeService.getNewsTypeName(this.newsItem.newsType.key);
-    }
+    }, 100);
   }
 
   public getMyStyle() {

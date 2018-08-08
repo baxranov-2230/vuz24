@@ -70,7 +70,7 @@ export class ProfileService {
     let options = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            'authorization': this.getToken()
+            'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
         })
     };
 
@@ -124,7 +124,7 @@ export class ProfileService {
         })
     };
 
-    return this.http.post(GeneralURL.profileURL.concat('saved_nll'), json, options);
+    return this.http.post<Array<NewsDto>>(GeneralURL.profileURL.concat('saved_nll'), json, options);
   }
 
   public createImage(file: File) {

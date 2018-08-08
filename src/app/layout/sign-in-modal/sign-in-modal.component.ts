@@ -46,6 +46,7 @@ export class SignInModalComponent implements OnInit {
           LocalStorageSecurity.setItem(CommonKey.TOKEN, data.token);
           LocalStorageSecurity.setItem(CommonKey.NAME, data.firstName);
           LocalStorageSecurity.setItem(CommonKey.SURNAME, data.lastName);
+          LocalStorageSecurity.setItem(CommonKey.IMG, data.imgLink);
           this.isEntered.emit(true);
           document.getElementById("login-close-btn").click();
         } else {

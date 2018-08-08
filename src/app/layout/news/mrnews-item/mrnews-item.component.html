@@ -1,5 +1,5 @@
 <div class="mrNewsItem" *ngIf="newsItem">
-  <a class="linkBlock" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.nlId}}">
+  <a class="linkBlock" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.nlId}}" fragment="{{newsItem.newsType.key}}">
     <div class="picture" [ngStyle]="getMyStyle()"></div>
     <h5>{{newsItem.title}}</h5>
     <p>{{newsItem.subContent}}</p>
@@ -15,7 +15,8 @@
         <span><i class="fa fa-eye"></i> {{newsItem.viewedCount}}</span>
       </div>
       <div class="downElement">
-        <span><i class="fa fa-comments-o"></i> 19</span>
+        <span *ngIf="!newsItem.commentCount"><i class="fa fa-comments-o"></i> 0</span>
+        <span *ngIf="newsItem.commentCount"><i class="fa fa-comments-o"></i> {{newsItem.commentCount}}</span>
       </div>
       <div class="downElement">
         <span>

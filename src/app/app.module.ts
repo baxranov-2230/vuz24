@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./appRouting.module";
 import { HttpClientModule } from '@angular/common/http';
+import { NgxImgModule } from 'ngx-img';
 
 import { AppComponent } from './app.component';
 import { LogInComponent } from './layout/log-in/log-in.component';
@@ -65,7 +66,8 @@ import { MainSidebarComponent } from './layout/main-sidebar/main-sidebar.compone
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxImgModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

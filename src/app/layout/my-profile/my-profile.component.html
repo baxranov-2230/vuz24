@@ -1,3 +1,35 @@
-<p>
-  my-profile works!
-</p>
+<div class="row" style="margin: 15px 0 0 0; background-color: #fff; padding: 15px;">
+  <div class="col-2" style="padding: unset" *ngIf="isImgReady">
+    <img src="{{ src }}" class="savedImg">
+    <button *ngIf="isEditing" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 105px; top: 100px; border-radius: 50%" (click)="removeImg()"><i class="fa fa-trash-o"></i></button>
+  </div>
+  <div class="col-3" style="padding: unset" *ngIf="!isImgReady">
+    <ngx-img (onSelect)="onSelect($event)" [config]="{ crop: [ { ratio: 1 } ] }"></ngx-img>
+  </div>
+  <div class="col-7" style="padding-top: 5px">
+    <h4 style="color: #218fcf">{{user.firstName}} {{user.lastName}}</h4>
+    <p>{{'russeal94@gmail.com'}}</p>
+    <div style="position: absolute; bottom: 0;">
+      <button *ngIf="isImgChosen && !isImgReady" class="btn btn-info" style="border-radius: 50px;" (click)="saveImg()">Rasmni Saqlang</button>
+    </div>
+  </div>
+  <div class="col-2" *ngIf="!isEditing">
+    <button class="btn btn-info" style="border-radius: 50px; padding: 6px 20px;" (click)="startEditing()">Tahrirlash</button>
+  </div>
+</div>
+<div class="row savedNews">
+  <div class="col-12 col-sm-4" *ngFor="let newsOne of savedNews; index as i" [style.margin]="i%3===1 ? '15px' : '0'">
+    <a class="row" routerLink="{{'/' + newsOne.lang + '/news/' + newsOne.nlId}}" fragment="{{newsOne.newsType.key}}" (click)="goToTop()">
+      <div class="col-3 col-sm-12">
+        <img src="{{newsOne.imgSrc}}" class="grow" *ngIf="newsOne.imgSrc">
+      </div>
+      <div class="col-9 col-sm-12">
+        <p class="d-none d-sm-block">{{newsOne.publishDate}}</p>
+        <p>{{newsOne.title}}</p>
+        <hr class="d-sm-none">
+        <p class="d-sm-none">{{newsOne.publishDate}}</p>
+      </div>
+    </a>
+  </div>
+</div>
+

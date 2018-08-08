@@ -9,6 +9,7 @@ export class ProfileDto {
     public email: string;
     public birthDate;
     public isAdmin: Boolean;
+    public imgLink: string;
     public isModerator: Boolean;
     public roles: Array<{ name: string }>
 

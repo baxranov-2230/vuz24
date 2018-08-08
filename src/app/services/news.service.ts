@@ -21,6 +21,8 @@ export class NewsService {
         })
     };
 
+    console.log('test');
+    
     return this.http.get<Array<LangDto>>(GeneralURL.langURL.concat('all'), options);
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { PublicNewsService } from '../../services/publicNews.service';
 import { Location } from '@angular/common';
 import { CountDto } from '../../dto/countDto';
@@ -7,6 +7,11 @@ import { CommonKey } from '../../util/commonKey';
 import { LangDto } from '../../dto/langDto';
 import { NewsDto } from '../../dto/newsDto';
 import { Router, NavigationEnd } from '@angular/router';
+declare global {
+  interface Document {
+      documentMode?: any;
+  }
+}
 
 @Component({
   selector: 'app-news',
@@ -14,13 +19,13 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./news.component.scss'],
   providers: [ PublicNewsService ]
 })
-export class NewsComponent implements OnInit, OnDestroy {
+export class NewsComponent implements OnDestroy {
 
   @HostListener("window:scroll", ["$event"])
     onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight;
     let max = document.documentElement.scrollHeight;
-    if(pos >= max - 100)   {
+    if(pos >= max - 200)   {
       if (this.flag) {
         this.getRecentNews();
         this.flag = false; 
@@ -28,7 +33,8 @@ export class NewsComponent implements OnInit, OnDestroy {
     } else if (!this.flag){
       this.flag = true;
     }
-}
+  }
+  
   private flag;
   private from: number;
   private amount: number;
@@ -39,14 +45,9 @@ export class NewsComponent implements OnInit, OnDestroy {
   constructor(private publicNewsService: PublicNewsService, private location: Location, private router: Router) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
-        if (e.id !== 1) {
-          this.initialiseInvites();
-        }
+        this.initialiseInvites();
       }
     });
-  }
-
-  ngOnInit() {
   }
 
   ngOnDestroy() {
