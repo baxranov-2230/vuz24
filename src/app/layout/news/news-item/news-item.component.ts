@@ -43,7 +43,7 @@ export class NewsItemComponent implements OnInit {
     try {
       this.imgSrc = $(this.newsItem.content).find('img')[0].src;
     } catch (e) {
-        console.log('Could not find <img>!');
+      this.imgSrc = "assets/images/logo.png";
     }
   }
 

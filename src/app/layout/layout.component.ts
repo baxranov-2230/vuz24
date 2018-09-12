@@ -27,6 +27,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   constructor(private newsTypeService: NewsType, private newsService: NewsService, private location: Location, private router: Router) {
     this.langs = [];
+    this.newsTypes = [];
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
         if (e.url.split("#").length > 1) {
