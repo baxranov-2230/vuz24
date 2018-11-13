@@ -15,6 +15,7 @@ export class NewsDto {
     public viewedCount: number;
     public important: boolean;
     public imgSrc: string;
+    public NEWS_ID: number;
     public profile: {
         isLiked: boolean;
         isCommented: boolean;

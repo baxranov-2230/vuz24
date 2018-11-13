@@ -1,0 +1,38 @@
+<div class="row">
+  <h2 class="mainHeader">Yangilik qo'shish</h2>
+</div>
+<form class="col-12 pt-3 pb-3">
+<div class="row m-0">
+  <div class="form-group" style="margin-right: 100px" *ngIf="langs">
+      <label for="sel1">Tilni tanlang</label>
+      <select class="form-control" id="sel1" (change)="checkNews()">
+        <option disabled selected>Tillar:</option>
+        <option *ngFor="let lang of langs" value="{{lang.name}}">{{lang.key}}</option>
+      </select>
+  </div>
+  <div class="form-group input-group-prepend" style="margin-top: calc(0.5rem + 24px); height: 38px;">
+      <div class="input-group-text">
+          <input id="sel3" type="checkbox" aria-label="Checkbox for following text input">
+          <label for="sel3" style="margin-bottom: 0.1rem">&nbsp;Dolzarb</label>
+      </div>
+  </div>
+</div>
+<div class="row m-0">
+    <div class="form-group col-12 col-lg-8 p-0">
+      <label for="title">Sarlavhani kiriting</label>
+      <input type="text" class="form-control" id="title" placeholder="Sarlavha"
+             name="title" (blur)="checkNews()" required>
+    </div>
+</div>
+<div class="row m-0">
+    <div class="form-group col-12 col-lg-8 p-0">
+      <label for="subContent">Subcontentni kiriting</label>
+      <textarea name="subContent" class="form-control" rows="4" maxlength="250"
+                [(ngModel)]="subContent" (blur)="checkNews()" required></textarea>
+    </div>
+</div>
+<div id="editor">
+</div>
+<button type="submit" class="btn btn-primary" (click)='saveNews()'
+        [attr.disabled]="isReady ? null : true">Post</button>
+</form>

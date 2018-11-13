@@ -7,8 +7,8 @@
                         <span class="fa fa-bars" style="color: #fff"></span>
                     </button>
                 </li>
-                <li *ngFor="let lang of langs">
-                    <a id="{{lang.name}}" (click)="saveLang(lang.name)">{{lang.key}}</a>
+                <li *ngFor="let lang of langs, index as i">
+                    <a id="{{lang.name}}" (click)="saveLang(lang.name)" [class.active]="i==0">{{lang.key}}</a>
                 </li>
                 <li class="miniLogo">
                     <a href="#"><img src="assets/images/logo.png" height="31"></a>

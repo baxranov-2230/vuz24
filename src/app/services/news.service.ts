@@ -20,8 +20,6 @@ export class NewsService {
           'Content-Type': 'application/json'
         })
     };
-
-    console.log('test');
     
     return this.http.get<Array<LangDto>>(GeneralURL.langURL.concat('all'), options);
   }
@@ -62,6 +60,19 @@ export class NewsService {
     return this.http.post<CountDto>(GeneralURL.newsActURL.concat('create_trans'), json, options);
   }
 
+  public getNewsWithToken(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+      })
+    };
+
+    return this.http.post<NewsDto>(GeneralURL.newsPublic.concat("get_by_parent_with/" + count.lang), json, options);
+  }
+
   public getNotPublishedNewsList(count: CountDto) {
     let json = JSON.stringify(count);
 
@@ -73,6 +84,30 @@ export class NewsService {
     };
 
     return this.http.post<Array<NewsDto>>(GeneralURL.newsActURL.concat('n_pub_list'), json, options);
+  }
+
+  public deleteNews(id: number) {
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+      })
+    };
+
+    return this.http.delete<CountDto>(GeneralURL.newsActURL.concat('delete_news_lang/' + id), options);
+  }
+
+  public getNewsLangTree(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+      })
+    };
+
+    return this.http.post<Array<NewsDto>>(GeneralURL.newsActURL.concat('lang_tree'), json, options);
   }
 
   public publishNews(id: number) {

@@ -11,6 +11,7 @@ import { CommentService } from '../../../services/commentService';
 import { CommentDto } from '../../../dto/commentDto';
 import { NewsComponent } from '../news.component';
 import { ProfileDto } from '../../../dto/profileDto';
+import { Location } from '@angular/common';
 declare var $;
 
 @Component({
@@ -34,7 +35,7 @@ export class NewsDetailComponent implements OnDestroy {
   public imgSrc: string;
   private date = new Date();
 
-  constructor(private commentService: CommentService, private router: Router,
+  constructor(private location: Location, private commentService: CommentService, private router: Router,
               private profileService: ProfileService, private sanitizer: DomSanitizer,
               private activeRoute: ActivatedRoute, private newsService: PublicNewsService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -71,8 +72,11 @@ export class NewsDetailComponent implements OnDestroy {
   }
 
   private getNews() {
+    var count = new CountDto();
+    count.lang = this.location.path().split('/')[1];
+    count.pId = this.newsId;
     if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
-      this.newsService.getNewsWithToken(this.newsId).subscribe(
+      this.newsService.getNewsByParentIdWithToken(count).subscribe(
         (data) => {
           if (data.state === 1) {
             this.newsItem = data;
@@ -86,7 +90,7 @@ export class NewsDetailComponent implements OnDestroy {
         (error) => console.log(error)
       );
     } else {
-      this.newsService.getNews(this.newsId).subscribe(
+      this.newsService.getNewsByParentId(count).subscribe(
         (data) => {
           if (data.state === 1) {
             this.newsItem = data;

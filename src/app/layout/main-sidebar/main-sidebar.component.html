@@ -1,7 +1,7 @@
 <hr class="hr-text" data-content="Dolzarb">
 <div *ngIf="hotNews">
   <div *ngFor="let newsItem of hotNews" style="background-color: #fff; margin-bottom: 10px">
-    <a style="text-decoration: none; color: inherit; margin: unset" class="row" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.nlId}}" fragment="{{newsItem.newsType.key}}">
+    <a style="text-decoration: none; color: inherit; margin: unset" class="row" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.id}}" fragment="{{newsItem.newsType.key}}">
       <div class="col-4" style="padding: 5px;">
         <div style="overflow: hidden;">
           <img src="{{newsItem.imgSrc}}" style="width: 100%;" class="grow">

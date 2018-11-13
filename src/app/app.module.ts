@@ -31,6 +31,8 @@ import { EditNewsComponent } from './administrator/news/edit-news/edit-news.comp
 import { MyProfileComponent } from './layout/my-profile/my-profile.component';
 import { MrnewsItemComponent } from './layout/news/mrnews-item/mrnews-item.component';
 import { MainSidebarComponent } from './layout/main-sidebar/main-sidebar.component';
+import { AllNewsComponent } from './administrator/news/all-news/all-news.component';
+import { TranslateNewsComponent } from './administrator/news/translate-news/translate-news.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { MainSidebarComponent } from './layout/main-sidebar/main-sidebar.compone
     EditNewsComponent,
     MyProfileComponent,
     MrnewsItemComponent,
-    MainSidebarComponent
+    MainSidebarComponent,
+    AllNewsComponent,
+    TranslateNewsComponent
   ],
   imports: [
     BrowserModule,

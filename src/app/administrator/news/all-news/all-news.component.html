@@ -1,0 +1,31 @@
+<div class="row" id="npNewsList">
+  <div class="col-12 pb-3">
+      <h2>Barcha yangiliklar</h2>
+  </div>
+  <div class="col-12">
+    <div class="row newsRow">
+      <table class="table table-bordered" style="table-layout: fixed;">
+        <tr>
+          <th style="width: 35px;">#</th>
+          <th>Title</th>
+          <th style="width: 200px;">Publisher</th>
+          <th style="width: 205px">Languages</th>
+          <th style="width: 170px">Date</th>
+        </tr>
+        <tr *ngFor="let newsItem of NPnews, index as i">
+          <td class="align-middle" style="">{{i+1}}</td>
+          <td class="align-middle" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{newsItem.title}}</td>
+          <td class="align-middle" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis" *ngIf="newsItem.profile">{{newsItem.profile.firstName}}</td>
+          <td class="align-middle" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis" *ngIf="!newsItem.profile">Khamidulla Khabibullaev</td>
+          <td>
+            <button routerLink="../translate/{{newsItem.childLang[0]}}/{{newsItem.id}}" class="btn btn-sm mr-2" [ngClass]="newsItem.childLang.includes('uzl') ? 'btn-success' : 'btn-danger'">O'z</button>
+            <button routerLink="../translate/{{newsItem.childLang[0]}}/{{newsItem.id}}" class="btn btn-sm mr-2" [ngClass]="newsItem.childLang.includes('uzk') ? 'btn-success' : 'btn-danger'">Ўз</button>
+            <button routerLink="../translate/{{newsItem.childLang[0]}}/{{newsItem.id}}" class="btn btn-sm mr-2">Рус</button>
+            <button routerLink="../translate/{{newsItem.childLang[0]}}/{{newsItem.id}}" class="btn btn-sm">Eng</button>
+          </td>
+          <td class="align-middle">{{newsItem.submitDate}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

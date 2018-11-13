@@ -252,7 +252,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=date]::-webkit-outer-s
 }
 .mdrtItem {
   box-shadow: 0px 3px 8px 0px #aaa;
-  margin: 15px 0;
+  margin: 15px 0 !important;
   img {
     border-radius: 50%;
     width: 100%;
@@ -326,7 +326,7 @@ textarea {
     }
 }
 .bd-example-modal-lg {
-    z-index: 9999;
+    z-index: 9999 !important;
     .modal-lg {
         max-width: 90%;
     }
@@ -839,36 +839,6 @@ $sparkle-r: .5*$sparkle-d;
           1px 0 1px white, -1px 0 1px white;
   }
 }
-@for $i from 0 through 200 {
-  #toggle-heart-#{$i} {
-      &:checked + label {
-          color: #f00;
-          filter: none;
-          will-change: font-size;
-          animation: heart 0.5s cubic-bezier(.17, .89, .32, 1.49);
-          
-          &:before, &:after {
-              animation: inherit;
-              animation-timing-function: ease-out;
-          }
-          
-          &:before {
-              will-change: transform, border-width, border-color;
-              animation-name: bubble;
-          }
-          
-          &:after {
-              will-change: opacity, box-shadow;
-              animation-name: sparkles;
-          }
-      }
-      &:focus + label {
-          text-shadow: 0 0 3px white, 
-              0 1px 1px white, 0 -1px 1px white, 
-              1px 0 1px white, -1px 0 1px white;
-      }
-  }
-}
 @for $i from 0 through 3 {
   #mr-toggle-heart-#{$i} {
       &:checked + label {
@@ -899,9 +869,41 @@ $sparkle-r: .5*$sparkle-d;
       }
   }
 }
+@for $i from 0 through 200 {
+  #toggle-heart-#{$i} {
+      &:checked + label {
+          color: #f00;
+          filter: none;
+          will-change: font-size;
+          animation: heart 0.5s cubic-bezier(.17, .89, .32, 1.49);
+          
+          &:before, &:after {
+              animation: inherit;
+              animation-timing-function: ease-out;
+          }
+          
+          &:before {
+              will-change: transform, border-width, border-color;
+              animation-name: bubble;
+          }
+          
+          &:after {
+              will-change: opacity, box-shadow;
+              animation-name: sparkles;
+          }
+      }
+      &:focus + label {
+          text-shadow: 0 0 3px white, 
+              0 1px 1px white, 0 -1px 1px white, 
+              1px 0 1px white, -1px 0 1px white;
+      }
+  }
+}
 .newsItem {
   background-color: #fff;
-  margin: unset;
+  margin-top: unset !important;
+  margin-right: unset !important;
+  margin-left: unset !important;
   margin-bottom: 1rem;
   .col-3 {
     overflow: hidden;
@@ -966,7 +968,7 @@ $sparkle-r: .5*$sparkle-d;
 }
 
 .MainNewsBlock {
-  margin: unset;
+  margin: unset !important;
   & > div {
     height: 25.2rem;
     padding: unset;
@@ -1206,6 +1208,11 @@ $sparkle-r: .5*$sparkle-d;
     .info {
       font-size: 12px;
     }
+  }
+}
+@media screen and (max-width: 767px) {
+  #mainSide {
+    display: none;
   }
 }
 

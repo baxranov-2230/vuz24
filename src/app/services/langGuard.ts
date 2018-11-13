@@ -10,7 +10,7 @@ export class LangGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot) {
     console.log(location.pathname.split('/'));
-
+    
     // if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE)) {
     //   this.router.navigate([LocalStorageSecurity.getItem(CommonKey.LANGUAGE)]);
     //   return true;

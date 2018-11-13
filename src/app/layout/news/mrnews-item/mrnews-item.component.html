@@ -1,5 +1,5 @@
 <div class="mrNewsItem" *ngIf="newsItem">
-  <a class="linkBlock" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.nlId}}" fragment="{{newsItem.newsType.key}}">
+  <a class="linkBlock" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.id}}" fragment="{{newsItem.newsType.key}}">
     <div class="picture" [ngStyle]="getMyStyle()"></div>
     <h5>{{newsItem.title}}</h5>
     <p>{{newsItem.subContent}}</p>

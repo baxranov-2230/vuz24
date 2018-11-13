@@ -8,6 +8,7 @@ export class CountDto {
     public type: string;
     public key: number;
     public newsId: number;
+    public pId: number;
 
     constructor() {}
 }

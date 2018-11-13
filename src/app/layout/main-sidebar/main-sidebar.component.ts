@@ -36,7 +36,6 @@ export class MainSidebarComponent implements OnInit {
   private getImportantNewsList() {
     this.newsService.getImportantNewsList(this.location.path().split('/')[1]).subscribe(
       (data) => {
-        console.log(data);
         for (let x of data) {
           this.hotNews = this.hotNews.concat(x);
           try {
@@ -46,13 +45,15 @@ export class MainSidebarComponent implements OnInit {
             console.log('Could not find <img>!');
           }
         }
+
+        setTimeout(() => {
+          if (this.hotNews.length > 0) {
+            var comeOn = window.innerHeight - document.getElementById('mainSide').offsetHeight;
+            document.getElementById('mainSide').style.top = "calc(" + comeOn + "px - 1rem)";
+          }
+        }, 500);
       },
       error => console.log(error)
     );
-    setTimeout(() => {
-      var comeOn = window.innerHeight - document.getElementById('mainSide').offsetHeight;
-      console.log(comeOn);
-      document.getElementById('mainSide').style.top = "calc(" + comeOn + "px - 1rem)";
-    }, 300);
   }
 }

@@ -103,12 +103,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   private getLang() {
     setTimeout(() => {
-      if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE) && document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)) !== null && !document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)).classList.contains("active")) {
+      var smth = LocalStorageSecurity.getItem(CommonKey.LANGUAGE);
+      if (smth && document.getElementById(smth) && !document.getElementById(smth).classList.contains("active")) {
         if (document.querySelector(".active") !== null) {
           document.querySelector(".active").classList.remove("active");
         }
-        document.getElementById(LocalStorageSecurity.getItem(CommonKey.LANGUAGE)).classList.add("active");
-        // this.router.navigate(["/" + LocalStorageSecurity.getItem(CommonKey.LANGUAGE) + this.router.url.substring(4)]);
+        document.getElementById(smth).classList.add("active");
       } else {
         this.getLang();
       }

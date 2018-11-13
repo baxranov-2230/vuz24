@@ -33,6 +33,31 @@ export class PublicNewsService {
     return this.http.get<NewsDto>(GeneralURL.newsPublic.concat("get_token/" + id), options);
   }
 
+  public getNewsByParentId(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<NewsDto>(GeneralURL.newsPublic.concat("get_by_parent_no/" + count.lang), json, options);
+  }
+
+  public getNewsByParentIdWithToken(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+      })
+    };
+
+    return this.http.post<NewsDto>(GeneralURL.newsPublic.concat("get_by_parent_with/" + count.lang), json, options);
+  }
+
   public getRecentNewsList(count: CountDto) {
     let json = JSON.stringify(count);
 

@@ -27,6 +27,8 @@ import { MyNewsComponent } from './administrator/news/my-news/my-news.component'
 import { ModeratorComponent } from './moderator/moderator.component';
 import { ModeratorDetailComponent } from './administrator/moderators/moderator-detail/moderator-detail.component';
 import { MyProfileComponent } from './layout/my-profile/my-profile.component';
+import { AllNewsComponent } from './administrator/news/all-news/all-news.component';
+import { TranslateNewsComponent } from './administrator/news/translate-news/translate-news.component';
 
 // var isUzk: boolean = false;
 // try {
@@ -39,7 +41,7 @@ import { MyProfileComponent } from './layout/my-profile/my-profile.component';
 
 const appRoutes: Routes = [
     { path: '', children: [
-        { path: '', redirectTo: LocalStorageSecurity.hasItem(CommonKey.LANGUAGE) && LocalStorageSecurity.getItem(CommonKey.LANGUAGE) !== 'uzl' ? 'uzk': 'uzl', pathMatch: 'full' },
+        { path: '', redirectTo: 'uzl', pathMatch: 'full' },
         { path: 'uzl', component: LayoutComponent, children: [
             { path: '', component: NewsComponent, runGuardsAndResolvers: 'always' },
             { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard] },
@@ -63,8 +65,10 @@ const appRoutes: Routes = [
                 ]},
                 { path: 'create-news', component: CreateNewsComponent },
                 { path: 'my-news', component: MyNewsComponent },
+                { path: 'all-news', component: AllNewsComponent },
                 { path: 'not-published-news', component: NotPublishedNewsComponent },
                 { path: 'published-news', component: PublishedNewsComponent },
+                { path: 'translate/:lang/:id', component: TranslateNewsComponent }
             ]
         }
     ]},
@@ -72,8 +76,10 @@ const appRoutes: Routes = [
         { path: '', component: ModeratorComponent, canActivate: [ModeratorGuard],
             children: [
                 { path: 'create-news', component: CreateNewsComponent },
+                { path: 'all-news', component: AllNewsComponent },
                 { path: 'not-published-news', component: NotPublishedNewsComponent },
-                { path: 'my-news', component: MyNewsComponent }
+                { path: 'my-news', component: MyNewsComponent },
+                { path: 'translate/:lang/:id', component: TranslateNewsComponent }
             ]
         }
     ]},

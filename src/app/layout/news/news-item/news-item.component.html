@@ -1,9 +1,9 @@
 <div class="row newsItem" *ngIf="newsItem">
-    <div class="col-3" *ngIf="imageHeight" id="{{'newsImgBlock' + newsItem.nlId}}">
+    <div class="col-3" *ngIf="imageHeight" id="{{'newsImgBlock' + newsItem.id}}">
       <img src="{{imgSrc}}" *ngIf="imgSrc" class="grow">
     </div>
-    <div class="col-9" id="{{'newsContent' + newsItem.nlId}}">
-      <a routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.nlId}}" fragment="{{newsItem.newsType.key}}">
+    <div class="col-9" id="{{'newsContent' + newsItem.id}}">
+      <a routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.id}}" fragment="{{newsItem.newsType.key}}">
         <h5>{{newsItem.title}}</h5>
         <p class="subContent">{{newsItem.subContent}}</p>
       </a>

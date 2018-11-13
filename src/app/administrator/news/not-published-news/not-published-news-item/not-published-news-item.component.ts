@@ -39,7 +39,21 @@ export class NotPublishedNewsItemComponent implements OnInit {
   public publishNews() {
     document.getElementById("closeBtn" + this.newsItem.id).click();
     setTimeout(() => {
-      this.newsService.publishNews(this.newsItem.id).subscribe(
+      this.newsService.publishNews(this.newsItem.nlId).subscribe(
+        (data) => {
+          if (data.state === 1) {
+            this.isPublished.emit(true);
+          }
+        },
+        error => console.log(error)
+      );
+    }, 100);
+  }
+
+  public deleteNews() {
+    document.getElementById("closeBtn" + this.newsItem.id).click();
+    setTimeout(() => {
+      this.newsService.deleteNews(this.newsItem.nlId).subscribe(
         (data) => {
           if (data.state === 1) {
             this.isPublished.emit(true);

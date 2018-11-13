@@ -25,19 +25,19 @@ export class NewsItemComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.newsItem.newsType.name = this.newsTypeService.getNewsTypeName(this.newsItem.newsType.key);
-      this.imageHeight = $("#newsContent" + this.newsItem.nlId).height() + 15;
+      this.imageHeight = $("#newsContent" + this.newsItem.id).height() + 15;
       setTimeout(() => {
-        $("#newsImgBlock" + this.newsItem.nlId).css("height", this.imageHeight + "px");
-        if ($("#newsImgBlock" + this.newsItem.nlId + " img").width() < $("#newsImgBlock" + this.newsItem.nlId + " img").height()) {
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("width", "100%");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("margin-top", -($("#newsImgBlock" + this.newsItem.nlId + " img").height() - this.imageHeight)/2 + "px");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("display", "inline");
+        $("#newsImgBlock" + this.newsItem.id).css("height", this.imageHeight + "px");
+        if ($("#newsImgBlock" + this.newsItem.id + " img").width() < $("#newsImgBlock" + this.newsItem.id + " img").height()) {
+          $("#newsImgBlock" + this.newsItem.id + " img").css("width", "100%");
+          $("#newsImgBlock" + this.newsItem.id + " img").css("margin-top", -($("#newsImgBlock" + this.newsItem.id + " img").height() - this.imageHeight)/2 + "px");
+          $("#newsImgBlock" + this.newsItem.id + " img").css("display", "inline");
         } else {
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("height", "100%");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("margin-left", ($("#newsImgBlock" + this.newsItem.nlId).width() - $("#newsImgBlock" + this.newsItem.nlId + " img").width())/2 + "px");
-          $("#newsImgBlock" + this.newsItem.nlId + " img").css("display", "inline");
+          $("#newsImgBlock" + this.newsItem.id + " img").css("height", "100%");
+          $("#newsImgBlock" + this.newsItem.id + " img").css("margin-left", ($("#newsImgBlock" + this.newsItem.id).width() - $("#newsImgBlock" + this.newsItem.id + " img").width())/2 + "px");
+          $("#newsImgBlock" + this.newsItem.id + " img").css("display", "inline");
         }
-      }, 50);
+      }, 100);
     }, 100);
 
     try {
