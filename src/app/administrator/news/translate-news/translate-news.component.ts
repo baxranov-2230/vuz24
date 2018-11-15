@@ -31,7 +31,7 @@ export class TranslateNewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    $('#editor').trumbowyg({
+    $('#editor2').trumbowyg({
       svgPath: 'assets/images/icons.svg',
       btnsDef: {
         image: {
@@ -137,7 +137,7 @@ export class TranslateNewsComponent implements OnInit {
     news.lang = (<HTMLInputElement>document.getElementById('sel1')).value;
     news.title = (<HTMLInputElement>document.getElementById('title')).value;
     news.subContent = this.subContent;
-    news.content = $('#editor').trumbowyg('html');
+    news.content = $('#editor2').trumbowyg('html');
 
     console.log(news);
     this.newsService.addNewsTranslation(news).subscribe(
