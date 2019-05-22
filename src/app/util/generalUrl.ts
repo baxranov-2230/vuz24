@@ -1,5 +1,5 @@
 export class GeneralURL {
-    private static MAIN_URL = 'http://vuz24.uz/demo/';
+    private static MAIN_URL = 'https://vuz24.uz/demo/';
 
     // public static profileURL:string = 'http://localhost:8080/vuz/profile/';
     // public static moderatorURL:string = 'http://localhost:8080/vuz/moderator/';

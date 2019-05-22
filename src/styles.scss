@@ -412,6 +412,9 @@ textarea {
         .mainLogo {
             display: none
         }
+        .menu ul li.nav-item .nav-link{
+              padding-left: 28px;
+        }
     }
     @media screen and (min-width: 992px) {
         .grow {

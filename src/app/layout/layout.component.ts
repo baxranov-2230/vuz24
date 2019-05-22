@@ -8,6 +8,7 @@ import { LocalStorageSecurity } from '../util/localStorageSecurity';
 import { CommonKey } from '../util/commonKey';
 import { ProfileDto } from '../dto/profileDto';
 import { NewsType } from '../util/newsType';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-layout',
@@ -59,6 +60,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.navigationSubscription.unsubscribe();
   }
 
+  onActivate(event) {
+    window.scroll(0,0);
+  }
+
   private getLanguages() {
     this.newsService.getLanguages().subscribe(
       (data) => {
@@ -74,6 +79,16 @@ export class LayoutComponent implements OnInit, OnDestroy {
       (data) => {
         this.newsTypes = data;
         this.newsTypeService.setNewsTypes(data);
+
+        setTimeout(() => {
+          for (let x of data) {
+            $("#" + x.key).on('click', function() {
+              if ($(window).width() < 992) {
+                $("#toggButt").click();                
+              }
+            });
+          }
+        }, 1000);
       },
       error => console.log(error)
     );
@@ -88,8 +103,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.typeName = str;
         document.querySelector(".nav-link:first-child").classList.remove("active-menu");
       }
-      window.scrollTo(0, 0);
-    }, 50);
+      // window.scrollTo(0, 0);
+    }, 200);
   }
 
   public saveLang(str: string) {

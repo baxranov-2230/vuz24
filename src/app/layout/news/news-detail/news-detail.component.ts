@@ -80,6 +80,7 @@ export class NewsDetailComponent implements OnDestroy {
         (data) => {
           if (data.state === 1) {
             this.newsItem = data;
+            console.log(data);
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();
             this.getCommentsList();
@@ -94,6 +95,8 @@ export class NewsDetailComponent implements OnDestroy {
         (data) => {
           if (data.state === 1) {
             this.newsItem = data;
+            console.log(data);
+            
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();
             this.getCommentsList();
@@ -251,7 +254,6 @@ export class NewsDetailComponent implements OnDestroy {
             this.setTimeOfComment(x);
           }
           this.commentsList = this.commentsList.concat(data);
-          console.log(data);
         },
         (error) => console.log(error)
       );
@@ -262,7 +264,6 @@ export class NewsDetailComponent implements OnDestroy {
             this.setTimeOfComment(x);
           }
           this.commentsList = this.commentsList.concat(data);
-          console.log(data);
         },
         (error) => console.log(error)
       );

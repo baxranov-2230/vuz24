@@ -49,11 +49,10 @@ export class MyProfileComponent implements OnInit {
           try {
             x.imgSrc = $(x.content).find('img')[0].src;
           } catch (e) {
-              console.log('Could not find <img>!');
+            x.imgSrc = "assets/images/logo.png";
           }
         }
         this.savedNews = this.savedNews.concat(data);
-        console.log(data);
       },
       error => console.log(error)
     );

@@ -3,7 +3,7 @@
         <div class="container">
             <ul class="list-inline">
                 <li class="navbar navbar-expand-lg p-0">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <button id="toggButt" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="fa fa-bars" style="color: #fff"></span>
                     </button>
                 </li>
@@ -39,7 +39,7 @@
                 <div class="menu">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item" *ngFor="let newsType of newsTypes">
-                            <a class="nav-link grow" [routerLink] = "newsType.key!=='basic' ? ['topic/' + newsType.key] : ['../' + defLang]" routerLinkActive="active-menu" (click)="goToTop(newsType.key)"><span>{{newsType.name}}</span></a>
+                            <a id="{{newsType.key}}" class="nav-link grow" [routerLink] = "newsType.key!=='basic' ? ['topic/' + newsType.key] : ['../' + defLang]" routerLinkActive="active-menu" (click)="goToTop(newsType.key)"><span>{{newsType.name}}</span></a>
                         </li>
                     </ul>
                 </div>
@@ -53,7 +53,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-9" [style.margin-top]="typeName ? '17px' : 'unset'">
-            <router-outlet></router-outlet>
+            <router-outlet (activate)="onActivate($event)"></router-outlet>
         </div>
         <div class="col-md-3 pl-0">
             <app-main-sidebar id="mainSide"></app-main-sidebar>

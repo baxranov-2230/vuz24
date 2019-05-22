@@ -49,8 +49,6 @@ export class AllNewsComponent implements OnInit {
     this.newsService.getNewsLangTree(count).subscribe(
       (data) => {
         this.NPnews = this.NPnews.concat(data);
-        console.log(data);
-        
         if (data.length < this.amount) {
           this.isEndOfNews = true;
         }
@@ -63,5 +61,20 @@ export class AllNewsComponent implements OnInit {
     this.from = 0;
     this.NPnews = [];
     this.getNewsList();
+  }
+
+  public deleteNews(id) {
+    setTimeout(() => {
+      this.newsService.deleteNews(id).subscribe(
+        (data) => {
+          if (data.state == 1) {
+            this.from = 0;
+            this.NPnews = [];
+            this.getNewsList();
+          }
+        },
+        error => console.log(error)
+      );
+    }, 100);
   }
 }

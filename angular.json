@@ -42,7 +42,6 @@
               "node_modules/trumbowyg/dist/plugins/fontfamily/trumbowyg.fontfamily.js",
               "node_modules/trumbowyg/dist/plugins/fontsize/trumbowyg.fontsize.js",
               "node_modules/trumbowyg/dist/plugins/pasteembed/trumbowyg.pasteembed.js",
-              "node_modules/trumbowyg/dist/plugins/cleanpaste/trumbowyg.cleanpaste.min.js",
               "node_modules/crypto-js/crypto-js.js"
             ]
           },

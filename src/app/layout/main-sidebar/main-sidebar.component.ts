@@ -40,9 +40,13 @@ export class MainSidebarComponent implements OnInit {
           this.hotNews = this.hotNews.concat(x);
           try {
             x.imgSrc = $(x.content).find('img')[0].src;
+          } catch (e) {
+            x.imgSrc = "assets/images/logo.png";
+          }
+          try {
             x.newsType.name = this.newsTypeService.getNewsTypeName(x.newsType.key);
           } catch (e) {
-            console.log('Could not find <img>!');
+            console.log("Cannot load type name");
           }
         }
 

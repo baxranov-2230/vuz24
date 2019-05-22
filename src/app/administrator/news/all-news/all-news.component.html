@@ -11,6 +11,7 @@
           <th style="width: 200px;">Publisher</th>
           <th style="width: 205px">Languages</th>
           <th style="width: 170px">Date</th>
+          <th style="width: 83px">Delete</th>
         </tr>
         <tr *ngFor="let newsItem of NPnews, index as i">
           <td class="align-middle" style="">{{i+1}}</td>
@@ -24,6 +25,7 @@
             <button routerLink="../translate/{{newsItem.childLang[0]}}/{{newsItem.id}}" class="btn btn-sm">Eng</button>
           </td>
           <td class="align-middle">{{newsItem.submitDate}}</td>
+          <td><button class="btn btn-sm btn-danger" (click)="deleteNews(newsItem.nlId)">Delete</button></td>
         </tr>
       </table>
     </div>

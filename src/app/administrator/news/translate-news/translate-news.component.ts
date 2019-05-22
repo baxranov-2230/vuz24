@@ -32,6 +32,7 @@ export class TranslateNewsComponent implements OnInit {
 
   ngOnInit() {
     $('#editor2').trumbowyg({
+      removeformatPasted: true,
       svgPath: 'assets/images/icons.svg',
       btnsDef: {
         image: {
@@ -61,8 +62,6 @@ export class TranslateNewsComponent implements OnInit {
           }
       }
     });
-
-    console.log(this.imageDto);
 
     this.activeRoute.params.forEach(params => {
       if (params["lang"]) {
@@ -142,11 +141,11 @@ export class TranslateNewsComponent implements OnInit {
     console.log(news);
     this.newsService.addNewsTranslation(news).subscribe(
       (data) => {
-        // if (data.state === 1) {
-        //   setTimeout(() => {
-        //     this.router.navigate(["moderator/my-news"]);
-        //   }, 300);
-        // }
+        if (data.state === 1) {
+          setTimeout(() => {
+            this.router.navigate(["moderator/not-published-news"]);
+          }, 300);
+        }
         console.log(data);
         
       },

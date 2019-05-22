@@ -37,7 +37,7 @@ export class NewsItemComponent implements OnInit {
           $("#newsImgBlock" + this.newsItem.id + " img").css("margin-left", ($("#newsImgBlock" + this.newsItem.id).width() - $("#newsImgBlock" + this.newsItem.id + " img").width())/2 + "px");
           $("#newsImgBlock" + this.newsItem.id + " img").css("display", "inline");
         }
-      }, 100);
+      }, 500);
     }, 100);
 
     try {
