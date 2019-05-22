@@ -48,7 +48,6 @@ export class NotPublishedNewsComponent implements OnInit {
     this.newsService.getNotPublishedNewsList(count).subscribe(
       (data) => {
         this.NPnews = this.NPnews.concat(data);
-        console.log(data);
         
         if (data.length < this.amount) {
           this.isEndOfNews = true;

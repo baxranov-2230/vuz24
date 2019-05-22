@@ -80,7 +80,6 @@ export class NewsDetailComponent implements OnDestroy {
         (data) => {
           if (data.state === 1) {
             this.newsItem = data;
-            console.log(data);
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();
             this.getCommentsList();
@@ -95,8 +94,6 @@ export class NewsDetailComponent implements OnDestroy {
         (data) => {
           if (data.state === 1) {
             this.newsItem = data;
-            console.log(data);
-            
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();
             this.getCommentsList();
@@ -127,7 +124,7 @@ export class NewsDetailComponent implements OnDestroy {
             try {
               x.imgSrc = $(x.content).find('img')[0].src;
             } catch (e) {
-                console.log('Could not find <img>!');
+                this.imgSrc = "assets/images/logo.png";
             }
           }
           if (this.relatedNews.length === 4) {
@@ -147,7 +144,7 @@ export class NewsDetailComponent implements OnDestroy {
                 this.relatedNews = this.relatedNews.concat(x);
               }
             } catch (e) {
-                console.log('Could not find <img>!');
+                this.imgSrc = "assets/images/logo.png";
             }
           }
           if (this.relatedNews.length === 4) {

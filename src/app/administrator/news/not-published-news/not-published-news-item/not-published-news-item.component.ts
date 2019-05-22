@@ -32,7 +32,7 @@ export class NotPublishedNewsItemComponent implements OnInit {
       this.imgSrc = $(this.newsItem.content).find('img')[0].src;
       this.content = this.sanitizer.bypassSecurityTrustHtml(this.newsItem.content);
     } catch (e) {
-        console.log('Could not find <img>!');
+      this.imgSrc = "assets/images/logo.png";
     }
   }
 

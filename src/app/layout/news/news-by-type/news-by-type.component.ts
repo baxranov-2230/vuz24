@@ -62,7 +62,6 @@ export class NewsByTypeComponent implements OnInit, OnDestroy {
     if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
       this.publicNewsService.getNewsListByTypeWithToken(count).subscribe(
         (data) => {
-          console.log(data);
           this.news = this.news.concat(data);
         },
         error => console.log(error)
@@ -70,7 +69,6 @@ export class NewsByTypeComponent implements OnInit, OnDestroy {
     } else {
       this.publicNewsService.getNewsListByType(count).subscribe(
         (data) => {
-          console.log(data);
           this.news = this.news.concat(data);
         },
         error => console.log(error)

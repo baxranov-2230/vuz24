@@ -41,7 +41,6 @@ export class SignInModalComponent implements OnInit {
   public authorization() {
     this.profileService.authorization(this.profile).subscribe(
       (data) => {
-        console.log(data);
         if (data.state === 1) {
           LocalStorageSecurity.setItem(CommonKey.TOKEN, data.token);
           LocalStorageSecurity.setItem(CommonKey.NAME, data.firstName);
@@ -65,7 +64,6 @@ export class SignInModalComponent implements OnInit {
     if (this.isRegReady) {
       this.profileService.registration(this.profile).subscribe(
         (data) => {
-          console.log(data);
           if (data.state === 1) {
             LocalStorageSecurity.setItem(CommonKey.TOKEN, data.token);
             LocalStorageSecurity.setItem(CommonKey.NAME, this.profile.firstName);
@@ -80,7 +78,6 @@ export class SignInModalComponent implements OnInit {
         error => console.log(error)
       );
     } else {
-      console.log('error');
       this.errorOccured();
     }
   }

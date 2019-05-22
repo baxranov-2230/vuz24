@@ -45,7 +45,6 @@ export class ModeratorListComponent implements OnInit {
         if (data.length < this.amount) {
           this.isEndOfMdrts = true;
         }
-        console.log(data);
       },
       error => console.log(error)
     );

@@ -61,7 +61,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   onActivate(event) {
-    window.scroll(0,0);
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
   private getLanguages() {
@@ -103,8 +104,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.typeName = str;
         document.querySelector(".nav-link:first-child").classList.remove("active-menu");
       }
-      // window.scrollTo(0, 0);
-    }, 200);
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }, 1000);
+  }
+
+  public goToTop2() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    this.router.navigate(["/" + this.router.url.split('/')[1]]);
   }
 
   public saveLang(str: string) {

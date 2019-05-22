@@ -58,8 +58,6 @@ export class CreateNewsComponent implements OnInit {
           }
       }
     });
-
-    console.log(this.imageDto);
     
     this.getLanguages();
     this.getNewsTypeList();
@@ -103,7 +101,6 @@ export class CreateNewsComponent implements OnInit {
     news.subContent = this.subContent;
     news.content = $('#editor').trumbowyg('html');
 
-    console.log(news);
     this.newsService.createNews(news).subscribe(
       (data) => {
         if (data.state === 1) {

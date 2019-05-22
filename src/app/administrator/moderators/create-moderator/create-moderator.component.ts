@@ -35,7 +35,6 @@ export class CreateModeratorComponent implements OnInit {
             this.router.navigate(["administrator/moderators"]);
           }, 500);
         }
-        console.log(data);
       },
       error => console.log(error)
     );

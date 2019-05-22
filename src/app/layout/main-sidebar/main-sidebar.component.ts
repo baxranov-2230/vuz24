@@ -46,7 +46,7 @@ export class MainSidebarComponent implements OnInit {
           try {
             x.newsType.name = this.newsTypeService.getNewsTypeName(x.newsType.key);
           } catch (e) {
-            console.log("Cannot load type name");
+            
           }
         }
 

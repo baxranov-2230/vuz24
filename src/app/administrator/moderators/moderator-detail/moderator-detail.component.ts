@@ -23,7 +23,5 @@ export class ModeratorDetailComponent implements OnInit {
   }
 
   private getModerator() {
-    console.log(this.moderatorId);
-    
   }
 }

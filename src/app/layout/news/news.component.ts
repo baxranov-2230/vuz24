@@ -74,7 +74,6 @@ export class NewsComponent implements OnDestroy {
       this.publicNewsService.getRecentNewsListWithToken(count).subscribe(
         (data) => {
           this.news = this.news.concat(data);
-          console.log(this.news);
         },
         error => console.log(error)
       );
@@ -82,7 +81,6 @@ export class NewsComponent implements OnDestroy {
       this.publicNewsService.getRecentNewsList(count).subscribe(
         (data) => {
           this.news = this.news.concat(data);
-          console.log(this.news);
         },
         error => console.log(error)
       );
@@ -99,7 +97,6 @@ export class NewsComponent implements OnDestroy {
       this.publicNewsService.getMostReadNewsListWithToken(count).subscribe(
         (data) => {
           this.mostReadNews = this.mostReadNews.concat(data);
-          console.log(data);
         },
         error => console.log(error)
       );
@@ -107,7 +104,6 @@ export class NewsComponent implements OnDestroy {
       this.publicNewsService.getMostReadNewsList(count).subscribe(
         (data) => {
           this.mostReadNews = this.mostReadNews.concat(data);
-          console.log(data);
         },
         error => console.log(error)
       );

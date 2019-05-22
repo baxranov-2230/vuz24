@@ -137,8 +137,6 @@ export class TranslateNewsComponent implements OnInit {
     news.title = (<HTMLInputElement>document.getElementById('title')).value;
     news.subContent = this.subContent;
     news.content = $('#editor2').trumbowyg('html');
-
-    console.log(news);
     this.newsService.addNewsTranslation(news).subscribe(
       (data) => {
         if (data.state === 1) {
@@ -146,7 +144,6 @@ export class TranslateNewsComponent implements OnInit {
             this.router.navigate(["moderator/not-published-news"]);
           }, 300);
         }
-        console.log(data);
         
       },
       error => console.log(error)

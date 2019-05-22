@@ -87,7 +87,6 @@ export class MyProfileComponent implements OnInit {
     profile.imgLink = this.image.imageName;
     this.profileService.updateMyImage(profile).subscribe(
       (data) => {
-        console.log(data);
       },
       error => console.log(error)
     );
