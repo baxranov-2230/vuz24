@@ -99,13 +99,18 @@ export class LayoutComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       if (str === "basic" && location.pathname.split("/")[2] !== "topic") {
         this.typeName = null;
-        document.querySelector(".nav-link:first-child").classList.add("active-menu");
+        document.querySelector(".nav-link:first-child").classList.add("active-menu")
       } else if (location.pathname.split("/")[2] === "topic") {
         this.typeName = str;
-        document.querySelector(".nav-link:first-child").classList.remove("active-menu");
+        document.querySelector(".nav-link:first-child").classList.remove("active-menu")
       }
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
+
+      // manashu settimeoutni ichi bez limit ishliyapti
+
+
+      // document.body.scrollTop = 0; // For Safari
+      // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }, 1000);
   }
 
@@ -113,6 +118,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     this.router.navigate(["/" + this.router.url.split('/')[1]]);
+    console.log("sssssss");
+    
   }
 
   public saveLang(str: string) {
@@ -151,6 +158,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   public showDropdown() {
     document.getElementById("profileddMenu").classList.toggle("show");
+  }
+
+  public removeDropdown() {
+    // e.stopPropagation();
+    document.getElementById("profileddMenu").classList.remove("show");
   }
 
   public logOut() {

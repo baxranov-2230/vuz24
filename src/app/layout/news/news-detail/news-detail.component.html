@@ -45,7 +45,7 @@
   </p>
   <div class="row relativeNewsList">
     <div class="col-12 col-sm-4" *ngFor="let newsOne of relatedNews">
-      <a class="row" routerLink="{{'/' + newsOne.lang + '/news/' + newsOne.id}}" fragment="{{newsOne.newsType.key}}" (click)="goToTop()">
+      <a class="row" routerLink="{{'/' + newsOne.lang + '/news/' + newsOne.id}}" fragment="{{newsOne.newsType.key}}">
         <div class="col-3 col-sm-12">
           <img src="{{newsOne.imgSrc}}" class="grow" *ngIf="newsOne.imgSrc">
         </div>

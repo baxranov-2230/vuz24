@@ -78,7 +78,7 @@ export class NewsDetailComponent implements OnDestroy {
     if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
       this.newsService.getNewsByParentIdWithToken(count).subscribe(
         (data) => {
-          if (data.state === 1) {
+          if (data && data.state === 1) {
             this.newsItem = data;
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();
@@ -92,7 +92,7 @@ export class NewsDetailComponent implements OnDestroy {
     } else {
       this.newsService.getNewsByParentId(count).subscribe(
         (data) => {
-          if (data.state === 1) {
+          if (data && data.state === 1) {
             this.newsItem = data;
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();
@@ -207,10 +207,6 @@ export class NewsDetailComponent implements OnDestroy {
     } else {
       document.getElementById("logInModal").click();
     }
-  }
-
-  public goToTop() {
-    window.scrollTo(0, 0);
   }
 
   public createComment() {
