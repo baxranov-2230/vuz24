@@ -14,7 +14,7 @@
                     <a href="#"><img src="assets/images/logo.png" height="31"></a>
                 </li>
                 <li class="moveRight pr-0">
-                    <a id="logInModal" data-toggle="modal" data-target="#modalSignIn" *ngIf="!isLoggedIn">
+                    <a id="logInModal" data-toggle="modal" data-target="#modalSignIn" *ngIf="!isLoggedIn" (click)="opeenn()">
                         <span class="fa fa-sign-in"></span><span class="enter"> Kirish</span>
                     </a>
                     <a (click)="showDropdown()" *ngIf="isLoggedIn">
@@ -38,8 +38,11 @@
                 <img src="assets/images/logo.png" style="cursor: pointer" width="170" height="70" class="mainLogo" (click)="goToTop2()">
                 <div class="menu">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item" *ngFor="let newsType of newsTypes">
-                            <a id="{{newsType.key}}" class="nav-link grow" [routerLink] = "newsType.key!=='basic' ? ['topic/' + newsType.key] : ['../' + defLang]" routerLinkActive="active-menu" (click)="goToTop(newsType.key)"><span>{{newsType.name}}</span></a>
+                        <li class="nav-item" *ngFor="let newsType of newsTypes" (click)="goToTop(newsType.key)">
+                            <a id="{{newsType.key}}" class="nav-link grow"
+                            [routerLink] = "newsType.key!=='basic' ? ['topic/' + newsType.key] : ['../' + defLang]"
+                            routerLinkActive="active-menu"
+                            ><span>{{newsType.name}}</span></a>
                         </li>
                     </ul>
                 </div>

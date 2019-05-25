@@ -105,7 +105,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
         document.querySelector(".nav-link:first-child").classList.remove("active-menu")
       }
 
-
+      console.log('ssssss');
+      
       // manashu settimeoutni ichi bez limit ishliyapti
 
 
@@ -179,5 +180,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   private refreshPage() {
     this.router.navigate([this.router.url.split('#')[0]], { preserveFragment: true });
+  }
+
+  public opeenn() {
+    setTimeout(() => {
+      var baland;
+      if (window.innerHeight > document.getElementById("modal-itself").offsetHeight) {
+        baland = ((window.innerHeight - document.getElementById("modal-itself").offsetHeight) / 2) + "px";
+        document.getElementById("modal-itself").style.marginTop = baland;
+      }
+    }, 200);
   }
 }
