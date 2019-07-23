@@ -53,6 +53,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
     if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE)) {
       this.defLang = LocalStorageSecurity.getItem(CommonKey.LANGUAGE);
+    } else {
+      this.defLang = this.location.path().split('/')[1];
     }
   }
 
@@ -104,12 +106,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.typeName = str;
         document.querySelector(".nav-link:first-child").classList.remove("active-menu")
       }
-
-      console.log('ssssss');
       
       // manashu settimeoutni ichi bez limit ishliyapti
-
-
       // document.body.scrollTop = 0; // For Safari
       // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }, 1000);
@@ -119,8 +117,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     this.router.navigate(["/" + this.router.url.split('/')[1]]);
-    console.log("sssssss");
-    
   }
 
   public saveLang(str: string) {
