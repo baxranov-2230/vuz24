@@ -64,7 +64,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   onActivate(event) {
     document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera.
   }
 
   private getLanguages() {
