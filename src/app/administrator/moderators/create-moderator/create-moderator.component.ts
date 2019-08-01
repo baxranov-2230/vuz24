@@ -30,13 +30,19 @@ export class CreateModeratorComponent implements OnInit {
 
     this.mdrtService.createModerator(moderator).subscribe(
       (data) => {
+        console.log(data);
+        
         if (data.state === 1) {
           setTimeout(() => {
             this.router.navigate(["administrator/moderators"]);
           }, 500);
         }
       },
-      error => console.log(error)
+      error => {
+        if (error.error.state === -1) {
+          alert(error.error.errMsg)
+        }
+      }
     );
   }
 

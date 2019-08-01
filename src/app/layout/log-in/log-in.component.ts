@@ -20,6 +20,8 @@ export class LogInComponent implements OnInit {
     if (window.innerHeight > document.getElementById('logInForm').scrollHeight) {
       document.getElementById('logInForm').style.height = "100vh";
     }
+
+    document.getElementById("inputEmail").click();
   }
 
   public authorization() {

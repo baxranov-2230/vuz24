@@ -4,7 +4,7 @@
             <h3>VUZ24</h3>
         </div>
         <ul class="list-unstyled components">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="#">Bosh saytga o'tish</a></li>
             <li><a routerLink="moderators">Moderatorlar</a></li>
             <li>
                 <a (click)="showFullMenu(1)">Yangiliklar<span class="fa fa-angle-right" id="menuArrow1"></span></a>
@@ -13,12 +13,10 @@
                     <!-- <li><a routerLink="my-news">Mening yangiliklarim</a></li> -->
                     <li><a routerLink="not-published-news">Yangi qo'shilgan yangiliklar</a></li>
                     <li><a routerLink="all-news">Barcha yangiliklar</a></li>
-                    <li><a routerLink="published-news">Chop etilgan yangiliklar</a></li>
-                    <li><a>O'chirilgan yangiliklar</a></li>
+                    <!-- <li><a routerLink="published-news">Chop etilgan yangiliklar</a></li> -->
+                    <!-- <li><a>O'chirilgan yangiliklar</a></li> -->
                 </ul>
             </li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Contact</a></li>
         </ul>
     </nav>
     <nav class="navbar navbar-dark fixed-top bg-dark" id="navbar">
@@ -29,9 +27,7 @@
         </div>
         <a class="dropdown-toggle" data-toggle="dropdown" id="nameDrop">{{name}} {{surname}}</a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 2</a>
-            <a class="dropdown-item" (click)="logOut()">Log out</a>
+            <a class="dropdown-item" (click)="logOut()">Chiqish</a>
         </div>
     </nav>
     <div id="mainBody" class="container">

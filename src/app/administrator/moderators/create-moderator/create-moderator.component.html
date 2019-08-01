@@ -4,42 +4,42 @@
 <form class="row pt-4">
   <div class="col-6">
     <div class="data-form">
-      <label for="fName">Name</label>
-      <input type="text" class="form-control" id="fName" placeholder="Enter name"
+      <label for="fName">Ism</label>
+      <input type="text" class="form-control" id="fName" placeholder="Ismni kiriting"
              name="fName" (blur)="checkMdrtData()">
     </div>
     <div class="data-form">
       <label for="login">Username</label>
-      <input type="text" class="form-control" id="login" placeholder="Enter username"
-             name="login" (blur)="checkMdrtData()">
+      <input type="text" class="form-control" id="login" placeholder="Usernameni kiriting"
+             name="login" autocomplete="off" (blur)="checkMdrtData()">
     </div>
     <div class="data-form">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <label for="email">E-mail</label>
+      <input type="email" class="form-control" id="email" placeholder="E-mailni kiriting" name="email">
     </div>
     <div class="data-form">
-      <label for="bDate">Birthday</label>
+      <label for="bDate">Tug'ilgan kun</label>
       <input type="date" class="form-control" id="bDate" name="bDate">
     </div>
   </div>
   <div class="col-6">
     <div class="data-form">
-      <label for="lName">Surname</label>
-      <input type="text" class="form-control" id="lName" placeholder="Enter surname"
+      <label for="lName">Familiya</label>
+      <input type="text" class="form-control" id="lName" placeholder="Familiyani kiriting"
              name="lName" (blur)="checkMdrtData()">
     </div>
     <div class="data-form">
-      <label for="pwd">Password</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password"
-             name="pswd" (blur)="checkMdrtData()">
+      <label for="pwd">Kalit so'z</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Kalit so'zni kiriting"
+             name="pswd" autocomplete="off" (blur)="checkMdrtData()">
     </div>
     <div class="data-form">
-      <label for="phNumber">Phone number</label>
-      <input type="number" class="form-control" min="0" id="phNumber" placeholder="Enter phone number" name="phNumber">
+      <label for="phNumber">Telefon raqam</label>
+      <input type="tel" class="form-control" id="phNumber" size="12" minlength="9" maxlength="13" placeholder="Telefon raqamini kiriting" name="phNumber">
     </div>
   </div>
   <div class="col-12">
     <button type="submit" class="btn btn-primary mdrtCreate d-block" (click)="createMdrt()"
-            [attr.disabled]="isMdrtReady ? null : true">Submit</button>
+            [attr.disabled]="isMdrtReady ? null : true">Tayyor</button>
   </div>
 </form>

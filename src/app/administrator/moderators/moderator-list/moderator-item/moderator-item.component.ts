@@ -13,5 +13,8 @@ export class ModeratorItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!this.moderator.phoneNumber.startsWith("+") && this.moderator.phoneNumber.length > 0) {
+      this.moderator.phoneNumber = "+" + this.moderator.phoneNumber;
+    }
   }
 }

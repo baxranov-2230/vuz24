@@ -3,7 +3,7 @@
     <h4 data-toggle="tooltip" title="{{moderator.firstName}} {{moderator.lastName}}"
         >{{moderator.firstName}} {{moderator.lastName}}</h4>
     <p data-toggle="tooltip" title="{{moderator.email}}"><span class="fa fa-envelope-o"></span> {{moderator.email}}</p>
-    <p><span class="fa fa-phone"></span> +{{moderator.phoneNumber}}</p>
+    <p *ngIf="this.moderator.phoneNumber.length > 0"><span class="fa fa-phone"></span> {{moderator.phoneNumber}}</p>
   </div>
   <div class="col-4">
     <img src="assets/images/user.png">
