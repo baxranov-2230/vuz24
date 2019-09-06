@@ -19,7 +19,7 @@ export class CreateNewsComponent implements OnInit {
 
   public langs: Array<LangDto>;
   public newsTypes: Array<NewsTypeDto>;
-  public subContent: String = "";
+  public subContent: string = "";
   public isReady: Boolean = false;
   private imageDto: ImageDto;
 
@@ -105,7 +105,7 @@ export class CreateNewsComponent implements OnInit {
       (data) => {
         if (data.state === 1) {
           setTimeout(() => {
-            this.router.navigate(["moderator/my-news"]);
+            this.router.navigate(["moderator/all-news"]);
           }, 300);
         }
       },

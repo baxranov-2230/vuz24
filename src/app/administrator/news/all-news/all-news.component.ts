@@ -29,7 +29,7 @@ export class AllNewsComponent implements OnInit {
   private flag;
   public NPnews: Array<NewsDto>;
   private from: number = 0;
-  private amount: number = 9;
+  private amount: number = 25;
   private isEndOfNews: Boolean = false;
 
   constructor(private newsService: NewsService) {
@@ -48,6 +48,8 @@ export class AllNewsComponent implements OnInit {
 
     this.newsService.getNewsLangTree(count).subscribe(
       (data) => {
+        console.log(data);
+        
         this.NPnews = this.NPnews.concat(data);
         if (data.length < this.amount) {
           this.isEndOfNews = true;

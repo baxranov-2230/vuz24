@@ -87,7 +87,11 @@ export class NewsDetailComponent implements OnDestroy {
             this.router.navigate(['404']);
           }
         },
-        (error) => console.log(error)
+        (error) => {
+          if (error.status === 401) {
+            document.getElementById("chiqish").click();
+          }
+        }
       );
     } else {
       this.newsService.getNewsByParentId(count).subscribe(
@@ -131,7 +135,9 @@ export class NewsDetailComponent implements OnDestroy {
             this.relatedNews.splice(3, 1);
           }
         },
-        (error) => console.log(error)
+        (error) => {
+          
+        }
       );
     } else {
       this.newsService.getNewsListByType(count).subscribe(

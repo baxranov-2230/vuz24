@@ -19,8 +19,9 @@ declare var $;
 export class TranslateNewsComponent implements OnInit {
 
   public langs: Array<LangDto>;
+  public lang: string;
   public newsTypes: Array<NewsTypeDto>;
-  public subContent: String = "";
+  public subContent: string = "";
   public isReady: Boolean = false;
   private imageDto: ImageDto;
   public content: SafeHtml;
@@ -65,6 +66,7 @@ export class TranslateNewsComponent implements OnInit {
 
     this.activeRoute.params.forEach(params => {
       if (params["lang"]) {
+        this.lang = params["lang"];
         this.getLanguages(params["lang"]);
         if (params["id"]) {
           this.getNews(params["lang"], params["id"])
@@ -79,11 +81,20 @@ export class TranslateNewsComponent implements OnInit {
     var count = new CountDto();
     count.lang = lang;
     count.pId = id;
-    this.newsService.getNewsWithToken(count).subscribe(
+    this.newsService.getNewsWithTokenNew(count).subscribe(
       (data) => {
         if (data.state === 1) {
+          console.log(data);
+          
           this.newsItem = data;
-          this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
+
+          (<HTMLInputElement>document.getElementById('titleEdit')).value = data.title;
+          (<HTMLTextAreaElement>document.getElementById('subTitleEdit')).value = data.subContent;
+          console.log(data.content);
+          
+          
+          $('#editor2').trumbowyg('html', data.content);
+          this.content = this.sanitizer.bypassSecurityTrustHtml(data.title);
         } else {
           this.router.navigate(['404']);
         }
@@ -95,15 +106,15 @@ export class TranslateNewsComponent implements OnInit {
   private getLanguages(lang: string) {
     this.newsService.getLanguages().subscribe(
       (data) => {
-        if (lang === "uzl") {
-          data.shift()
-        } else if (lang === "uzk") {
-          data.splice(1, 1)
-        } else if (lang === "ru") {
-          data.splice(2, 1)
-        } else if (lang === "en") {
-          data.pop()
-        }
+        // if (lang === "uzl") {
+        //   data.shift()
+        // } else if (lang === "uzk") {
+        //   data.splice(1, 1)
+        // } else if (lang === "ru") {
+        //   data.splice(2, 1)
+        // } else if (lang === "en") {
+        //   data.pop()
+        // }
         this.langs = data;
       },
       error => console.log(error)

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./appRouting.module";
 import { HttpClientModule } from '@angular/common/http';
 import { NgxImgModule } from 'ngx-img';
+import { AgmCoreModule } from "@agm/core";
 
 import { AppComponent } from './app.component';
 import { LogInComponent } from './layout/log-in/log-in.component';
@@ -33,6 +34,7 @@ import { MrnewsItemComponent } from './layout/news/mrnews-item/mrnews-item.compo
 import { MainSidebarComponent } from './layout/main-sidebar/main-sidebar.component';
 import { AllNewsComponent } from './administrator/news/all-news/all-news.component';
 import { TranslateNewsComponent } from './administrator/news/translate-news/translate-news.component';
+import { ContactComponent } from './layout/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { TranslateNewsComponent } from './administrator/news/translate-news/tran
     MrnewsItemComponent,
     MainSidebarComponent,
     AllNewsComponent,
-    TranslateNewsComponent
+    TranslateNewsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ import { TranslateNewsComponent } from './administrator/news/translate-news/tran
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyBDaNo28mD5SXWHDdlmeEUdNDTbyqmNc7Q'}),
     NgxImgModule.forRoot()
   ],
   providers: [],

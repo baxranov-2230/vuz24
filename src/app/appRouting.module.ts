@@ -29,6 +29,7 @@ import { ModeratorDetailComponent } from './administrator/moderators/moderator-d
 import { MyProfileComponent } from './layout/my-profile/my-profile.component';
 import { AllNewsComponent } from './administrator/news/all-news/all-news.component';
 import { TranslateNewsComponent } from './administrator/news/translate-news/translate-news.component';
+import { ContactComponent } from './layout/contact/contact.component';
 
 // var isUzk: boolean = false;
 // try {
@@ -46,13 +47,15 @@ const appRoutes: Routes = [
             { path: '', component: NewsComponent, runGuardsAndResolvers: 'always' },
             { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard] },
             { path: 'topic/:type', component: NewsByTypeComponent },
-            { path: 'news/:id', component: NewsDetailComponent }
+            { path: 'news/:id', component: NewsDetailComponent },
+            { path: 'contact', component: ContactComponent }
         ]},
         { path: 'uzk', component: LayoutComponent, children: [
             { path: '', component: NewsComponent },
             { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard] },
             { path: 'topic/:type', component: NewsByTypeComponent },
-            { path: 'news/:id', component: NewsDetailComponent }
+            { path: 'news/:id', component: NewsDetailComponent },
+            { path: 'contact', component: ContactComponent }
         ]}
     ]},
     { path: 'administrator', children: [

@@ -7,6 +7,9 @@ body {
 .mainColor {
     color: #0F0;
 }
+agm-map {
+  height: 300px;
+}
 // exception pages
 .excPage {
     background-color: #F4FBFB;
@@ -916,6 +919,8 @@ $sparkle-r: .5*$sparkle-d;
     padding: unset;
     img {
       display: none;
+      height: 200px !important;
+      width: 200px !important;
     }
   }
   .col-9 {
@@ -1235,7 +1240,6 @@ $sparkle-r: .5*$sparkle-d;
       font-size: small;
       color: #707a7c;
       margin-bottom: unset;
-      max-width: fit-content;
       float: right;
       &:first-of-type {
         float: left;
@@ -1341,6 +1345,16 @@ $sparkle-r: .5*$sparkle-d;
       }
     }
   }
+  .shareLinksRow {
+    .btn-yt {
+      i {
+        margin-left: -18px;
+      }
+      &:hover i {
+        margin-left: 0px;
+      }
+    }
+  }
 }
 // social links
 $fb-color: #3b5998 !default;
@@ -1398,16 +1412,34 @@ $yt-color: #ED302F !default;
 }
 .btn-fb {
     background-color: $fb-color;
+
+    &:before {
+      background-color: #fff !important;
+    }
+    i {
+      font-size: 28px;
+      color: #fff;
+    }
     &:hover i {
-        color: $fb-color;
+      font-size: 22px;
+      color: $fb-color;
     }
 }
 .btn-tw {
     background-color: $tw-color;
+    &:before {
+      background-color: #fff !important;
+    }
+    i {
+      font-size: 28px;
+      color: #fff;
+    }
     &:hover i {
-        color: $tw-color;
+      font-size: 22px;
+      color: $tw-color;
     }
 }
+
 .btn-tg {
     background-color: #fff;
     &:before {
@@ -1423,16 +1455,33 @@ $yt-color: #ED302F !default;
     }
 }
 .btn-ins {
-    background-image: url("assets/images/ins.png");
-    background-size: cover;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    &:before {
+      background-color: #fff !important;
+    }
+    i {
+      font-size: 35px;
+      color: #fff;
+    }
     &:hover i {
-        color: #d6249f;
+      font-size: 28px;
+      color: #d6249f;
     }
 }
 .btn-yt {
-    background-color: $yt-color;
+    background-color: #fff;
+    &:before {
+      background-color: $yt-color !important;
+    }
+    i {
+      font-size: 64px;
+      margin-left: -10px;
+      color: $yt-color;
+    }
     &:hover i {
-        color: $yt-color;
+      font-size: 30px;
+      margin-left: 0px;
+      color: #fff;
     }
 }
 @media screen and (min-width: 1200px) {

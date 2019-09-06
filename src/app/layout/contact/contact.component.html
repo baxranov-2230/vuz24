@@ -1,0 +1,36 @@
+<div class="row" style="margin: 15px 0 0 0; background-color: #fff; padding: 15px;">
+  <h3 *ngIf="isUzl" style="text-align: center; width: 100%; margin-bottom: 50px">Aloqa</h3>
+  <h3 *ngIf="!isUzl" style="text-align: center; width: 100%; margin-bottom: 50px">Алоқа</h3>
+  <div class="col-5" style="padding-top: 25px">
+    <div *ngIf="!isUzl" style="height: 63px; margin-bottom: 35px">
+      <i style="padding-top: 20px; font-size: 22px; vertical-align: -webkit-baseline-middle;" class="fa fa-map-marker"></i>
+      <span style="font-size: 14px; width: 85%; float: right; text-align: center">100095<br>Тошкент шаҳри, Олмазор тумани<br>Талабалар кўчаси, 70-уй</span>
+    </div>
+    <div *ngIf="isUzl" style="height: 63px; margin-bottom: 35px">
+      <i style="padding-top: 20px; font-size: 22px; vertical-align: -webkit-baseline-middle;" class="fa fa-map-marker"></i>
+      <span style="font-size: 14px; width: 85%; float: right; text-align: center">100095<br>Toshkent shahri, Olmazor tumani<br>Talabalar ko‘chasi, 70-uy</span>
+    </div>
+    <div style="height: 25px; margin-bottom: 35px">
+        <i style="font-size: 22px;" class="fa fa-phone"></i>
+        <span style="font-size: 14px; width: 85%; float: right; text-align: center">93-509-36-36</span>
+    </div>
+    <div style="height: 25px; margin-bottom: 35px">
+        <i style="font-size: 22px;" class="fa fa-envelope-o"></i>
+        <span style="font-size: 14px; width: 85%; float: right; text-align: center">info@vuz24.uz</span>
+    </div>
+    <a class="btn-floating btn-fb" target="_blank" href="https://www.facebook.com/vuz24/"><i class="fa fa-facebook"></i></a>
+    <a class="btn-floating btn-tg" target="_blank" href="https://t.me/vuz_24"><i class="fa fa-telegram"></i></a>
+    <a class="btn-floating btn-ins" target="_blank" href="https://www.instagram.com/vuz_24/"><i class="fa fa-instagram"></i></a>
+    <a class="btn-floating btn-tw" target="_blank" href="https://twitter.com/Muhammad__Rasul?ref_src=twsrc%5Etfw"><i class="fa fa-twitter"></i></a>
+    <a class="btn-floating btn-yt" target="_blank" href="https://www.youtube.com/user/MARVEL"><i class="fa fa-youtube-play"></i></a>
+
+  </div>
+  <div class="col-7" style="">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14">
+      <agm-marker [latitude]="lat" [longitude]="lng">
+      </agm-marker>
+    </agm-map>
+  </div>
+  
+
+</div>

@@ -64,7 +64,11 @@ export class NewsByTypeComponent implements OnInit, OnDestroy {
         (data) => {
           this.news = this.news.concat(data);
         },
-        error => console.log(error)
+        error => {
+          if (error.status === 401) {
+            document.getElementById("chiqish").click();
+          }
+        }
       );
     } else {
       this.publicNewsService.getNewsListByType(count).subscribe(

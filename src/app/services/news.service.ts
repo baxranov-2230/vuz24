@@ -73,6 +73,19 @@ export class NewsService {
     return this.http.post<NewsDto>(GeneralURL.newsPublic.concat("get_by_parent_with/" + count.lang), json, options);
   }
 
+  public getNewsWithTokenNew(count: CountDto) {
+    let json = JSON.stringify(count);
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+      })
+    };
+
+    return this.http.post<NewsDto>(GeneralURL.newsActURL.concat("get_by_parent/" + count.lang), json, options);
+  }
+
   public getNotPublishedNewsList(count: CountDto) {
     let json = JSON.stringify(count);
 

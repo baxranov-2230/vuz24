@@ -6,7 +6,7 @@ export class NewsDto {
     public state: number;
     public lang: string;
     public content: string;
-    public subContent: String;
+    public subContent: string;
     public submitDate: string;
     public newsType: NewsTypeDto;
     public nlId: number;

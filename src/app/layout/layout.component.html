@@ -26,7 +26,7 @@
                         <h6 class="dropdown-header">{{user.firstName}} {{user.lastName}}</h6>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" routerLink="./my-profile">Mening profilim</a>
-                        <a class="dropdown-item" (click)="logOut()">Chiqish</a>
+                        <a id="chiqish" class="dropdown-item" (click)="logOut()">Chiqish</a>
                     </div>
                 </li>
             </ul>
@@ -40,7 +40,7 @@
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item" *ngFor="let newsType of newsTypes" (click)="goToTop(newsType.key)">
                             <a id="{{newsType.key}}" class="nav-link grow"
-                            [routerLink] = "newsType.key!=='basic' ? ['topic/' + newsType.key] : ['../' + defLang]"
+                            [routerLink] = "newsType.key!=='uzbekistan' ? ['topic/' + newsType.key] : ['../' + defLang]"
                             routerLinkActive="active-menu"
                             ><span>{{newsType.name}}</span></a>
                         </li>

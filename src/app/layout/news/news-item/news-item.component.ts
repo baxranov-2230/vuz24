@@ -5,6 +5,7 @@ import { NewsType } from '../../../util/newsType';
 import { LocalStorageSecurity } from '../../../util/localStorageSecurity';
 import { CommonKey } from '../../../util/commonKey';
 import { ProfileService } from '../../../services/profile.service';
+import { StringDecoder } from 'string_decoder';
 declare var $;
 
 @Component({
@@ -41,7 +42,7 @@ export class NewsItemComponent implements OnInit {
     }, 200);
 
     try {
-      this.imgSrc = $(this.newsItem.content).find('img')[0].src;
+      this.imgSrc = $("<p>" + this.newsItem.content + "</p>").find('img')[0].src;
     } catch (e) {
       this.imgSrc = "assets/images/logo.png";
     }

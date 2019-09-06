@@ -75,7 +75,11 @@ export class NewsComponent implements OnDestroy {
         (data) => {
           this.news = this.news.concat(data);
         },
-        error => console.log(error)
+        error => {
+          if (error.status === 401) {
+            document.getElementById("chiqish").click();
+          }
+        }
       );
     } else {
       this.publicNewsService.getRecentNewsList(count).subscribe(
@@ -98,7 +102,11 @@ export class NewsComponent implements OnDestroy {
         (data) => {
           this.mostReadNews = this.mostReadNews.concat(data);
         },
-        error => console.log(error)
+        error => {
+          if (error.status === 401) {
+            document.getElementById("chiqish").click();
+          }
+        }
       );
     } else {
       this.publicNewsService.getMostReadNewsList(count).subscribe(
