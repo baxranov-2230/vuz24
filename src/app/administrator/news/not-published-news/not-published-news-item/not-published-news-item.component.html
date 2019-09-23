@@ -16,6 +16,7 @@
     </p>
   </div>
 </div>
+
 <div class="modal fade bd-example-modal-lg" id="{{'newsInModal'+newsItem.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -25,15 +26,37 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" [innerHTML]="content"></div>
+      <div *ngIf="content" class="modal-body" [innerHTML]="content"></div>
+      <div *ngIf="!content" class="modal-body" [innerHTML]="newsItem.content"></div>
       <div class="modal-footer">
         <!-- <label style="margin-right: auto;">
           <input type="checkbox" disabled [attr.checked]="newsItem.important ? true : null">
           Dolzarb
         </label> -->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" (click)="deleteNews()">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#returner">Qaytarish</button>
+        <button type="button" class="btn btn-danger" (click)="deleteNews()">O'chirish</button>
         <button type="button" class="btn btn-primary" (click)="publishNews()">Chop etish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="returner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">{{newsItem.title}}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input id="returnReason" type="text" style="width: 50%" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" (click)="disableNews()">Qaytarish</button>
       </div>
     </div>
   </div>

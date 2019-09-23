@@ -9,6 +9,7 @@ export class CountDto {
     public key: number;
     public newsId: number;
     public pId: number;
+    public reason: string;
 
     constructor() {}
 }

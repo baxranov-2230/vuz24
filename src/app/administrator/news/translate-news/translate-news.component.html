@@ -4,10 +4,10 @@
 <form class="col-12 pt-3 pb-3">
     <div class="row m-0">
     <div class="form-group" style="margin-right: 100px" *ngIf="langs">
-        <label for="sel1">Tilni tanlang</label>
-        <select class="form-control" id="sel1" (change)="checkNews()">
+        <label for="sel11">Tilni tanlang</label>
+        <select class="form-control" id="sel11" (change)="checkNews()">
             <option disabled>Tillar:</option>
-            <option [selected]="lang==langLar.name ? true : false" *ngFor="let langLar of langs" value="{{langLar.name}}">{{langLar.key}}</option>
+            <option [selected]="lang == langLar.name" *ngFor="let langLar of langs" value="{{langLar.name}}">{{langLar.key}}</option>
         </select>
     </div>
     <div class="form-group input-group-prepend" style="margin-top: calc(0.5rem + 24px); height: 38px;">
@@ -19,9 +19,9 @@
     </div>
     <div class="row m-0">
         <div class="form-group col-12 col-lg-8 p-0">
-        <label for="title">Sarlavhani kiriting</label>
+        <label for="titleEdit">Sarlavhani kiriting</label>
         <input type="text" class="form-control" id="titleEdit" placeholder="Sarlavha"
-                name="title" (blur)="checkNews()" required>
+                name="titleEdit" (blur)="checkNews()" required>
         </div>
     </div>
     <div class="row m-0">

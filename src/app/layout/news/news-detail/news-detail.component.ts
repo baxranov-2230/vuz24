@@ -61,7 +61,16 @@ export class NewsDetailComponent implements OnDestroy {
     this.activeRoute.params.forEach(params => {
       this.newsId = params["id"];
       if (this.newsId) {
-        this.getNews();
+        if (LocalStorageSecurity.hasItem(CommonKey.NEWS) && JSON.parse(LocalStorageSecurity.getItem(CommonKey.NEWS)).lang === this.location.path().split('/')[1] && this.newsId == JSON.parse(LocalStorageSecurity.getItem(CommonKey.NEWS)).id) {
+          var data = JSON.parse(LocalStorageSecurity.getItem(CommonKey.NEWS));
+          this.newsItem = data;
+          this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
+          this.getRelatedNewsList();
+          this.getCommentsList();
+        } else {
+          // console.log(JSON.parse(LocalStorageSecurity.getItem(CommonKey.NEWS)));
+          this.getNews();
+        }
       }
     });
     this.src = location.href;
@@ -79,6 +88,7 @@ export class NewsDetailComponent implements OnDestroy {
       this.newsService.getNewsByParentIdWithToken(count).subscribe(
         (data) => {
           if (data && data.state === 1) {
+            LocalStorageSecurity.setItem(CommonKey.NEWS, JSON.stringify(data));
             this.newsItem = data;
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();
@@ -97,6 +107,7 @@ export class NewsDetailComponent implements OnDestroy {
       this.newsService.getNewsByParentId(count).subscribe(
         (data) => {
           if (data && data.state === 1) {
+            LocalStorageSecurity.setItem(CommonKey.NEWS, JSON.stringify(data));
             this.newsItem = data;
             this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
             this.getRelatedNewsList();

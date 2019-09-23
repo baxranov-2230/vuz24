@@ -84,13 +84,11 @@ export class TranslateNewsComponent implements OnInit {
     this.newsService.getNewsWithTokenNew(count).subscribe(
       (data) => {
         if (data.state === 1) {
-          console.log(data);
           
           this.newsItem = data;
 
           (<HTMLInputElement>document.getElementById('titleEdit')).value = data.title;
           (<HTMLTextAreaElement>document.getElementById('subTitleEdit')).value = data.subContent;
-          console.log(data.content);
           
           
           $('#editor2').trumbowyg('html', data.content);
@@ -131,8 +129,8 @@ export class TranslateNewsComponent implements OnInit {
   }
 
   public checkNews() {
-    if ((<HTMLInputElement>document.getElementById('sel1')).value !== "Tillar:" &&
-        (<HTMLInputElement>document.getElementById('title')).value.length > 0 &&
+    if ((<HTMLInputElement>document.getElementById('sel11')).value !== "Tillar:" &&
+        (<HTMLInputElement>document.getElementById('titleEdit')).value.length > 0 &&
         this.subContent.length > 0) {
       this.isReady = true;
     }
@@ -144,15 +142,15 @@ export class TranslateNewsComponent implements OnInit {
     news.NEWS_ID = this.newsItem.id;
     news.id = this.newsItem.id;
     news.important = (<HTMLInputElement>document.getElementById('sel3')).checked;
-    news.lang = (<HTMLInputElement>document.getElementById('sel1')).value;
-    news.title = (<HTMLInputElement>document.getElementById('title')).value;
+    news.lang = (<HTMLInputElement>document.getElementById('sel11')).value;
+    news.title = (<HTMLInputElement>document.getElementById('titleEdit')).value;
     news.subContent = this.subContent;
     news.content = $('#editor2').trumbowyg('html');
     this.newsService.addNewsTranslation(news).subscribe(
       (data) => {
         if (data.state === 1) {
           setTimeout(() => {
-            this.router.navigate(["moderator/not-published-news"]);
+            this.router.navigate(["moderator/all-news"]);
           }, 300);
         }
         

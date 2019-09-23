@@ -3,6 +3,7 @@ import { NewsDto } from '../../../../dto/newsDto';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NewsService } from '../../../../services/news.service';
 import { Router } from '@angular/router';
+import { CountDto } from '../../../../dto/countDto';
 declare var $;
 
 @Component({
@@ -24,13 +25,20 @@ export class NotPublishedNewsItemComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, private newsService: NewsService) { }
 
   ngOnInit() {
+    console.log(this.newsItem);
+    
     setTimeout(() => {
       document.getElementById("target" + this.newsItem.id).setAttribute('data-target', "#newsInModal" + this.newsItem.id);
     }, 500);
 
     try {
-      this.imgSrc = $(this.newsItem.content).find('img')[0].src;
-      this.content = this.sanitizer.bypassSecurityTrustHtml(this.newsItem.content);
+      if ($(this.newsItem.content).find('img').length > 0 && $("<p>" + this.newsItem.content + "</p>").find('img').length > 0) {
+        this.imgSrc = $("<p>" + this.newsItem.content + "</p>").find('img')[0].src;
+        this.content = this.sanitizer.bypassSecurityTrustHtml(this.newsItem.content);
+      } else {
+        this.imgSrc = "assets/images/logo.png";
+      }
+
     } catch (e) {
       this.imgSrc = "assets/images/logo.png";
     }
@@ -57,6 +65,29 @@ export class NotPublishedNewsItemComponent implements OnInit {
         (data) => {
           if (data.state === 1) {
             this.isPublished.emit(true);
+          }
+        },
+        error => console.log(error)
+      );
+    }, 100);
+  }
+
+  public disableNews() {
+    document.getElementById("closeBtn" + this.newsItem.id).click();
+
+    var count = new CountDto();
+    count.newsId = this.newsItem.nlId;
+    count.reason = (<HTMLInputElement>document.getElementById("returnReason")).value;
+
+    console.log(count);
+    
+    setTimeout(() => {
+      this.newsService.disableNews(count).subscribe(
+        (data) => {
+          console.log(data);
+          
+          if (data.state === 1) {
+            
           }
         },
         error => console.log(error)

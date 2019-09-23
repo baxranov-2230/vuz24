@@ -48,8 +48,6 @@ export class AllNewsComponent implements OnInit {
 
     this.newsService.getNewsLangTree(count).subscribe(
       (data) => {
-        console.log(data);
-        
         this.NPnews = this.NPnews.concat(data);
         if (data.length < this.amount) {
           this.isEndOfNews = true;

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CountDto } from '../../../dto/countDto';
@@ -6,6 +6,12 @@ import { PublicNewsService } from '../../../services/publicNews.service';
 import { LocalStorageSecurity } from '../../../util/localStorageSecurity';
 import { CommonKey } from '../../../util/commonKey';
 import { NewsDto } from '../../../dto/newsDto';
+import { LangDto } from '../../../dto/langDto';
+declare global {
+  interface Document {
+      documentMode?: any;
+  }
+}
 
 @Component({
   selector: 'app-news-by-type',
@@ -13,8 +19,23 @@ import { NewsDto } from '../../../dto/newsDto';
   styleUrls: ['./news-by-type.component.scss'],
   providers: [ PublicNewsService ]
 })
-export class NewsByTypeComponent implements OnInit, OnDestroy {
+export class NewsByTypeComponent implements OnDestroy {
 
+  @HostListener("window:scroll", ["$event"])
+    onWindowScroll() {
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight;
+    let max = document.documentElement.scrollHeight;
+    if(pos >= max - 200)   {
+      if (this.flag) {
+        this.getNewsListByType();
+        this.flag = false; 
+      }
+    } else if (!this.flag){
+      this.flag = true;
+    }
+  }
+
+  private flag;
   private typeName: string;
   private from: number;
   private amount: number;

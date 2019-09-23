@@ -5,4 +5,5 @@ export class CommonKey {
   public static ROLE = 'role';
   public static LANGUAGE = 'language';
   public static IMG = 'img';
+  public static NEWS = 'news';
 }

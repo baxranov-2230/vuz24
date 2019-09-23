@@ -35,11 +35,13 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery-resizable-dom/dist/jquery-resizable.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/trumbowyg/dist/trumbowyg.js",
               "node_modules/trumbowyg/dist/plugins/upload/trumbowyg.upload.js",
               "node_modules/trumbowyg/dist/plugins/colors/trumbowyg.colors.js",
               "node_modules/trumbowyg/dist/plugins/fontfamily/trumbowyg.fontfamily.js",
+              "node_modules/trumbowyg/dist/plugins/resizimg/trumbowyg.resizimg.js",
               "node_modules/trumbowyg/dist/plugins/fontsize/trumbowyg.fontsize.js",
               "node_modules/trumbowyg/dist/plugins/pasteembed/trumbowyg.pasteembed.js",
               "node_modules/crypto-js/crypto-js.js"

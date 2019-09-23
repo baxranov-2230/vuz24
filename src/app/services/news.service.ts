@@ -110,6 +110,19 @@ export class NewsService {
     return this.http.delete<CountDto>(GeneralURL.newsActURL.concat('delete_news_lang/' + id), options);
   }
 
+  public disableNews(disableDTO: CountDto) {
+    let json = JSON.stringify(disableDTO);
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+      })
+    };
+
+    return this.http.post<CountDto>(GeneralURL.newsActURL.concat('disable/' + disableDTO.newsId), json, options);
+  }
+
   public getNewsLangTree(count: CountDto) {
     let json = JSON.stringify(count);
 

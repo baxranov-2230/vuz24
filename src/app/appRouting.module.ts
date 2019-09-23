@@ -80,7 +80,7 @@ const appRoutes: Routes = [
             children: [
                 { path: 'create-news', component: CreateNewsComponent },
                 { path: 'all-news', component: AllNewsComponent },
-                { path: 'not-published-news', component: NotPublishedNewsComponent },
+                // { path: 'not-published-news', component: NotPublishedNewsComponent },
                 { path: 'my-news', component: MyNewsComponent },
                 { path: 'translate/:lang/:id', component: TranslateNewsComponent }
             ]
