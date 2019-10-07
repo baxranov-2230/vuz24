@@ -1,0 +1,41 @@
+<!-- The Modal -->
+<div class="modal fade confirmModal" id="confirmModalID">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="confirmDTO">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">{{confirmDTO.title}}</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center">
+        <div>
+          <img src="../../../assets/images/svg/warning.svg" alt="warning" width="90">
+        </div>
+        <h4 class=" py-2">{{confirmDTO.content}}</h4>
+        <div *ngIf="confirmDTO.isInputRequired">
+          <div class="form-group">
+            <label for="reasonComment">Пожалуйста, напишите свой комментарий:</label>
+            <textarea class="form-control" rows="5" id="reasonComment"
+                      [(ngModel)]="confirmDTO.inputContent" (input)="validate()" name="isInputRequired"></textarea>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-info mx-1" data-dismiss="modal">Отменить <i class="fa fa-remove"></i>
+          </button>
+          <button type="submit" class="btn btn-danger mx-1" [attr.disabled]="isValidForConfirm ? null : true"
+                  (click)="confirmButtonAction()">Подтвердить <i
+            class="fa fa-check"></i></button>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn  btn-sm" data-dismiss="modal">Закрыть</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { LocalStorageSecurity } from '../util/localStorageSecurity';
-import { CommonKey } from '../util/commonKey';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorageSecurity} from '../util/localStorageSecurity';
+import {CommonKey} from '../util/commonKey';
+import {Router} from '@angular/router';
+import {ConfirmModalService} from '../shared/confirm-modal/confirm-modal.service';
+import {SharedToasterService} from '../shared/shared-toaster/shared-toaster.service';
+import {NewsLangService} from '../services/news-lang.service';
+import {NewsTypeService} from '../services/news-type.service';
+import {AttendService} from '../services/attend.service';
 declare var $: any;
 
 @Component({
   selector: 'app-administrator',
   templateUrl: './administrator.component.html',
-  styleUrls: ['./administrator.component.scss']
+  styleUrls: ['./administrator.component.scss'],
+  providers: [ConfirmModalService, SharedToasterService, NewsLangService, NewsTypeService, AttendService]
 })
 
 export class AdministratorComponent implements OnInit {
@@ -15,18 +21,19 @@ export class AdministratorComponent implements OnInit {
   public name: string;
   public surname: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $('#navbar').toggleClass('move');
-            $('#nameDrop').toggleClass('showMe');
-        });
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $('#navbar').toggleClass('move');
+        $('#nameDrop').toggleClass('showMe');
+      });
     });
 
-    if (window.innerHeight < document.getElementById('sidebar').scrollHeight) {
+    if (document.getElementById('sidebar') && window.innerHeight < document.getElementById('sidebar').scrollHeight) {
       document.getElementById('sidebar').style.height = "100%";
     }
 

@@ -1,0 +1,82 @@
+// ========== Widget-Icon
+.wg-icon {
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  position: absolute;
+  //transform: rotate(-27deg);
+  bottom: calc(50% - 60px);
+  right: 2%;
+  overflow: hidden;
+  background-color: #ffffff29;
+  mask: {
+    size: 100%;
+    repeat: no-repeat;
+    position: center center;
+  }
+  -webkit-mask: {
+    size: 100%;
+    repeat: no-repeat;
+    position: center center;
+  }
+  &.icon-users {
+    mask-image: url("../../../assets/images/adminka/users.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/users.svg");
+  }
+  &.icon-keyboards {
+    mask-image: url("../../../assets/images/adminka/keyboard.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/keyboard.svg");
+  }
+  &.icon-newspaper {
+    mask-image: url("../../../assets/images/adminka/newspaper.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/newspaper.svg");
+  }
+  &.icon-newspaper-lock {
+    mask-image: url("../../../assets/images/adminka/newspaper2.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/newspaper2.svg");
+  }
+  &.icon-website {
+    mask-image: url("../../../assets/images/adminka/website.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/website.svg");
+  }
+  &.icon-like {
+    mask-image: url("../../../assets/images/adminka/like.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/like.svg");
+  }
+  &.icon-comment {
+    mask-image: url("../../../assets/images/adminka/comment.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/comment.svg");
+  }
+  &.icon-news-today {
+    mask-image: url("../../../assets/images/adminka/newspaper3.svg");
+    -webkit-mask-image: url("../../../assets/images/adminka/newspaper3.svg");
+  }
+}
+
+// =============== Gradient
+.gradient-success {
+  background-image: linear-gradient(to right, #0abd7f, #0dea9d);
+}
+
+.gradient-danger {
+  background-image: linear-gradient(to right, #f65b6d, #f68b97);
+}
+
+.gradient-orange {
+  background-image: linear-gradient(to right, #f68f64, #f6b091);
+}
+
+.gradient-info {
+  background-image: linear-gradient(to right, #01a5a8, #01d2d6);
+}
+
+.gradient-green {
+  background-image: linear-gradient(to right, #20966e, #60d6c5);
+}
+
+.gradient-red {
+  background-image: linear-gradient(to right, #963e51, #d6847d);
+}
+.gradient-blue {
+  background-image: linear-gradient(to right, #963e51, #64B5F6);
+}

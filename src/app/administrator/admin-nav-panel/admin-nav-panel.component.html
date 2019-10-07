@@ -1,0 +1,155 @@
+<div class="nav-p-container">
+  <div class="d-block text-center home-van"><a [routerLink]="['/']">Vuz24</a></div>
+  <div class="user-detail">
+    <div class="user-image text-center p-3">
+      <img *ngIf="!pImgLink" class="w-50 rounded-circle" src="../../../assets/images/general/user_avatar.png"
+           alt="User Image">
+      <img *ngIf="pImgLink" class="w-50 rounded" src="{{pImgLink}}" alt="User Image">
+      <p class="my-1 text-white" (click)="openNavProfileDetailModal()">{{firstName + ' ' + lastName}}</p>
+    </div>
+  </div>
+  <div class="link-container">
+    <div>
+      <div class="nav-header">
+        <h4>General</h4>
+      </div>
+      <ul class="list-unstyled np-parent">
+        <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('dashboard')}"
+               (click)="selectedMenuKey = 'dashboard'" class="d-block"
+               [routerLink]="['dashboard']">
+          <i
+            class="fa fa-home mr-2"></i>Dashboard</a></li>
+        <li>
+          <a (click)="openCloseMenu('np-child-one')" class="hashChild">
+            <i class="fa fa-newspaper-o mr-2"></i>Yangiliklar
+            <i class="fa fa-angle-down mr-2 float-right"></i>
+          </a>
+          <ul class="np-child np-child-one showSubMenu">
+            <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-create')}"
+                   (click)="selectedMenuKey = 'news-create'" class="d-block"
+                   [routerLink]="['news-create/0']">
+              <i class="fa fa-plus-circle mr-1"></i>Yangilik yaratish </a></li>
+            <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-not')}"
+                   (click)="selectedMenuKey = 'news-not'" class="d-block"
+                   [routerLink]="['news-not']"><i
+              class="fa fa-hourglass-start mr-1"></i>Yangi qo'shilgan</a></li>
+            <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-list')}"
+                   (click)="selectedMenuKey = 'news-list'" class="d-block"
+                   [routerLink]="['news-list']"><i
+              class="fa fa-list mr-1"></i>Yangiliklar ro'yhati</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="nav-header">
+        <h4>Adminstration</h4>
+      </div>
+      <ul class="list-unstyled np-parent">
+        <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('moderator')}"
+               (click)="selectedMenuKey = 'moderator'" class="d-block"
+               [routerLink]="['moderator']"><i
+          class="fa fa-keyboard-o mr-2"></i>Moderator</a></li>
+        <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('comment')}"
+               (click)="selectedMenuKey = 'comment'" class="d-block"
+               [routerLink]="['comment']"><i
+          class="fa fa-comment mr-2"></i>Comment</a></li>
+        <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('user')}"
+               (click)="selectedMenuKey = user" class="d-block"
+               [routerLink]="['user']"><i
+          class="fa fa-users mr-2"></i>User lar</a></li>
+        <!--<li><a [ngClass]="{'selectedMenu' : getSelectedMenu(7)}"-->
+        <!--(click)="selectedMenuId = 7" class="d-block"-->
+        <!--[routerLink]="['feedBack']"><i-->
+        <!--class="fa fa-commenting mr-2"></i>Feedback</a></li>-->
+      </ul>
+    </div>
+    <div>
+      <div class="nav-header">
+        <h4>Managing</h4>
+      </div>
+      <ul class="list-unstyled np-parent">
+        <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('log')}"
+               (click)="selectedMenuKey = 'log'" class="d-block"
+               [routerLink]="['log']"><i
+          class="fa fa-file-text mr-2"></i>Log</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="np-footer">
+    <ul class="list-unstyled m-0">
+      <li class="d-inline-block mx-2"><i class="fa fa-bars "></i></li>
+      <li class="d-inline-block mx-2 " (click)="logOut()"><i class="fa fa-power-off "></i></li>
+    </ul>
+  </div>
+
+</div>
+
+
+<div class="modal fade navProfileDetailModal" id="navProfileModalDTO" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Обновить личный данные</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" *ngIf="profileDTO">
+        <div class="form-inline py-1 px-1">
+          <label class="col-md-3 justify-content-start" for="firstName">Имя</label>
+          <input type="text" class="form-control col-md" id="firstName" [(ngModel)]="profileDTO.firstName"
+                 name="firstName">
+        </div>
+        <div class="form-inline py-1 px-1">
+          <label class="col-md-3 justify-content-start" for="lastName">Фамилия</label>
+          <input type="text" class="form-control col-md" id="lastName" [(ngModel)]="profileDTO.lastName"
+                 name="lastName">
+        </div>
+        <div class="form-inline py-1 px-1">
+          <label class="col-md-3 justify-content-start" for="email">Е-mail</label>
+          <input type="email" class="form-control col-md" id="email" [(ngModel)]="profileDTO.email"
+                 name="email">
+        </div>
+        <div class="form-inline py-1 px-1">
+          <label class="col-md-3 justify-content-start" for="phoneNumber">Контакты</label>
+          <input type="text" class="form-control col-md" id="phoneNumber" [(ngModel)]="profileDTO.phoneNumber"
+                 name="phoneNumber">
+        </div>
+        <div class="form-inline py-1 px-1">
+          <label class="col-md-3 justify-content-start" for="birthDate">Дата рождение</label>
+          <input type="text" class="form-control col-md" id="birthDate" [(ngModel)]="profileDTO.birthDate"
+                 name="birthDate">
+        </div>
+        <!--<div class="form-inline py-1 px-1">-->
+        <!--<label class="col-md-3 justify-content-start" for="login">Логин</label>-->
+        <!--<input type="text" class="form-control col-md" id="login" [(ngModel)]="profileDTO.login"-->
+        <!--name="login">-->
+        <!--</div>-->
+        <!--<div class="form-inline py-1 px-1">-->
+        <!--<label class="col-md-3 justify-content-start" for="password">Пароль</label>-->
+        <!--<input type="password" class="form-control col-md" id="password" [(ngModel)]="profileDTO.password"-->
+        <!--name="password">-->
+        <!--</div>-->
+        <!--<div class="form-inline py-1 px-1">-->
+        <!--<label class="col-md-3 justify-content-start" for="password">Повторите пароль</label>-->
+        <!--<input type="password" class="form-control col-md" id="repeatPassword"-->
+        <!--[(ngModel)]="moderatorDTO.repeatPassword"-->
+        <!--name="repeatPassword">-->
+        <!--</div>-->
+        <div class="text-center alert alert-danger" *ngIf="showErrMsg">
+          {{errMsg}}
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gray btn-sm" data-dismiss="modal">Отменить</button>
+        <button type="button" class="btn btn-success btn-sm" (click)="updateProfileDetail()">Обновить данные</button>
+      </div>
+
+    </div>
+  </div>
+</div>

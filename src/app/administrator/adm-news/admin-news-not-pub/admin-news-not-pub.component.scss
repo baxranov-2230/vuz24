@@ -1,0 +1,45 @@
+.toolBar {
+  background-color: #00a0b0;
+  align-items: center;
+  .toolbar-info {
+    border-left: 2px solid #ffffff;
+  }
+}
+
+.notPubNewsRow {
+  background-color: #fff;
+  margin: 10px 0;
+  padding: 1px;
+  border: 1px solid #00a0b0;
+  height: 95%;
+  border-radius: 2px;
+  a, a:hover, a:active {
+    color: unset;
+    text-decoration: unset;
+    cursor: pointer;
+    h5 {
+      padding-top: 12px;
+    }
+  }
+  .col-3 {
+    img {
+      width: 100%;
+      padding-top: 20px;
+    }
+  }
+  .col-9 {
+    p.mainColor {
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.bd-example-modal-lg {
+  z-index: 9999 !important;
+  .modal-lg {
+    max-width: 90%;
+  }
+}

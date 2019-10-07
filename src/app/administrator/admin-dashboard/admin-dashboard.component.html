@@ -1,0 +1,109 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12 pt-3">
+      <h3>Umumiy</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white gradient-success">
+        <div class="card-body position-relative">
+          <b class="wg-icon icon-users"></b>
+          <h4>Foynalanuvchilar </h4>
+          <p>{{dashBoardDTO.user_count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white gradient-danger">
+        <div class="card-body position-relative">
+          <b class="wg-icon icon-keyboards"></b>
+          <h4>Moderatorlar </h4>
+          <p>{{dashBoardDTO.moder_count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white gradient-orange">
+        <div class="card-body position-relative ">
+          <b class="wg-icon icon-newspaper"></b>
+          <h4>Chop etilgan yangiliklar </h4>
+          <p>{{dashBoardDTO.pub_news_count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white gradient-orange">
+        <div class="card-body position-relative ">
+          <b class="wg-icon icon-newspaper"></b>
+          <h4>Chop etilgan yangiliklar Tillar bilan </h4>
+          <p>{{dashBoardDTO.pub_news_lang_count}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="row pt-2">-->
+  <!--<div class="col-md-4">-->
+  <!--<div class="card text-white gradient-info">-->
+  <!--<div class="card-body position-relative">-->
+  <!--<b class="wg-icon icon-newspaper-lock"></b>-->
+  <!--<h4>Chop etilmagan yangiliklar </h4>-->
+  <!--<p>3232</p>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <div class="row">
+    <div class="col-md-12 pt-3">
+      <h3>Bugun</h3>
+    </div>
+    <!--<div class="col-md-4">-->
+    <!--<div class="card text-white gradient-green">-->
+    <!--<div class="card-body position-relative">-->
+    <!--<b class="wg-icon icon-website"></b>-->
+    <!--<h4>Bugungi tizimdagi foydalanuvchilar</h4>-->
+    <!--<p>3232</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="col-md-4">
+      <div class="card text-white gradient-red">
+        <div class="card-body position-relative">
+          <b class="wg-icon icon-like"></b>
+          <h4>Liked Cound</h4>
+          <p>{{dashBoardDTO.today_like_count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white gradient-blue">
+        <div class="card-body position-relative">
+          <b class="wg-icon icon-comment"></b>
+          <h4>Today Comment Count</h4>
+          <p>{{dashBoardDTO.today_comment_count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white gradient-blue">
+        <div class="card-body  position-relative">
+          <b class="wg-icon icon-news-today"></b>
+          <h4>Bugun Chop etilgan yangiliklar</h4>
+          <p>{{dashBoardDTO.today_publish_nw_count}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-white gradient-blue">
+        <div class="card-body  position-relative">
+          <b class="wg-icon icon-news-today"></b>
+          <h4>Bugun Chop etilgan yangiliklar Tillar bilan</h4>
+          <p>{{dashBoardDTO.today_publish_nwLang_count}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

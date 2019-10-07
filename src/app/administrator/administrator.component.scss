@@ -1,0 +1,20 @@
+.main-panel-container {
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.471;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 100vh;
+
+  .nav-panel-container {
+    width: 18%;
+    background-color: #0097A7;
+  }
+  .main-panel-child {
+    width: 82%;
+    background-color: #f1f1f1;
+  }
+}

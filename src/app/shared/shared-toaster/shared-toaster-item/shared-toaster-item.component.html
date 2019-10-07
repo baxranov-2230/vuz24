@@ -1,0 +1,19 @@
+<div class="toaster-item" id="{{toasterDTO.id}}">
+  <div class="toaster-inner"
+       [class.toaster-success]="toasterDTO.type ==='success'"
+       [class.toaster-warning]="toasterDTO.type ==='warning'"
+       [class.toaster-error]="toasterDTO.type === 'error'">
+    <div class="toaster-img">
+      <img *ngIf="toasterDTO.type === 'success' " src="../../../assets/images/toaster/success.svg" alt="toaster icon"
+           class="img-fluid">
+      <img *ngIf="toasterDTO.type === 'warning' " src="../../../assets/images/toaster/warning.svg" alt="toaster icon"
+           class="img-fluid">
+      <img *ngIf="toasterDTO.type === 'error' " src="../../../assets/images/toaster/error.svg" alt="toaster icon"
+           class="img-fluid">
+    </div>
+    <div class="text-center toaster-content">
+      <h4>{{toasterDTO.title}}</h4>
+      <p>{{toasterDTO.content}}</p>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,12 @@ export class LocalStorageSecurity {
     localStorage.setItem(encrypted_key, encrypted_value);
   }
 
+  public static removeItem(key: string): void {
+    const encrypted_key = CryptoSecurity.encrypte(key);
+
+    localStorage.removeItem(encrypted_key);
+  }
+
   public static getItem(key: string): string {
     const encrypted_key = CryptoSecurity.encrypte(key);
     const encrypted_value = localStorage.getItem(encrypted_key);

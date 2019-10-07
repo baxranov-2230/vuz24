@@ -1,0 +1,63 @@
+.tableProfileImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.toolBar {
+  background-color: #00a0b0;
+  align-items: center;
+  .toolbar-info {
+    border-left: 2px solid #ffffff;
+  }
+}
+
+.adm-table-footer {
+  display: flex;
+  align-items: center;
+  background-color: #00a0b0;
+  padding: 5px 5px;
+  text-align: center;
+  .pagination {
+    margin: 0;
+    a {
+      color: #007bff;
+    }
+    .active {
+      a {
+        color: #ffffff !important;
+      }
+    }
+    .not-active {
+      a {
+        background-color: #e2e2e2;
+      }
+      a:hover {
+        cursor: default;
+      }
+    }
+  }
+}
+
+.infoModal {
+  .modal-header {
+    padding: 5px 10px;
+    background-color: #00a0b0;
+    color: #ffffff;
+  }
+  .modal-footer {
+    padding: 5px 10px;
+  }
+}
+
+.max-width-250 {
+  max-width: 250px;
+}
+
+table {
+  margin: 0;
+}
+
+table tr td {
+  vertical-align: middle;
+}

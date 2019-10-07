@@ -1,0 +1,32 @@
+.adm-moderator {
+  .tableProfileImg {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  .toolBar {
+    background-color: #00a0b0;
+    align-items: center;
+    .toolbar-info {
+      border-left: 2px solid #ffffff;
+    }
+  }
+  table tr td {
+    vertical-align: middle;
+  }
+  table thead {
+
+    //color: #ffffff;
+  }
+}
+
+.infoModal {
+  .modal-header {
+    padding: 5px 10px;
+    background-color: #00a0b0;
+    color: #ffffff;
+  }
+  .modal-footer {
+    padding: 5px 10px;
+  }
+}

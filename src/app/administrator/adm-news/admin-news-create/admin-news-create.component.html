@@ -1,0 +1,69 @@
+<div class="h-100 px-2">
+  <div class="container bg-white h-100 mt-2 p-0 ">
+    <div class="d-flex toolBar p-2 justify-content-center">
+      <div class="text-white toolbar-info pl-2">
+        Создавать новости
+      </div>
+      <div class="ml-auto text-white">
+
+      </div>
+    </div>
+    <div class="row p-3">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="sel1">Tilni tanlang</label>
+          <select [(ngModel)]="selectedNewsLangKey" name="" class="form-control" id="sel1" (change)="checkNews()"
+                  [attr.disabled]="urlAction != 2 ? null : true">
+            <option disabled selected value="def">Tillar:</option>
+            <option *ngFor="let lang of langList" value="{{lang.name}}">{{lang.key}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="sel2">Mavzuni tanlang</label>
+          <select [(ngModel)]="selectedNewsTypeId" class="form-control" id="sel2" (change)="checkNews()"
+                  [attr.disabled]="isNewsTypeDisabled()">
+            <option disabled selected value="0">Yangilik mavzulari:</option>
+            <option *ngFor="let newsType of newsTypesList" value="{{newsType.id}}">{{newsType.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group input-group-prepend" style="margin-top: calc(0.5rem + 24px); height: 38px;">
+          <div class="input-group-text">
+            <input id="sel3" type="checkbox" [(ngModel)]="selectedNewsImportant">
+            <label for="sel3" style="margin-bottom: 0.1rem">&nbsp;Dolzarb</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row p-3">
+      <div class="form-group col-12 col-lg-8">
+        <label for="title">Sarlavhani kiriting</label>
+        <input type="text" [(ngModel)]="newsTitle" class="form-control" id="title" placeholder="Sarlavha"
+               name="title" (input)="checkNews()" required>
+      </div>
+    </div>
+    <div class="row p-3">
+      <div class="form-group col-12 col-lg-8">
+        <label for="subContent">Subcontentni kiriting</label>
+        <textarea name="subContent" class="form-control" id="subContent" rows="4" maxlength="250"
+                  [(ngModel)]="newsSubContent" (input)="checkNews()" required></textarea>
+      </div>
+    </div>
+    <div class="row m-3">
+      <div id="admNewsEditor" (input)="checkNews()">
+      </div>
+      <button *ngIf="urlAction === 0" type="submit" class="btn btn-success" (click)='createNews()'
+              [attr.disabled]="isReady ? null : true">Создать
+      </button>
+      <button *ngIf="urlAction === 1" type="submit" class="btn btn-primary" (click)='updateNews()'
+              [attr.disabled]="isReady ? null : true">Сохранить изменение
+      </button>
+      <button *ngIf="urlAction === 2" type="submit" class="btn btn-primary" (click)='createTranslation()'
+              [attr.disabled]="isReady ? null : true">Создать перевод
+      </button>
+    </div>
+  </div>
+</div>

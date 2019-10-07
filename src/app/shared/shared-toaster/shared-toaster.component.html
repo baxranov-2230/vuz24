@@ -1,0 +1,3 @@
+<div class="toaster-wrapper">
+  <app-shared-toaster-item *ngFor="let item of toasterDTOList" [toasterDTO]="item" (removeItem)="removeItemFromList($event)"></app-shared-toaster-item>
+</div>

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalStorageSecurity} from "../../util/localStorageSecurity";
 import {CommonKey} from "../../util/commonKey";
-import { ProfileDto } from '../../dto/profileDto';
-import { ProfileService } from '../../services/profile.service';
-import { Router } from '@angular/router';
+import {ProfileDto} from '../../dto/profileDto';
+import {ProfileService} from '../../services/profile.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
 
 export class LogInComponent implements OnInit {
 
-  constructor(private profileService: ProfileService, private router: Router) {}
+  constructor(private profileService: ProfileService, private router: Router) {
+  }
 
   ngOnInit() {
     if (window.innerHeight > document.getElementById('logInForm').scrollHeight) {
@@ -36,6 +37,9 @@ export class LogInComponent implements OnInit {
           LocalStorageSecurity.setItem(CommonKey.NAME, data.firstName);
           LocalStorageSecurity.setItem(CommonKey.SURNAME, data.lastName);
           LocalStorageSecurity.setItem(CommonKey.ROLE, data.roles[0].name);
+          if (data.imgLink) {
+            LocalStorageSecurity.setItem(CommonKey.PROFILE_IMG_LINK, data.imgLink);
+          }
           if (data.isAdmin) {
             this.router.navigate(['administrator']);
           } else if (data.isModerator) {

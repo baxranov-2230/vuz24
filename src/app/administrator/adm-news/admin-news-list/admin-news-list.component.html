@@ -1,0 +1,273 @@
+<div class="h-100 px-2">
+  <div class="container bg-white h-100 mt-2 p-0">
+    <div class="d-flex toolBar p-2 justify-content-center">
+      <div class="text-white toolbar-info pl-2">
+        Список новостей
+      </div>
+      <div class="ml-auto text-white">
+        <span style="font-size: 14px">Общее количество</span>&nbsp;&nbsp;&nbsp;<b>{{totalCount}}</b>
+      </div>
+    </div>
+    <table class="table table-bordered  table-sm">
+      <thead>
+      <tr>
+        <th>№</th>
+        <th class="text-center">Подробная информация</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let newsDTO of newsTreeList; let i = index">
+        <td class="text-center">{{ ((currentPage -1) * itemsPerPage ) + (i + 1) }}</td>
+        <td class="py-2">
+          <table class="w-100 mb-2 adm-inner-table">
+            <thead>
+            <tr>
+              <th>Кол.&nbsp; Комментарии</th>
+              <th>Кол.&nbsp; Ляков</th>
+              <th>Кол.&nbsp; Просмотров</th>
+              <th>Тип</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{newsDTO.comment_count}}</td>
+              <td>{{newsDTO.liked_count}}</td>
+              <td>{{newsDTO.viewed_count}}</td>
+              <td>{{newsDTO.news_type_id}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="w-100 adm-inner-table">
+            <thead>
+            <tr>
+              <th>Заглавие</th>
+              <th>Cуб-контент</th>
+              <th>Модератор</th>
+              <th>Дата создание</th>
+              <th>Дата публикации</th>
+              <th>Язык</th>
+              <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="newsDTO.uzl">
+              <td>{{newsDTO.uzlDTO.title}}</td>
+              <td>{{newsDTO.uzlDTO.sub_content}}</td>
+              <td>{{newsDTO.uzlDTO.profile_first_name + ' '+ newsDTO.uzlDTO.profile_last_name}}</td>
+              <td>{{getDateFormat(newsDTO.uzlDTO.submit_date)}}</td>
+              <td>{{getDateFormat(newsDTO.uzlDTO.publish_date)}}</td>
+              <td class="text-center">
+                <div *ngIf="newsDTO.uzlDTO.publish" title="Опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-success">
+                  O'z
+                </div>
+                <div *ngIf="!newsDTO.uzlDTO.publish" title="Не опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-warning">
+                  O'z
+                </div>
+              </td>
+              <td>
+                <button type="submit" class="btn btn-info btn-sm mx-1" title="Настройки"
+                        (click)="openNewsSettingsModal(newsDTO,newsDTO.uzlDTO)"><i
+                  class="fa fa-wrench"
+                  aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="!newsDTO.uzl">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-center">
+                <button type="submit" class="btn  btn-sm mx-1" title="Создать"
+                        (click)="createNewsTranslate(newsDTO, 'uzl')">
+                  <i class="fa fa-keyboard-o" aria-hidden="true"></i> O'z
+                </button>
+              </td>
+              <td></td>
+            </tr>
+            <tr *ngIf="newsDTO.uzk">
+              <td>{{newsDTO.uzkDTO.title}}</td>
+              <td>{{newsDTO.uzkDTO.sub_content}}</td>
+              <td>{{newsDTO.uzkDTO.profile_first_name + ' '+ newsDTO.uzkDTO.profile_last_name}}</td>
+              <td>{{getDateFormat(newsDTO.uzkDTO.submit_date)}}</td>
+              <td>{{getDateFormat(newsDTO.uzkDTO.publish_date)}}</td>
+              <td class="text-center">
+                <div *ngIf="newsDTO.uzkDTO.publish" title="Опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-success">
+                  Ўз
+                </div>
+                <div *ngIf="!newsDTO.uzkDTO.publish" title="Не опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-warning">
+                  Ўз
+                </div>
+              </td>
+              <td>
+                <button type="submit" class="btn btn-info btn-sm mx-1" title="Настройки"
+                        (click)="openNewsSettingsModal(newsDTO, newsDTO.uzkDTO)"><i
+                  class="fa fa-wrench"
+                  aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="!newsDTO.uzk">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-center">
+                <button type="submit" class="btn  btn-sm mx-1" title="Создать"
+                        (click)="createNewsTranslate(newsDTO, 'uzk')">
+                  <i class="fa fa-keyboard-o" aria-hidden="true"></i> Ўз
+                </button>
+              </td>
+              <td></td>
+            </tr>
+            <tr *ngIf="newsDTO.ru">
+              <td>{{newsDTO.ruDTO.title}}</td>
+              <td>{{newsDTO.ruDTO.sub_content}}</td>
+              <td>{{newsDTO.ruDTO.profile_first_name + ' '+ newsDTO.ruDTO.profile_last_name}}</td>
+              <td>{{getDateFormat(newsDTO.ruDTO.submit_date)}}</td>
+              <td>{{getDateFormat(newsDTO.ruDTO.publish_date)}}</td>
+              <td class="text-center">
+                <div *ngIf="newsDTO.ruDTO.publish" title="Опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-success">
+                  Ру
+                </div>
+                <div *ngIf="!newsDTO.ruDTO.publish" title="Не опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-warning">
+                  Ру
+                </div>
+              </td>
+              <td>
+                <button type="submit" class="btn btn-info btn-sm mx-1" title="Настройки"
+                        (click)="openNewsSettingsModal(newsDTO, newsDTO.ruDTO)"><i
+                  class="fa fa-wrench"
+                  aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="!newsDTO.ru">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-center">
+                <button type="submit" class="btn  btn-sm mx-1" title="Создать"
+                        (click)="createNewsTranslate(newsDTO, 'ru')">
+                  <i class="fa fa-keyboard-o" aria-hidden="true"></i> Ру
+                </button>
+              </td>
+              <td></td>
+            </tr>
+            <tr *ngIf="newsDTO.en">
+              <td>{{newsDTO.enDTO.title}}</td>
+              <td>{{newsDTO.enDTO.sub_content}}</td>
+              <td>{{newsDTO.enDTO.profile_first_name + ' '+ newsDTO.enDTO.profile_last_name}}</td>
+              <td>{{getDateFormat(newsDTO.enDTO.submit_date)}}</td>
+              <td>{{getDateFormat(newsDTO.enDTO.publish_date)}}</td>
+              <td class="text-center">
+                <div *ngIf="newsDTO.enDTO.publish" title="Опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-success">
+                  En
+                </div>
+                <div *ngIf="!newsDTO.enDTO.publish" title="Не опубликованный"
+                     class="py-1 px-2 rounded d-inline-block text-white bg-warning">
+                  En
+                </div>
+              </td>
+              <td>
+                <button type="submit" class="btn btn-info btn-sm mx-1" title="Настройки"
+                        (click)="openNewsSettingsModal(newsDTO, newsDTO.enDTO)"><i
+                  class="fa fa-wrench"
+                  aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="!newsDTO.en">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-center">
+                <button type="submit" class="btn  btn-sm mx-1" title="Создать"
+                        (click)="createNewsTranslate(newsDTO, 'en')">
+                  <i class="fa fa-keyboard-o" aria-hidden="true"></i> En
+                </button>
+              </td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="adm-table-footer">
+      <div class="col-md-6 offset-3">
+        <ul class="pagination pagination-sm justify-content-center">
+          <li class="page-item" [ngClass]="{'not-active': currentPage === 1}">
+            <a class="page-link" (click)="goToPrevPage()">Предыдущий</a>
+          </li>
+          <li *ngFor="let page of pageCountArray" class="page-item" [ngClass]="{'active' : currentPage == page}">
+            <a class="page-link" (click)="goToPage(page)">{{page}}</a>
+          </li>
+          <li class="page-item" [ngClass]="{'not-active': currentPage === totalPageCount}">
+            <a class="page-link activePage" (click)="goToNextPage()">Следующий</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-3 text-white">
+        <span style="font-size: 14px">Общее количество</span>&nbsp;&nbsp;&nbsp;<b>{{totalCount}}</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Moderator info modal-->
+<div class="modal fade infoModal" id="admNewsSettingsModalID" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h6 class="modal-title">Настройки </h6>
+        <button type="button" class="close text-white" data-dismiss="modal"><i class="fa fa-close"></i></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" *ngIf="selectedNewsTreeDTO">
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-warning text-white btn-sm mx-1" title="Изменить"
+                      (click)="updateSelectedNews()">
+                <i class="fa fa-edit" aria-hidden="true"></i> Изменить
+              </button>
+              <button *ngIf="selectedNewsItemDTO.publish" type="submit" class="btn btn-warning text-white btn-sm mx-1"
+                      title="Отменить публикацию"
+                      (click)="cancelPublication()">
+                <i class="fa fa-minus-circle" aria-hidden="true"></i> Отменить публикацию
+              </button>
+              <button type="submit" class="btn btn-danger text-white btn-sm mx-1" title="Удалить"
+                      (click)="deleteSelectedNews()">
+                <i class="fa fa-remove" aria-hidden="true"></i> Удалить
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gray btn-sm" data-dismiss="modal">Закрыть</button>
+      </div>
+
+    </div>
+  </div>
+</div>

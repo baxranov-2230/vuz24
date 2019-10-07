@@ -1,0 +1,93 @@
+.toaster-item {
+  visibility: hidden;
+  width: 80%;
+  margin: 1rem 1rem 0 0;
+  float: right;
+  .toaster-inner {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    .toaster-img {
+      width: 15%;
+    }
+    .toaster-content {
+      width: 85%;
+    }
+  }
+}
+
+.toaster-success {
+  background: #8bc34af2;
+  color: #fff;
+}
+
+.toaster-warning {
+  background: #ffc107f7;
+  color: #fff;
+}
+
+.toaster-error {
+  background: #f44336f2;
+  color: #fff;
+}
+
+.toaster-item.show {
+  visibility: visible;
+  //-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  -webkit-animation: fadein 0.5s;
+  //animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s;
+}
+
+.toaster-item.hide {
+  visibility: visible;
+  -webkit-animation: fadeout 0.5s 2.5s;
+  animation: fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}

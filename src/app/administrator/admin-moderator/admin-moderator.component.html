@@ -1,0 +1,109 @@
+<div class="adm-moderator h-100 px-2">
+  <div class="container bg-white h-100 mt-2 pt-3  rounded">
+    <div class="d-flex toolBar p-2 justify-content-center">
+      <div class="text-white toolbar-info pl-2">
+        Moderator
+      </div>
+      <div class="ml-auto">
+        <button class="btn btn-success btn-sm" (click)="crateModerator()">
+          <i class="fa fa-plus-circle"></i> Создать
+        </button>
+      </div>
+    </div>
+    <table class="table table-bordered table-hover table-sm">
+      <thead>
+      <tr>
+        <th>№</th>
+        <th>Фото</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Е-mail</th>
+        <th>Контакты</th>
+        <th>Дата регистрации</th>
+        <th>Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let moderator of moderatorList; let i = index">
+        <td class="text-center">{{i + 1}}</td>
+        <td class="text-center">
+          <img class="tableProfileImg" src="../../../assets/images/unisex-user.png" alt="avatar">
+        </td>
+        <td class="verti">{{moderator.firstName}}</td>
+        <td>{{moderator.lastName}}</td>
+        <td>{{moderator.email}}</td>
+        <td>{{moderator.phoneNumber}}</td>
+        <td>{{moderator.submitDate}}</td>
+        <td>
+          <button type="submit" class="btn btn-info btn-sm mx-1" (click)="moderDetailInfo(moderator)"><i
+            class="fa fa-info-circle"
+            aria-hidden="true"></i>
+          </button>
+          <button type="submit" class="btn btn-danger btn-sm mx-1" (click)="deleteModerator(moderator)">
+            <i class="fa fa-remove"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--Moderator info modal-->
+<div class="modal fade infoModal" id="admModerDetailModalID" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h6 class="modal-title">Информация </h6>
+        <button type="button" class="close text-white" data-dismiss="modal"><i class="fa fa-close"></i></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" *ngIf="selectedModerator">
+        <div class="container">
+          <div class="row justify-content-center py-2">
+            <img class="rounded img-fluid" src="../../../assets/images/unisex-user.png" width="100" alt="avatar">
+          </div>
+          <div class="row">
+            <table class="table table-striped table-bordered">
+              <tr>
+                <th>Имя</th>
+                <td>{{selectedModerator.firstName}}</td>
+              </tr>
+              <tr>
+                <th>Фамилия</th>
+                <td>{{selectedModerator.lastName}}</td>
+              </tr>
+              <tr>
+                <th>Е-mail</th>
+                <td>{{selectedModerator.email}}</td>
+              </tr>
+              <tr>
+                <th>Контакты</th>
+                <td>{{selectedModerator.phoneNumber}}</td>
+              </tr>
+              <tr>
+                <th>Дата регистрации</th>
+                <td>{{selectedModerator.submitDate}}</td>
+              </tr>
+              <tr>
+                <th>Дата рождения</th>
+                <td>{{selectedModerator.birthDate}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gray btn-sm" data-dismiss="modal">Закрыть</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-admin-moderator-item (moderatorCreated)="reloadModeratorList()"></app-admin-moderator-item>
