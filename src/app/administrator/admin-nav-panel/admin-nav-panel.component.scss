@@ -12,11 +12,14 @@
       }
     }
   }
-  .user-image{
+  .user-image {
 
     //img{
     //  object-fit: cover;
     //}
+    p:hover {
+      cursor: pointer;
+    }
   }
 
   /* Navigation Section Header */
