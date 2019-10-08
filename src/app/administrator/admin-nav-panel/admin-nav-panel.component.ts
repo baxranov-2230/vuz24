@@ -7,6 +7,7 @@ import {ProfileDetailDTO} from './dto/profileDetailDTO';
 import {SharedToasterDTO} from '../../shared/shared-toaster/dto/sharedToasterDTO';
 import {SharedToasterService} from '../../shared/shared-toaster/shared-toaster.service';
 import {Subscription} from "rxjs";
+import {ImageDto} from "../../dto/imageDto";
 
 declare var $: any;
 
@@ -18,7 +19,6 @@ declare var $: any;
 })
 export class AdminNavPanelComponent implements OnInit, OnDestroy {
 
-  public selectedMenuId = 1;
   public selectedMenuKey: string;
   public firstName: string;
   public lastName: string;
@@ -29,7 +29,7 @@ export class AdminNavPanelComponent implements OnInit, OnDestroy {
   public errMsg: string;
 
   public userRole: string;
-
+  public profileImgSrc: any;
   /* Subscription */
   public routeChangeSubscription: Subscription;
 
@@ -160,7 +160,6 @@ export class AdminNavPanelComponent implements OnInit, OnDestroy {
     return true;
   }
 
-
   public getAccess(code: number) {
     if (this.userRole === 'moderator') {  /* moderator */
       if (code === 1 || code === 2 || code === 3) {
@@ -171,6 +170,60 @@ export class AdminNavPanelComponent implements OnInit, OnDestroy {
     }
 
     return false;
+  }
+
+  public openProfileImgModal() {
+    $('#navProfileImageModalID').modal('show');
+  }
+
+  public onProfileImageSelect(e) {
+    this.profileImgSrc = e;
+  }
+
+  public createImage() {
+    const file = this.getImageAsFile(this.profileImgSrc, 'avatar.png');
+
+    this.adminNavPanelSrv.createImage(file).subscribe(
+      (data) => {
+        if (data.state === 1) {
+          this.updateProfileImage(data);
+        }
+      },
+      error => console.log(error)
+    );
+  }
+
+  private updateProfileImage(imgDTO: ImageDto) {
+    const obj = {imgLink: imgDTO.imageName};
+    this.adminNavPanelSrv.updateProfileImage(JSON.stringify(obj)).subscribe(
+      (data) => {
+        if (data.state === 1) {
+          this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Успешно', 'Аватар обновлен', 'success'));
+          this.pImgLink = imgDTO.imageLink;
+          LocalStorageSecurity.setItem(CommonKey.PROFILE_IMG_LINK, imgDTO.imageLink);
+        } else if (data.state === 1) {
+          this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Ошибка', 'Произошла ошибка', 'warning'));
+        }
+      },
+      error => {
+        this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Ошибка', 'Произошла ошибка', 'error'));
+      },
+      () => {
+        $('#navProfileImageModalID').modal('hide');
+      }
+    );
+  }
+
+  private getImageAsFile(dataurl, filename) {
+    const arr = dataurl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1])
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type: mime});
   }
 
   public logOut() {

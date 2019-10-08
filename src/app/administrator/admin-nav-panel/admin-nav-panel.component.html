@@ -3,8 +3,8 @@
   <div class="user-detail">
     <div class="user-image text-center p-3">
       <img *ngIf="!pImgLink" class="w-50 rounded-circle" src="../../../assets/images/general/user_avatar.png"
-           alt="User Image">
-      <img *ngIf="pImgLink" class="w-50 rounded" src="{{pImgLink}}" alt="User Image">
+           alt="User Image" (click)="openProfileImgModal()">
+      <img *ngIf="pImgLink" class="w-50 rounded" src="{{pImgLink}}" alt="User Image" (click)="openProfileImgModal()">
       <p class="my-1 text-white" (click)="openNavProfileDetailModal()">{{firstName + ' ' + lastName}}</p>
     </div>
   </div>
@@ -148,6 +148,37 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-gray btn-sm" data-dismiss="modal">Отменить</button>
         <button type="button" class="btn btn-success btn-sm" (click)="updateProfileDetail()">Обновить данные</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade navProfileDetailModal" id="navProfileImageModalID" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Аватар</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-7" style="padding: unset">
+              <ngx-img (onSelect)="onProfileImageSelect($event)" [config]="{ fileSize:1024, crop: [ { ratio: 1 } ] }"></ngx-img>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gray btn-sm" data-dismiss="modal">Отменить</button>
+        <button type="button" class="btn btn-success btn-sm" (click)="createImage()">Обновить фото</button>
       </div>
 
     </div>

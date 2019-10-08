@@ -9,6 +9,7 @@ import {LocalStorageSecurity} from '../../util/localStorageSecurity';
 import {catchError} from 'rxjs/internal/operators';
 import {CommonKey} from '../../util/commonKey';
 import {ServerResponceDTO} from "../../dto/serverResponceDTO";
+import {ImageDto} from "../../dto/imageDto";
 
 @Injectable()
 export class AdminNavPanelService {
@@ -39,4 +40,23 @@ export class AdminNavPanelService {
       catchError(this.attendService.handleError('getProfileDetail', new ServerResponceDTO()))
     );
   }
+
+  public createImage(file: File): Observable<ImageDto> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<ImageDto>(GeneralURL.imageURL.concat('create'), formData);
+  }
+
+  public updateProfileImage(json: string): Observable<ServerResponceDTO> {
+
+    return this.http.put<ServerResponceDTO>(GeneralURL.profileURL.concat('update_img'), json, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': LocalStorageSecurity.getItem(CommonKey.TOKEN)
+      })
+    }).pipe(
+      catchError(this.attendService.handleError('updateProfileImage', new ServerResponceDTO()))
+    );
+  }
+
 }
