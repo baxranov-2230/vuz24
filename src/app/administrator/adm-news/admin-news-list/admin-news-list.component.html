@@ -245,16 +245,16 @@
         <div class="container">
           <div class="row">
             <div class="col text-center">
-              <button type="submit" class="btn btn-warning text-white btn-sm mx-1" title="Изменить"
+              <button *ngIf="getAccess(1)" type="submit" class="btn btn-warning text-white btn-sm mx-1" title="Изменить"
                       (click)="updateSelectedNews()">
                 <i class="fa fa-edit" aria-hidden="true"></i> Изменить
               </button>
-              <button *ngIf="selectedNewsItemDTO.publish" type="submit" class="btn btn-warning text-white btn-sm mx-1"
+              <button *ngIf="selectedNewsItemDTO.publish && getAccess(2)" type="submit" class="btn btn-warning text-white btn-sm mx-1"
                       title="Отменить публикацию"
                       (click)="cancelPublication()">
                 <i class="fa fa-minus-circle" aria-hidden="true"></i> Отменить публикацию
               </button>
-              <button type="submit" class="btn btn-danger text-white btn-sm mx-1" title="Удалить"
+              <button *ngIf="getAccess(3)" type="submit" class="btn btn-danger text-white btn-sm mx-1" title="Удалить"
                       (click)="deleteSelectedNews()">
                 <i class="fa fa-remove" aria-hidden="true"></i> Удалить
               </button>

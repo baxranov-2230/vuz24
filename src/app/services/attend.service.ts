@@ -16,7 +16,15 @@ export class AttendService {
     return (error: HttpErrorResponse): Observable<T> => {
       if (error.status === 401) {  // UNAUTHORIZED
         this.sharedToasterSrv.startSharedToasterEmitter.emit(new SharedToasterDTO('Ваша сессия закончилась', 'Пожалуйста авторизуйтесь заного', 'warning'));
-        this.router.navigate(['log-in']); // ROUTER REDIRECT
+        setTimeout(() => {
+          this.router.navigate(['log-in']); // ROUTER REDIRECT
+        }, 2000);
+      }
+      if (error.status === 405) {  // NOT ALLOWED
+        this.sharedToasterSrv.startSharedToasterEmitter.emit(new SharedToasterDTO('Внимание', 'Вы не имейте доступа', 'warning'));
+        setTimeout(() => {
+          this.router.navigate(['log-in']); // ROUTER REDIRECT
+        }, 2000);
       }
       return of(result as T);
     };

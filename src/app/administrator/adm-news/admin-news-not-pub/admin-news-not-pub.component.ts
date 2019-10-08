@@ -7,6 +7,8 @@ import {ConfirmModalService} from '../../../shared/confirm-modal/confirm-modal.s
 import {SharedToasterService} from '../../../shared/shared-toaster/shared-toaster.service';
 import {ConfirmModalDTO} from '../../../shared/confirm-modal/dto/confModalDTO';
 import {SharedToasterDTO} from '../../../shared/shared-toaster/dto/sharedToasterDTO';
+import {LocalStorageSecurity} from "../../../util/localStorageSecurity";
+import {CommonKey} from "../../../util/commonKey";
 
 declare var $: any;
 @Component({
@@ -23,10 +25,13 @@ export class AdminNewsNotPubComponent implements OnInit, OnDestroy {
   /* Subscription */
   public confirmMServiceSubscription: Subscription;
 
+  public profileRole: string;
+
   constructor(private admNewsNotPubSrv: AdminNewsNotPubService, private sanitizer: DomSanitizer,
               private sharedConfModalService: ConfirmModalService, private sharedToasterSer: SharedToasterService) {
     this.notPubNewsList = [];
     this.selectedNewsDTO = null;
+    this.profileRole = '';
   }
 
   ngOnInit() {
@@ -39,6 +44,8 @@ export class AdminNewsNotPubComponent implements OnInit, OnDestroy {
         this.rejectNewsSrv(data.inputContent);
       }
     });
+
+    this.profileRole = LocalStorageSecurity.getItem(CommonKey.ROLE);
 
     this.getNotPublishedNewsList();
   }
@@ -177,7 +184,20 @@ export class AdminNewsNotPubComponent implements OnInit, OnDestroy {
     );
   }
 
+  public getAccess(code: number) {
+    if (this.profileRole === 'moderator') {  /* moderator */
+      if (code === 2) {
+        return true;
+      }
+    } else if (this.profileRole === 'admin') {   /* admin */
+      return true;
+    }
+
+    return false;
+  }
+
   public getContent() {
     return this.sanitizer.bypassSecurityTrustHtml(this.selectedNewsDTO.content);
   }
+
 }

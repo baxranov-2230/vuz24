@@ -37,10 +37,15 @@ export class AdminNewsListComponent implements OnInit, OnDestroy {
   public selectedNewsTreeDTO: AdmNewsTreeDTO;
   public selectedNewsItemDTO: AdmNewsItemDTO;
 
+  public userRole: string;
+
   constructor(private admNewsListService: AdminNewsListService, private router: Router,
               private sharedConfModalService: ConfirmModalService, private sharedToasterSer: SharedToasterService) {
     this.pageFilter = new PageFilterDTO();
     this.selectedNewsTreeDTO = null;
+    this.userRole = '';
+
+    this.userRole = LocalStorageSecurity.getItem(CommonKey.ROLE);
   }
 
   ngOnInit() {
@@ -209,6 +214,18 @@ export class AdminNewsListComponent implements OnInit, OnDestroy {
     );
   }
 
+  public getAccess(code: number): boolean {
+    if (this.userRole === 'moderator') {  /* moderator */
+      if (code === 1) {
+        return true;
+      }
+    } else if (this.userRole === 'admin') {   /* admin */
+      return true;
+    }
+
+    return false;
+  }
+
   /* Pagination methods */
   public calculatePagination() {
     this.pageCountArray = [];
@@ -242,5 +259,4 @@ export class AdminNewsListComponent implements OnInit, OnDestroy {
       this.getNewsTreeList();
     }
   }
-
 }

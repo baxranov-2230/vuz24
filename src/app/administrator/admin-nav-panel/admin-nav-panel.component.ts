@@ -26,6 +26,8 @@ export class AdminNavPanelComponent implements OnInit {
   public showErrMsg: boolean;
   public errMsg: string;
 
+  public userRole: string;
+
   constructor(private router: Router, private adminNavPanelSrv: AdminNavPanelService, private sharedToasterSer: SharedToasterService) {
     this.firstName = '';
     this.lastName = '';
@@ -40,7 +42,7 @@ export class AdminNavPanelComponent implements OnInit {
 
   ngOnInit() {
     this.init();
-
+    this.userRole = LocalStorageSecurity.getItem(CommonKey.ROLE);
   }
 
   public init() {
@@ -95,7 +97,6 @@ export class AdminNavPanelComponent implements OnInit {
       }
     );
 
-
   }
 
   private isProfileDetailValid(): boolean {
@@ -137,12 +138,25 @@ export class AdminNavPanelComponent implements OnInit {
     return true;
   }
 
+
+  public getAccess(code: number) {
+    if (this.userRole === 'moderator') {  /* moderator */
+      if (code === 1 || code === 2 || code === 3) {
+        return true;
+      }
+    } else if (this.userRole === 'admin') {   /* admin */
+      return true;
+    }
+
+    return false;
+  }
+
   public logOut() {
     LocalStorageSecurity.removeItem(CommonKey.NAME);
     LocalStorageSecurity.removeItem(CommonKey.SURNAME);
     LocalStorageSecurity.removeItem(CommonKey.PROFILE_IMG_LINK);
     LocalStorageSecurity.removeItem(CommonKey.TOKEN);
     LocalStorageSecurity.removeItem(CommonKey.ROLE);
-    this.router.navigate(['']);
+    this.router.navigate(['log-in']);
   }
 }

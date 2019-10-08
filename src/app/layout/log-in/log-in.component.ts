@@ -43,7 +43,7 @@ export class LogInComponent implements OnInit {
           if (data.isAdmin) {
             this.router.navigate(['administrator']);
           } else if (data.isModerator) {
-            this.router.navigate(['moderator']);
+            this.router.navigate(['administrator']);
           }
         } else {
           (<HTMLInputElement>(document.getElementById('inputEmail'))).value = '';
