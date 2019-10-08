@@ -25,23 +25,23 @@
             <i class="fa fa-angle-down mr-2 float-right"></i>
           </a>
           <ul class="np-child np-child-one showSubMenu">
-            <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-create')}"
-                   (click)="selectedMenuKey = 'news-create'" class="d-block"
-                   [routerLink]="['news-create/0']">
+            <li *ngIf="getAccess(1)"><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-create')}"
+                                        (click)="selectedMenuKey = 'news-create'" class="d-block"
+                                        [routerLink]="['news-create/0']">
               <i class="fa fa-plus-circle mr-1"></i>Yangilik yaratish </a></li>
-            <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-not')}"
-                   (click)="selectedMenuKey = 'news-not'" class="d-block"
-                   [routerLink]="['news-not']"><i
+            <li *ngIf="getAccess(2)"><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-not')}"
+                                        (click)="selectedMenuKey = 'news-not'" class="d-block"
+                                        [routerLink]="['news-not']"><i
               class="fa fa-hourglass-start mr-1"></i>Yangi qo'shilgan</a></li>
-            <li><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-list')}"
-                   (click)="selectedMenuKey = 'news-list'" class="d-block"
-                   [routerLink]="['news-list']"><i
+            <li *ngIf="getAccess(3)"><a [ngClass]="{'selectedMenu' : getSelectedMenu('news-list')}"
+                                        (click)="selectedMenuKey = 'news-list'" class="d-block"
+                                        [routerLink]="['news-list']"><i
               class="fa fa-list mr-1"></i>Yangiliklar ro'yhati</a></li>
           </ul>
         </li>
       </ul>
     </div>
-    <div>
+    <div *ngIf="getAccess(4)">
       <div class="nav-header">
         <h4>Adminstration</h4>
       </div>
@@ -64,7 +64,7 @@
         <!--class="fa fa-commenting mr-2"></i>Feedback</a></li>-->
       </ul>
     </div>
-    <div>
+    <div *ngIf="getAccess(5)">
       <div class="nav-header">
         <h4>Managing</h4>
       </div>

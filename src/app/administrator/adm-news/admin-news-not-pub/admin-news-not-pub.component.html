@@ -46,14 +46,15 @@
       <div *ngIf="selectedNewsDTO.content" class="modal-body"> Yangilikni Contenti qani</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="getAccess(1)" type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal"
+                aria-label="Close"
                 data-target="#returner" (click)="rejectNews()">Отклонять
         </button>
-        <button type="button" class="btn btn-info">
-          Изменить
+        <button *ngIf="getAccess(2)" type="button" class="btn btn-info">
+          <i class="fa fa-edit"></i> Изменить
         </button>
-        <button type="button" class="btn btn-danger" (click)="deleteNews()">Удалить</button>
-        <button type="button" class="btn btn-primary" (click)="publishNews()">Опубликовать</button>
+        <button *ngIf="getAccess(3)" type="button" class="btn btn-danger" (click)="deleteNews()">Удалить</button>
+        <button *ngIf="getAccess(4)" type="button" class="btn btn-primary" (click)="publishNews()">Опубликовать</button>
       </div>
     </div>
   </div>

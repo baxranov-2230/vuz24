@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot} from '@angular/router';
-import { CommonKey } from '../util/commonKey';
-import { LocalStorageSecurity } from '../util/localStorageSecurity';
+import {CommonKey} from '../util/commonKey';
+import {LocalStorageSecurity} from '../util/localStorageSecurity';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -10,9 +10,10 @@ export class AdminGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
-    if (LocalStorageSecurity.getItem(CommonKey.ROLE) === "admin") {
+    const userRole = LocalStorageSecurity.getItem(CommonKey.ROLE);
+    if (userRole === 'admin' || userRole === 'moderator') {
       return true;
-    } else if(LocalStorageSecurity.getItem(CommonKey.ROLE)) {
+    } else if (LocalStorageSecurity.getItem(CommonKey.ROLE)) {
       this.router.navigate(['403']);
       return true;
     }
