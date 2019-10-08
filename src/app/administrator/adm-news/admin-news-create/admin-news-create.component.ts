@@ -8,10 +8,9 @@ import {NewsLangService} from '../../../services/news-lang.service';
 import {NewsTypeService} from '../../../services/news-type.service';
 import {LangDto} from '../../../dto/langDto';
 import {NewsTypeDto} from '../../../dto/newsTypeDto';
-import {NewsDto} from '../../../dto/newsDto';
 import {SharedToasterDTO} from '../../../shared/shared-toaster/dto/sharedToasterDTO';
-import {LocalStorageSecurity} from "../../../util/localStorageSecurity";
-import {CommonKey} from "../../../util/commonKey";
+import {LocalStorageSecurity} from '../../../util/localStorageSecurity';
+import {CommonKey} from '../../../util/commonKey';
 
 declare var $: any;
 
@@ -100,13 +99,13 @@ export class AdminNewsCreateComponent implements OnInit, OnDestroy {
         const obj = JSON.parse(data);
         const detail = JSON.parse(obj['detail']);
 
-        this.newsId = obj['news_id'];
-        this.selectedNewsLangKey = detail['lang'];
+        this.newsId = obj['news_id']; // news_id
+        this.selectedNewsLangKey = detail['lang']; // uzl,uzk,ru,en
         this.selectedNewsTypeId = obj['news_type_id'];
         this.selectedNewsImportant = detail['important'];
         this.newsTitle = detail['title'];
         this.newsSubContent = detail['sub_content'];
-        this.nlId = detail['news_lang_id'];
+        this.nlId = detail['news_lang_id']; // news_lang_id
         $('#admNewsEditor').trumbowyg('html', detail['content']);
 
         this.init();
@@ -212,7 +211,7 @@ export class AdminNewsCreateComponent implements OnInit, OnDestroy {
         if (data.state === 1) {
           this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Успешно', 'Новость создан', 'success'));
           setTimeout(() => {
-            this.router.navigate(['administrator']);
+            this.router.navigate(['administrator/news-not']);
           }, 100);
         } else if (data.state === -1) {
           this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Ошибка', 'Произошла ошибка', 'warning'));
@@ -248,7 +247,7 @@ export class AdminNewsCreateComponent implements OnInit, OnDestroy {
         if (data.state === 1) {
           this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Успешно', 'Перевод создан', 'success'));
           setTimeout(() => {
-            this.router.navigate(['administrator']);
+            this.router.navigate(['administrator/news-not']);
           }, 100);
         } else if (data.state === -1) {
           this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Ошибка', 'Произошла ошибка', 'warning'));
@@ -283,7 +282,7 @@ export class AdminNewsCreateComponent implements OnInit, OnDestroy {
         if (data.state === 1) {
           this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Успешно', 'Перевод создан', 'success'));
           setTimeout(() => {
-            this.router.navigate(['administrator']);
+            this.router.navigate(['administrator/news-not']);
           }, 100);
         } else if (data.state === -1) {
           this.sharedToasterSer.startSharedToasterEmitter.emit(new SharedToasterDTO('Ошибка', 'Произошла ошибка', 'warning'));

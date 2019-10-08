@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 import {LocalStorageSecurity} from '../../util/localStorageSecurity';
 import {CommonKey} from '../../util/commonKey';
 import {AdminNavPanelService} from './admin-nav-panel.service';
 import {ProfileDetailDTO} from './dto/profileDetailDTO';
 import {SharedToasterDTO} from '../../shared/shared-toaster/dto/sharedToasterDTO';
 import {SharedToasterService} from '../../shared/shared-toaster/shared-toaster.service';
+import {Subscription} from "rxjs";
 
 declare var $: any;
 
@@ -15,7 +16,8 @@ declare var $: any;
   styleUrls: ['./admin-nav-panel.component.scss'],
   providers: [AdminNavPanelService]
 })
-export class AdminNavPanelComponent implements OnInit {
+export class AdminNavPanelComponent implements OnInit, OnDestroy {
+
   public selectedMenuId = 1;
   public selectedMenuKey: string;
   public firstName: string;
@@ -27,6 +29,9 @@ export class AdminNavPanelComponent implements OnInit {
   public errMsg: string;
 
   public userRole: string;
+
+  /* Subscription */
+  public routeChangeSubscription: Subscription;
 
   constructor(private router: Router, private adminNavPanelSrv: AdminNavPanelService, private sharedToasterSer: SharedToasterService) {
     this.firstName = '';
@@ -53,6 +58,19 @@ export class AdminNavPanelComponent implements OnInit {
     const url = this.router.url.toString();
     this.selectedMenuKey = url.split('/')[2];
 
+    this.routeChangeSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const obj = event as NavigationEnd;
+        this.selectedMenuKey = obj.url.toString().split('/')[2];
+      }
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.routeChangeSubscription) {
+      this.routeChangeSubscription.unsubscribe();
+    }
   }
 
   public openCloseMenu(childClass: string) {
@@ -68,6 +86,7 @@ export class AdminNavPanelComponent implements OnInit {
       (data) => {
         if (data.state === 1) {
           this.profileDTO = data;
+          this.showErrMsg = false;
           $('#navProfileModalDTO').modal('show');
         }
       },
@@ -77,7 +96,10 @@ export class AdminNavPanelComponent implements OnInit {
 
   public updateProfileDetail() {
     if (!this.isProfileDetailValid()) {
+      this.showErrMsg = true;
       return;
+    } else {
+      this.showErrMsg = false;
     }
 
     this.adminNavPanelSrv.updateProfileDetail(JSON.stringify(this.profileDTO)).subscribe(

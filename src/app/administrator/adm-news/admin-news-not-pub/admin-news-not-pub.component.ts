@@ -9,6 +9,7 @@ import {ConfirmModalDTO} from '../../../shared/confirm-modal/dto/confModalDTO';
 import {SharedToasterDTO} from '../../../shared/shared-toaster/dto/sharedToasterDTO';
 import {LocalStorageSecurity} from "../../../util/localStorageSecurity";
 import {CommonKey} from "../../../util/commonKey";
+import {Router} from "@angular/router";
 
 declare var $: any;
 @Component({
@@ -27,7 +28,7 @@ export class AdminNewsNotPubComponent implements OnInit, OnDestroy {
 
   public profileRole: string;
 
-  constructor(private admNewsNotPubSrv: AdminNewsNotPubService, private sanitizer: DomSanitizer,
+  constructor(private admNewsNotPubSrv: AdminNewsNotPubService, private sanitizer: DomSanitizer, private router: Router,
               private sharedConfModalService: ConfirmModalService, private sharedToasterSer: SharedToasterService) {
     this.notPubNewsList = [];
     this.selectedNewsDTO = null;
@@ -184,6 +185,35 @@ export class AdminNewsNotPubComponent implements OnInit, OnDestroy {
     );
   }
 
+  public updateNews() {
+    if (!this.selectedNewsDTO) {
+      return;
+    }
+
+    $('#notPubNewsModalID').modal('hide');
+
+    const detail = {
+      lang: this.selectedNewsDTO.lang,
+      important: false,
+      title: this.selectedNewsDTO.title,
+      sub_content: this.selectedNewsDTO.subContent,
+      news_lang_id: this.selectedNewsDTO.nlId,
+      content: this.selectedNewsDTO.content
+    };
+
+    const obj = {
+      'news_id': this.selectedNewsDTO.id,
+      'news_type_id': this.selectedNewsDTO.newsType.id,
+      'detail': JSON.stringify(detail)
+    };
+
+    LocalStorageSecurity.setItem(CommonKey.ADM_NEWS, JSON.stringify(obj));
+    setTimeout(() => {
+      this.router.navigate(['administrator/news-create/1']);
+    }, 350);
+  }
+
+
   public getAccess(code: number) {
     if (this.profileRole === 'moderator') {  /* moderator */
       if (code === 2) {
@@ -195,6 +225,7 @@ export class AdminNewsNotPubComponent implements OnInit, OnDestroy {
 
     return false;
   }
+
 
   public getContent() {
     return this.sanitizer.bypassSecurityTrustHtml(this.selectedNewsDTO.content);
