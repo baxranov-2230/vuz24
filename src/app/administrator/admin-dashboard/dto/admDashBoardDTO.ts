@@ -8,7 +8,7 @@ export class AdmDashBoardDTO {
   public pub_news_lang_count: number;
   public today_comment_count: number;
   public today_like_count: number;
-  public today_publish_nwLang_count: number;
+  public today_publish_nw_lang_count: number;
   public today_publish_nw_count: number;
   public user_count: number;
 

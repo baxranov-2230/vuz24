@@ -80,10 +80,7 @@ export class AdminNewsNotPubComponent implements OnInit, OnDestroy {
       const content = item.content.toString();
       const regexTest = /<img.*?>/g;
 
-      
-      
       if (item.content && regexTest.exec(content)) {
-        console.log(item);
         return $('<p>' + item.content + '</p>').find('img')[0].src; // the best way to extract src
       } else {
         return 'assets/images/logo.png';
