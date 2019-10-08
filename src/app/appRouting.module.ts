@@ -70,6 +70,24 @@ const appRoutes: Routes = [
       {path: 'news/:id', component: NewsDetailComponent},
       {path: 'contact', component: ContactComponent}
     ]
+    },
+    {
+      path: 'ru', component: LayoutComponent, children: [
+      {path: '', component: NewsComponent},
+      {path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
+      {path: 'topic/:type', component: NewsByTypeComponent},
+      {path: 'news/:id', component: NewsDetailComponent},
+      {path: 'contact', component: ContactComponent}
+    ]
+    },
+    {
+      path: 'en', component: LayoutComponent, children: [
+      {path: '', component: NewsComponent},
+      {path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
+      {path: 'topic/:type', component: NewsByTypeComponent},
+      {path: 'news/:id', component: NewsDetailComponent},
+      {path: 'contact', component: ContactComponent}
+    ]
     }
   ]
   },

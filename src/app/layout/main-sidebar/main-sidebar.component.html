@@ -1,4 +1,6 @@
-<hr class="hr-text" data-content="Dolzarb">
+<hr class="hr-text" data-content="Dolzarb" *ngIf="isUzl">
+<hr class="hr-text" data-content="Долзарб" *ngIf="isUzk">
+<hr class="hr-text" data-content="Актуальный" *ngIf="isRu">
 <div *ngIf="hotNews">
   <div *ngFor="let newsItem of hotNews" style="background-color: #fff; margin-bottom: 10px">
     <a style="text-decoration: none; color: inherit; margin: unset" class="row" routerLink="{{'/' + newsItem.lang + '/news/' + newsItem.id}}" fragment="{{newsItem.newsType.key}}">
@@ -32,7 +34,12 @@
     <a href="">Лойиха ҳақида</a>
     <a href="">Фойдаланиш шартлари</a>
     <a routerLink="./contact">Алоқа</a>
-  </div>
+</div>
+<div class="infoLinks" *ngIf="isRu" style="font-size: 11px;">
+    <a href="">Лойиха ҳақида</a>
+    <a href="">Фойдаланиш шартлари</a>
+    <a routerLink="./contact">Алоқа</a>
+</div>
 <div class="info" *ngIf="isUzl">
   <p>«www.vuz24.uz» axborot-tahliliy portali 2019-yil 3-iyulda elektron OAV sifatida davlat ro‘yxatidan o‘tkazilgan.</p>
   <p>Materiallarimizdan to‘liq yoki qisman foydalanilganda «Foydalanish shartlari»ga amal qilinishi shart.</p>
@@ -42,6 +49,14 @@
   <p><i>Email:</i> info@vuz24.uz</p> -->
 </div>
 <div class="info" *ngIf="isUzk">
+    <p>«www.vuz24.uz» ахборот-таҳлилий портали 2019-йил 3-июльда электрон ОАВ сифатида давлат рўйхатидан ўтказилган.</p>
+    <p>Материалларимиздан тўлиқ ёки қисман фойдаланилганда «Фойдаланиш шартлари»га амал қилиниши шарт.</p>
+    <p><i>Гувоҳнома рақами:</i> 1301.</p>
+    <p><i>Муассис:</i> Ўзбекистон Республикаси Олий ва ўрта махсус таълим вазирлиги хузуридаги "Маънавият ва маърифат" маркази.</p>
+    <!-- <p><i>Манзил:</i> 100095, Тошкент шаҳри, Олмазор тумани, Талабалар кўчаси, 70-уй.</p>
+    <p><i>Электрон манзил:</i> info@vuz24.uz</p> -->
+</div>
+<div class="info" *ngIf="isRu">
     <p>«www.vuz24.uz» ахборот-таҳлилий портали 2019-йил 3-июльда электрон ОАВ сифатида давлат рўйхатидан ўтказилган.</p>
     <p>Материалларимиздан тўлиқ ёки қисман фойдаланилганда «Фойдаланиш шартлари»га амал қилиниши шарт.</p>
     <p><i>Гувоҳнома рақами:</i> 1301.</p>

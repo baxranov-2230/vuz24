@@ -25,6 +25,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public defLang: string;
   public typeName: string;
   public navigationSubscription;
+  public isUzl: boolean = false;
+  public isUzk: boolean = false;
+  public isRu: boolean = false;
 
   constructor(private newsTypeService: NewsType, private newsService: NewsService, private location: Location, private router: Router) {
     this.langs = [];
@@ -41,6 +44,21 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    if (location.pathname.split("/")[1] === 'uzl') {
+      this.isUzl = true;
+      this.isUzk = false;
+      this.isRu = false;
+    } else if (location.pathname.split("/")[1] === 'uzk') {
+      this.isUzk = true;
+      this.isUzl = false;
+      this.isRu = false;
+    } else if (location.pathname.split("/")[1] === 'ru') {
+      this.isUzk = false;
+      this.isUzl = false;
+      this.isRu = true;
+    }
+
     this.getLanguages();
     this.getNewsTypeList();
     this.getLang();

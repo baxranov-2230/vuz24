@@ -17,6 +17,7 @@ export class MainSidebarComponent implements OnInit {
   public hotNews: Array<NewsDto>;
   public isUzl: boolean = false;
   public isUzk: boolean = false;
+  public isRu: boolean = false;
 
   constructor(private newsTypeService: NewsType, private newsService: PublicNewsService, private location: Location) {
     this.hotNews = [];
@@ -26,9 +27,15 @@ export class MainSidebarComponent implements OnInit {
     if (location.pathname.split("/")[1] === 'uzl') {
       this.isUzl = true;
       this.isUzk = false;
+      this.isRu = false;
     } else if (location.pathname.split("/")[1] === 'uzk') {
       this.isUzk = true;
       this.isUzl = false;
+      this.isRu = false;
+    } else if (location.pathname.split("/")[1] === 'ru') {
+      this.isUzk = false;
+      this.isUzl = false;
+      this.isRu = true;
     }
     this.getImportantNewsList();
   }

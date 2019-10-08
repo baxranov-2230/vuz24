@@ -25,9 +25,10 @@ export class NotPublishedNewsItemComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, private newsService: NewsService) { }
 
   ngOnInit() {
-    console.log(this.newsItem);
+    
     
     setTimeout(() => {
+      console.log($(this.newsItem));
       document.getElementById("target" + this.newsItem.id).setAttribute('data-target', "#newsInModal" + this.newsItem.id);
     }, 500);
 

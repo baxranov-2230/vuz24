@@ -15,7 +15,7 @@
                 </li>
                 <li class="moveRight pr-0">
                     <a id="logInModal" data-toggle="modal" data-target="#modalSignIn" *ngIf="!isLoggedIn" (click)="opeenn()">
-                        <span class="fa fa-sign-in"></span><span class="enter"> Kirish</span>
+                        <span class="fa fa-sign-in"></span><span class="enter" *ngIf="isUzl"> Kirish</span><span class="enter" *ngIf="isUzk"> Кириш</span><span class="enter" *ngIf="isRu"> Вход</span>
                     </a>
                     <a (click)="showDropdown()" *ngIf="isLoggedIn">
                         <span class="fa fa-user"></span>&nbsp;

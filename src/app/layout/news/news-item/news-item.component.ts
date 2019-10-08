@@ -24,6 +24,7 @@ export class NewsItemComponent implements OnInit {
   constructor(private router: Router, private newsTypeService: NewsType, private profileService: ProfileService) { }
 
   ngOnInit() {
+    
     setTimeout(() => {
       this.newsItem.newsType.name = this.newsTypeService.getNewsTypeName(this.newsItem.newsType.key);
       this.imageHeight = $("#newsContent" + this.newsItem.id).height() + 15;
@@ -35,7 +36,7 @@ export class NewsItemComponent implements OnInit {
           $("#newsImgBlock" + this.newsItem.id + " img").css("display", "inline");
         } else {
           $("#newsImgBlock" + this.newsItem.id + " img").css("height", "100%");
-          $("#newsImgBlock" + this.newsItem.id + " img").css("margin-left", ($("#newsImgBlock" + this.newsItem.id).width() - $("#newsImgBlock" + this.newsItem.id + " img").width())/2 + "px");
+          // $("#newsImgBlock" + this.newsItem.id + " img").css("margin-left", ($("#newsImgBlock" + this.newsItem.id).width() - $("#newsImgBlock" + this.newsItem.id + " img").width())/2 + "px");
           $("#newsImgBlock" + this.newsItem.id + " img").css("display", "inline");
         }
       }, 800);
