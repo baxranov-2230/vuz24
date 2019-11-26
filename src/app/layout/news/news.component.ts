@@ -7,6 +7,7 @@ import { CommonKey } from '../../util/commonKey';
 import { LangDto } from '../../dto/langDto';
 import { NewsDto } from '../../dto/newsDto';
 import { Router, NavigationEnd } from '@angular/router';
+declare var $;
 declare global {
   interface Document {
       documentMode?: any;
@@ -41,6 +42,7 @@ export class NewsComponent implements OnDestroy {
   public news: Array<NewsDto>;
   public mostReadNews: Array<NewsDto>;
   public navigationSubscription;
+  public initialFiveNews: Array<NewsDto>;
 
   constructor(private publicNewsService: PublicNewsService, private location: Location, private router: Router) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -73,7 +75,15 @@ export class NewsComponent implements OnDestroy {
     if (LocalStorageSecurity.hasItem(CommonKey.TOKEN)) {
       this.publicNewsService.getRecentNewsListWithToken(count).subscribe(
         (data) => {
-          this.news = this.news.concat(data);
+          if (this.from === 9) {
+            this.initialFiveNews = data.slice(0, 5);
+            this.news = data.slice(5, 9);
+            for (let x of this.initialFiveNews) {
+              x.imgSrc = $(x.content).find("img")[0].src;
+            }
+          } else {
+            this.news = this.news.concat(data);
+          }
         },
         error => {
           if (error.status === 401) {
@@ -84,7 +94,15 @@ export class NewsComponent implements OnDestroy {
     } else {
       this.publicNewsService.getRecentNewsList(count).subscribe(
         (data) => {
-          this.news = this.news.concat(data);
+          if (this.from === 9) {
+            this.initialFiveNews = data.slice(0, 5);
+            this.news = data.slice(5, 9);
+            for (let x of this.initialFiveNews) {
+              x.imgSrc = $(x.content).find("img")[0].src;
+            }
+          } else {
+            this.news = this.news.concat(data);
+          }
         },
         error => console.log(error)
       );

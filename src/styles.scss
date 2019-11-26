@@ -711,8 +711,11 @@ textarea {
 .grow:hover {
   transform: scale(1.15);
 }
-.colorlocal {
+.coloruzbekistan {
   color: #449cee;
+}
+.colorsociety {
+  color: #f56bf3;
 }
 .colorworld {
   color: #6bf59c;
@@ -720,16 +723,16 @@ textarea {
 .colorsport {
   color: #ee4444;
 }
-.colortechnologies {
+.colortechnology {
   color: #ee9044;
 }
 .colorculture {
   color: #f56bf3;
 }
-.coloreconomy {
+.coloreconomics {
   color: #534ff6;
 }
-.colorshowbusiness {
+.colorhellife {
   color: #964e4e;
 }
 $bubble-d: 1.5rem; // bubble diameter
@@ -1594,4 +1597,109 @@ $yt-color: #ED302F !default;
     margin: 10px auto;
     max-width: 100%;
   }
+}
+.contact {
+  margin: 15px 0 0 0;
+  background-color: #fff;
+  padding: 15px;
+  h3 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 50px
+  }
+  .col-5 {
+    padding-top: 25px;
+    .infoSide1 {
+      height: 63px;
+      margin-bottom: 35px;
+      i {
+        padding-top: 20px;
+        font-size: 22px;
+        vertical-align: -webkit-baseline-middle;
+      }
+      span {
+        font-size: 14px;
+        width: 85%;
+        float: right;
+        text-align: center
+      }
+    }
+    .infoSide2 {
+      height: 25px !important;
+      i {
+        padding-top: unset !important;
+        vertical-align: unset !important;
+      }
+    }
+  }
+}
+.interactive {
+  margin: 15px 0 0 0;
+  background-color: #fff;
+  padding: 15px;
+  h3 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 50px
+  }
+  img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto
+  }
+}
+#carouselExampleIndicators {
+  background: #fff;
+  ol {
+    bottom: unset;
+    top: 285px
+  }
+  .carousel-item a {
+    text-decoration: none;
+    color: inherit;
+    margin: unset;
+    div {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+      @media screen and (max-width: 425px) {
+        height: 150px;
+      }
+      img {
+        position: absolute;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto;
+        width: 100%;
+      }
+    }
+    h4 {
+      margin: 10px;
+      font-weight: 600;
+      font-size: 1.35rem;
+    }
+    p {
+      margin: 10px;
+      font-size: 14px;
+    }
+  }
+  .carousel-control-prev, .carousel-control-next {
+    height: 300px;
+  }
+  @media screen and (max-width: 767px) {
+    .carousel-control-prev, .carousel-control-next {
+      display: none
+    }
+  }
+}
+
+body.greying {
+      -webkit-filter: grayscale(100%);
+      -moz-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+      filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+      filter: grayscale(100%);
+      filter: gray;
 }

@@ -117,7 +117,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   public goToTop(str: string) {
     setTimeout(() => {
-      if (str === "basic" && location.pathname.split("/")[2] !== "topic") {
+      if (str === "uzbekistan" && location.pathname.split("/")[2] !== "topic") {
         this.typeName = null;
         document.querySelector(".nav-link:first-child").classList.add("active-menu")
       } else if (location.pathname.split("/")[2] === "topic") {
@@ -204,5 +204,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
         document.getElementById("modal-itself").style.marginTop = baland;
       }
     }, 200);
+  }
+
+  public greying() {
+    document.body.classList.toggle("greying");
   }
 }

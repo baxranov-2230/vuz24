@@ -30,6 +30,7 @@ import {MyProfileComponent} from './layout/my-profile/my-profile.component';
 import {AllNewsComponent} from './administrator/news/all-news/all-news.component';
 import {TranslateNewsComponent} from './administrator/news/translate-news/translate-news.component';
 import {ContactComponent} from './layout/contact/contact.component';
+import { InteractiveComponent } from './layout/interactive/interactive.component';
 import {AdminDashboardComponent} from "./administrator/admin-dashboard/admin-dashboard.component";
 import {AdminCommentComponent} from "./administrator/admin-comment/admin-comment.component";
 import {AdminModeratorComponent} from "./administrator/admin-moderator/admin-moderator.component";
@@ -39,15 +40,6 @@ import {AdminLogComponent} from "./administrator/admin-log/admin-log.component";
 import {AdminNewsListComponent} from "./administrator/adm-news/admin-news-list/admin-news-list.component";
 import {AdminNewsCreateComponent} from "./administrator/adm-news/admin-news-create/admin-news-create.component";
 import {AdminNewsNotPubComponent} from "./administrator/adm-news/admin-news-not-pub/admin-news-not-pub.component";
-
-// var isUzk: boolean = false;
-// try {
-//     if (LocalStorageSecurity.hasItem(CommonKey.LANGUAGE) && LocalStorageSecurity.getItem(CommonKey.LANGUAGE) !== 'uzl') {
-//         isUzk = true;
-//     }
-// } catch (error) {
-//     console.log(error);
-// }
 
 const appRoutes: Routes = [
   {
@@ -59,7 +51,8 @@ const appRoutes: Routes = [
       {path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
       {path: 'topic/:type', component: NewsByTypeComponent},
       {path: 'news/:id', component: NewsDetailComponent},
-      {path: 'contact', component: ContactComponent}
+      {path: 'contact', component: ContactComponent},
+      {path: 'interactives', component: InteractiveComponent}
     ]
     },
     {
@@ -68,7 +61,8 @@ const appRoutes: Routes = [
       {path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
       {path: 'topic/:type', component: NewsByTypeComponent},
       {path: 'news/:id', component: NewsDetailComponent},
-      {path: 'contact', component: ContactComponent}
+      {path: 'contact', component: ContactComponent},
+      {path: 'interactives', component: InteractiveComponent}
     ]
     },
     {
@@ -77,7 +71,8 @@ const appRoutes: Routes = [
       {path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
       {path: 'topic/:type', component: NewsByTypeComponent},
       {path: 'news/:id', component: NewsDetailComponent},
-      {path: 'contact', component: ContactComponent}
+      {path: 'contact', component: ContactComponent},
+      {path: 'interactives', component: InteractiveComponent}
     ]
     },
     {
@@ -86,7 +81,8 @@ const appRoutes: Routes = [
       {path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
       {path: 'topic/:type', component: NewsByTypeComponent},
       {path: 'news/:id', component: NewsDetailComponent},
-      {path: 'contact', component: ContactComponent}
+      {path: 'contact', component: ContactComponent},
+      {path: 'interactives', component: InteractiveComponent}
     ]
     }
   ]

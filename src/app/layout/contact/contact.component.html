@@ -1,22 +1,22 @@
-<div class="row" style="margin: 15px 0 0 0; background-color: #fff; padding: 15px;">
-  <h3 *ngIf="isUzl" style="text-align: center; width: 100%; margin-bottom: 50px">Aloqa</h3>
-  <h3 *ngIf="!isUzl" style="text-align: center; width: 100%; margin-bottom: 50px">Алоқа</h3>
-  <div class="col-5" style="padding-top: 25px">
-    <div *ngIf="!isUzl" style="height: 63px; margin-bottom: 35px">
-      <i style="padding-top: 20px; font-size: 22px; vertical-align: -webkit-baseline-middle;" class="fa fa-map-marker"></i>
-      <span style="font-size: 14px; width: 85%; float: right; text-align: center">100095<br>Тошкент шаҳри, Олмазор тумани<br>Талабалар кўчаси, 70-уй</span>
+<div class="row contact">
+  <h3 *ngIf="isUzl">Aloqa</h3>
+  <h3 *ngIf="!isUzl">Алоқа</h3>
+  <div class="col-5">
+    <div *ngIf="!isUzl" class="infoSide1">
+      <i class="fa fa-map-marker"></i>
+      <span>100095<br>Тошкент шаҳри, Олмазор тумани<br>Талабалар кўчаси, 70-уй</span>
     </div>
-    <div *ngIf="isUzl" style="height: 63px; margin-bottom: 35px">
-      <i style="padding-top: 20px; font-size: 22px; vertical-align: -webkit-baseline-middle;" class="fa fa-map-marker"></i>
-      <span style="font-size: 14px; width: 85%; float: right; text-align: center">100095<br>Toshkent shahri, Olmazor tumani<br>Talabalar ko‘chasi, 70-uy</span>
+    <div *ngIf="isUzl" class="infoSide1">
+      <i class="fa fa-map-marker"></i>
+      <span>100095<br>Toshkent shahri, Olmazor tumani<br>Talabalar ko‘chasi, 70-uy</span>
     </div>
-    <div style="height: 25px; margin-bottom: 35px">
-        <i style="font-size: 22px;" class="fa fa-phone"></i>
-        <span style="font-size: 14px; width: 85%; float: right; text-align: center">93-509-36-36</span>
+    <div class="infoSide1 infoSide2">
+        <i class="fa fa-phone"></i>
+        <span>+998-71-246-62-53</span>
     </div>
-    <div style="height: 25px; margin-bottom: 35px">
-        <i style="font-size: 22px;" class="fa fa-envelope-o"></i>
-        <span style="font-size: 14px; width: 85%; float: right; text-align: center">info@vuz24.uz</span>
+    <div class="infoSide1 infoSide2">
+        <i class="fa fa-envelope-o"></i>
+        <span>mediamaskan@edu.uz</span>
     </div>
     <a class="btn-floating btn-fb" target="_blank" href="https://www.facebook.com/vuz24/"><i class="fa fa-facebook"></i></a>
     <a class="btn-floating btn-tg" target="_blank" href="https://t.me/vuz_24"><i class="fa fa-telegram"></i></a>
@@ -31,6 +31,4 @@
       </agm-marker>
     </agm-map>
   </div>
-  
-
 </div>

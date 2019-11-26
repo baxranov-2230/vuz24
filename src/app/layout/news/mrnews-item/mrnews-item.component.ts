@@ -39,7 +39,6 @@ export class MrnewsItemComponent implements OnInit {
         'background-image': 'url(assets/images/logo.png)'
       };
       return myStyles;
-      // this.getMyStyle();
     }
   }
 

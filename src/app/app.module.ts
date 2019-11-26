@@ -48,6 +48,7 @@ import {SharedToasterItemComponent} from './shared/shared-toaster/shared-toaster
 import {AdminNewsListComponent} from './administrator/adm-news/admin-news-list/admin-news-list.component';
 import { AdminNewsCreateComponent } from './administrator/adm-news/admin-news-create/admin-news-create.component';
 import { AdminNewsNotPubComponent } from './administrator/adm-news/admin-news-not-pub/admin-news-not-pub.component';
+import { InteractiveComponent } from './layout/interactive/interactive.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { AdminNewsNotPubComponent } from './administrator/adm-news/admin-news-no
     AdminNewsListComponent,
     AdminNewsCreateComponent,
     AdminNewsNotPubComponent,
+    InteractiveComponent,
   ],
   imports: [
     BrowserModule,

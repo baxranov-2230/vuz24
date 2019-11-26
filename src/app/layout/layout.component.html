@@ -13,7 +13,12 @@
                 <li class="miniLogo">
                     <a href="#"><img src="assets/images/logo.png" height="31"></a>
                 </li>
-                <li class="moveRight pr-0">
+                <li class="moveRight pr-2">
+                    <a (click)="greying()">
+                        <span class="fa fa-eye"></span>
+                    </a>
+                </li>
+                <li class="pr-2">
                     <a id="logInModal" data-toggle="modal" data-target="#modalSignIn" *ngIf="!isLoggedIn" (click)="opeenn()">
                         <span class="fa fa-sign-in"></span><span class="enter" *ngIf="isUzl"> Kirish</span><span class="enter" *ngIf="isUzk"> Кириш</span><span class="enter" *ngIf="isRu"> Вход</span>
                     </a>
@@ -40,7 +45,7 @@
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item" *ngFor="let newsType of newsTypes" (click)="goToTop(newsType.key)">
                             <a id="{{newsType.key}}" class="nav-link grow"
-                            [routerLink] = "newsType.key!=='uzbekistan' ? ['topic/' + newsType.key] : ['../' + defLang]"
+                            [routerLink] = "['topic/' + newsType.key]"
                             routerLinkActive="active-menu"
                             ><span>{{newsType.name}}</span></a>
                         </li>

@@ -1,4 +1,69 @@
-<hr class="hr-text" data-content="Ommabop">
+<hr class="hr-text" data-content="Eng so'nggi" *ngIf="initialFiveNews">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" *ngIf="initialFiveNews">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a routerLink="{{'/' + initialFiveNews[0].lang + '/news/' + initialFiveNews[0].id}}" fragment="{{initialFiveNews[0].newsType.key}}">
+          <div>
+            <img class="d-inline" src="{{initialFiveNews[0].imgSrc}}" alt="First slide">
+          </div>
+          <h4>{{initialFiveNews[0].title}}</h4>
+          <p>{{initialFiveNews[0].subContent}}</p>
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a routerLink="{{'/' + initialFiveNews[1].lang + '/news/' + initialFiveNews[1].id}}" fragment="{{initialFiveNews[1].newsType.key}}">
+          <div>
+            <img class="d-block" src="{{initialFiveNews[1].imgSrc}}" alt="Second slide">
+          </div>
+          <h4>{{initialFiveNews[1].title}}</h4>
+          <p>Nimadirning contenti</p>
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a routerLink="{{'/' + initialFiveNews[2].lang + '/news/' + initialFiveNews[2].id}}" fragment="{{initialFiveNews[2].newsType.key}}">
+          <div>
+            <img class="d-block" src="{{initialFiveNews[2].imgSrc}}" alt="Third slide">
+          </div>
+          <h4>{{initialFiveNews[2].title}}</h4>
+          <p>Nimadirning contenti</p>
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a routerLink="{{'/' + initialFiveNews[3].lang + '/news/' + initialFiveNews[3].id}}" fragment="{{initialFiveNews[3].newsType.key}}">
+          <div>
+            <img class="d-block" src="{{initialFiveNews[3].imgSrc}}" alt="Third slide">
+          </div>
+          <h4>{{initialFiveNews[3].title}}</h4>
+          <p>Nimadirning contenti</p>
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a routerLink="{{'/' + initialFiveNews[4].lang + '/news/' + initialFiveNews[4].id}}" fragment="{{initialFiveNews[4].newsType.key}}">
+          <div>
+            <img class="d-block" src="{{initialFiveNews[4].imgSrc}}" alt="Third slide">
+          </div>
+          <h4>{{initialFiveNews[4].title}}</h4>
+          <p>Nimadirning contenti</p>
+        </a>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+<hr class="hr-text" data-content="Ommabop" *ngIf="mostReadNews">
 <div class="row MainNewsBlock">
     <div class="col-12" *ngFor="let newsOne of mostReadNews; index as i" [style.margin-right]="i%2 === 0 ? '2%' : 'unset'">
         <app-mrnews-item [newsItem]="newsOne" [index]="i" *ngIf="newsOne"></app-mrnews-item>
