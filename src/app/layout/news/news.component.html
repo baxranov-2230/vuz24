@@ -1,5 +1,5 @@
 <hr class="hr-text" data-content="Eng so'nggi" *ngIf="initialFiveNews">
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" *ngIf="initialFiveNews">
+<div id="carouselExampleIndicators" (touchstart)="myFunc($event)" (touchend)="myFunc2($event)" class="carousel slide" data-ride="carousel" *ngIf="initialFiveNews">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -23,7 +23,7 @@
             <img class="d-block" src="{{initialFiveNews[1].imgSrc}}" alt="Second slide">
           </div>
           <h4>{{initialFiveNews[1].title}}</h4>
-          <p>Nimadirning contenti</p>
+          <p>{{initialFiveNews[1].subContent}}</p>
         </a>
       </div>
       <div class="carousel-item">
@@ -32,7 +32,7 @@
             <img class="d-block" src="{{initialFiveNews[2].imgSrc}}" alt="Third slide">
           </div>
           <h4>{{initialFiveNews[2].title}}</h4>
-          <p>Nimadirning contenti</p>
+          <p>{{initialFiveNews[2].subContent}}</p>
         </a>
       </div>
       <div class="carousel-item">
@@ -41,7 +41,7 @@
             <img class="d-block" src="{{initialFiveNews[3].imgSrc}}" alt="Third slide">
           </div>
           <h4>{{initialFiveNews[3].title}}</h4>
-          <p>Nimadirning contenti</p>
+          <p>{{initialFiveNews[3].subContent}}</p>
         </a>
       </div>
       <div class="carousel-item">
@@ -50,7 +50,7 @@
             <img class="d-block" src="{{initialFiveNews[4].imgSrc}}" alt="Third slide">
           </div>
           <h4>{{initialFiveNews[4].title}}</h4>
-          <p>Nimadirning contenti</p>
+          <p>{{initialFiveNews[4].subContent}}</p>
         </a>
       </div>
     </div>

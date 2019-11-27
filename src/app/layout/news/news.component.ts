@@ -65,6 +65,23 @@ export class NewsComponent implements OnDestroy {
     this.getMostReadNews();
   }
 
+  public myFunc(event) {
+    var xClick = event.touches[0].pageX;
+    $("#carouselExampleIndicators").one("touchmove", function(event){
+      var xMove = event.touches[0].pageX;
+      if( Math.floor(xClick - xMove) > 5 ){
+        $(this).carousel('next');
+      }
+      else if( Math.floor(xClick - xMove) < -5 ){
+        $(this).carousel('prev');
+      }
+    });
+  }
+
+  public myFunc2(event) {
+    $(this).off("touchmove");
+  }
+
   private getRecentNews() {
     var count = new CountDto();
     count.from = this.from;
