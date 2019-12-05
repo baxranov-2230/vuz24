@@ -96,7 +96,7 @@ export class NewsComponent implements OnDestroy {
             this.initialFiveNews = data.slice(0, 5);
             this.news = data.slice(5, 9);
             for (let x of this.initialFiveNews) {
-              x.imgSrc = $(x.content).find("img")[0].src;
+              x.imgSrc = $("<p>" + x.content + "</p>").find("img")[0].src;
             }
           } else {
             this.news = this.news.concat(data);
@@ -115,7 +115,7 @@ export class NewsComponent implements OnDestroy {
             this.initialFiveNews = data.slice(0, 5);
             this.news = data.slice(5, 9);
             for (let x of this.initialFiveNews) {
-              x.imgSrc = $(x.content).find("img")[0].src;
+              x.imgSrc = $("<p>" + x.content + "</p>").find("img")[0].src;
             }
           } else {
             this.news = this.news.concat(data);

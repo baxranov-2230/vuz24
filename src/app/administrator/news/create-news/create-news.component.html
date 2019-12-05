@@ -38,8 +38,7 @@
                   [(ngModel)]="subContent" (blur)="checkNews()" required></textarea>
       </div>
   </div>
-  <div id="editor">
-  </div>
+  <div id="editor"></div>
   <button type="submit" class="btn btn-primary" (click)='saveNews()'
           [attr.disabled]="isReady ? null : true">Post</button>
 </form>

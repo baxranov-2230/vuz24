@@ -10,7 +10,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <a routerLink="{{'/' + initialFiveNews[0].lang + '/news/' + initialFiveNews[0].id}}" fragment="{{initialFiveNews[0].newsType.key}}">
-          <div>
+          <div *ngIf="initialFiveNews[0].imgSrc">
             <img class="d-inline" src="{{initialFiveNews[0].imgSrc}}" alt="First slide">
           </div>
           <h4>{{initialFiveNews[0].title}}</h4>
